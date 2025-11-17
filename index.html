@@ -1,0 +1,3758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Website Quick Count Pemilihan Pimpinan Kolektif BKM Kalurahan Bangunharjo">
+    <title>Quick Count - Pemilihan Pimpinan Kolektif BKM Kalurahan Bangunharjo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --success-color: #27ae60;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .countdown-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .countdown-item {
+            text-align: center;
+            padding: 0.5rem;
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .card-candidate {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-candidate:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .vote-count {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .vote-btn {
+            background-color: var(--secondary-color);
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .vote-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+        
+        .unvote-btn {
+            background-color: var(--accent-color);
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .unvote-btn:hover {
+            background-color: #c0392b;
+            transform: scale(1.05);
+        }
+        
+        .tab-content {
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .nav-tabs .nav-link.active {
+            background-color: white;
+            border-bottom: 3px solid var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .kring-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .progress {
+            height: 10px;
+            margin-top: 10px;
+        }
+        
+        .photo-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, var(--secondary-color), #1a5276);
+            color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .plano-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .plano-image {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .plano-kring-container {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .login-modal .modal-content {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .role-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .admin-controls {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .kring-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+        
+        .voted-candidate {
+            border: 2px solid var(--success-color);
+        }
+        
+        .vote-info {
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .member-plano-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        
+        .member-kring-info {
+            background: linear-gradient(135deg, var(--secondary-color), #1a5276);
+            color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .display-controls {
+            background-color: #fff3cd;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .submit-section {
+            background-color: #e8f5e8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .submit-btn {
+            font-size: 1.2rem;
+            padding: 0.75rem 2rem;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .pending-badge {
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+        
+        .selected-candidate {
+            background-color: #e8f5e9 !important;
+            border: 2px solid var(--success-color) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 2rem 0;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+            
+            .submit-btn {
+                font-size: 1rem;
+                padding: 0.5rem 1.5rem;
+            }
+        }
+
+        .connection-status {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .connection-online {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .connection-offline {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .vote-summary {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .plano-upload-section {
+            background-color: #e8f4fd;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .plano-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .toggle-vote-btn {
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .vote-limit-info {
+            background-color: #fff3cd;
+            border-radius: 5px;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .plano-ruang-container {
+            transition: all 0.3s ease;
+        }
+        
+        .plano-member-full {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .plano-ruang-container {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        .plano-upload-info {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .plano-status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        .plano-uploaded {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .plano-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .plano-missing {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Custom notification styles */
+        .custom-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Vote disabled state */
+        .vote-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .vote-disabled-info {
+            background-color: #f8d7da !important;
+            border-left: 4px solid #dc3545 !important;
+        }
+
+        /* Summary Section Styles */
+        .summary-stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .summary-stats-card h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-stats-card h5 {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .plano-gallery img {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .plano-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .rank-badge {
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+        }
+
+        .access-denied {
+            background-color: #f8d7da !important;
+            border-left: 4px solid #dc3545 !important;
+            color: #721c24 !important;
+        }
+
+        .access-denied-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            min-width: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Connection Status Indicator -->
+    <div id="connectionStatus" class="connection-status" style="display: none;">
+        <i class="fas fa-circle me-1"></i> <span id="connectionText">Menyambungkan...</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-vote-yea me-2"></i>
+                Quick Count BKM Bangunharjo
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-section="home"><i class="fas fa-home me-1"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item" id="summaryMenu" style="display: none;">
+                        <a class="nav-link" href="#" data-section="summary"><i class="fas fa-chart-bar me-1"></i> Summary</a>
+                    </li>
+                    <li class="nav-item dropdown" id="adminMenu" style="display: none;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-cogs me-1"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="fas fa-sliders-h me-1"></i> Pengaturan</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#candidateModal"><i class="fas fa-user-plus me-1"></i> Tambah Kandidat</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#displaySettingsModal"><i class="fas fa-eye me-1"></i> Kontrol Tampilan</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="resetData"><i class="fas fa-redo me-1"></i> Reset Data</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="nav-link" id="userInfo"></span>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light btn-sm" id="loginBtn"><i class="fas fa-sign-in-alt me-1"></i> Login</button>
+                        <button class="btn btn-outline-light btn-sm" id="logoutBtn" style="display: none;"><i class="fas fa-sign-out-alt me-1"></i> Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="header-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">Quick Count Pemilihan Pimpinan Kolektif</h1>
+            <p class="lead">Badan Keswadayaan Masyarakat (BKM) Kalurahan Bangunharjo</p>
+            <p class="mb-0">Sistem penghitungan suara real-time yang transparan dan akurat</p>
+        </div>
+    </div>
+
+    <div class="container" id="mainContent">
+        <!-- Countdown Timer -->
+        <div class="countdown-container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 class="mb-3">Countdown Pemungutan Suara</h3>
+                    <div class="row text-center">
+                        <div class="col-3 countdown-item">
+                            <div class="countdown-number" id="days">00</div>
+                            <div class="countdown-label">Hari</div>
+                        </div>
+                        <div class="col-3 countdown-item">
+                            <div class="countdown-number" id="hours">00</div>
+                            <div class="countdown-label">Jam</div>
+                        </div>
+                        <div class="col-3 countdown-item">
+                            <div class="countdown-number" id="minutes">00</div>
+                            <div class="countdown-label">Menit</div>
+                        </div>
+                        <div class="col-3 countdown-item">
+                            <div class="countdown-number" id="seconds">00</div>
+                            <div class="countdown-label">Detik</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#countdownModal" id="countdownSettingsBtn" style="display: none;">
+                        <i class="fas fa-cog me-1"></i> Atur Countdown
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h5><i class="fas fa-users me-2"></i> Total Pemilih</h5>
+                    <h2 id="totalVoters">350</h2>
+                    <p>Jumlah pemilih terdaftar</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h5><i class="fas fa-check-circle me-2"></i> Sudah Memilih</h5>
+                    <h2 id="voted">215</h2>
+                    <p>Pemilih yang telah menggunakan hak pilih</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <h5><i class="fas fa-percentage me-2"></i> Partisipasi</h5>
+                    <h2 id="participation">61.4%</h2>
+                    <p>Tingkat partisipasi pemilih</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member Kring Info -->
+        <div class="member-kring-info" id="memberKringInfo" style="display: none;">
+            <h4><i class="fas fa-users me-2"></i> Anda Login Sebagai Member <span id="memberKringName"></span></h4>
+            <p class="mb-0">Anda hanya dapat melihat dan memilih kandidat dari kring Anda</p>
+        </div>
+
+        <!-- Admin Controls (Visible only for admin) -->
+        <div class="admin-controls" id="adminControls" style="display: none;">
+            <h5><i class="fas fa-user-shield me-2"></i> Kontrol Admin</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="voteLimit" class="form-label">Jumlah Klik yang Diperbolehkan</label>
+                    <select class="form-select" id="voteLimit">
+                        <option value="1">1 Kali</option>
+                        <option value="2">2 Kali</option>
+                        <option value="3" selected>3 Kali</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="resetVotes" class="form-label">Reset Suara</label>
+                    <button class="btn btn-outline-danger w-100" id="resetVotes">
+                        <i class="fas fa-trash me-1"></i> Reset Semua Suara
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <label for="exportData" class="form-label">Ekspor Data</label>
+                    <button class="btn btn-outline-success w-100" id="exportData">
+                        <i class="fas fa-file-export me-1"></i> Ekspor ke Excel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Display Controls (Visible only for admin) -->
+        <div class="display-controls" id="displayControls" style="display: none;">
+            <h5><i class="fas fa-eye me-2"></i> Kontrol Tampilan</h5>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="togglePercentage" checked>
+                        <label class="form-check-label" for="togglePercentage">Tampilkan Persentase</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="toggleProgressBar" checked>
+                        <label class="form-check-label" for="toggleProgressBar">Tampilkan Progress Bar</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="toggleVoteCount" checked>
+                        <label class="form-check-label" for="toggleVoteCount">Tampilkan Jumlah Suara</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="toggleCandidatePhotos" checked>
+                        <label class="form-check-label" for="toggleCandidatePhotos">Tampilkan Foto Kandidat</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="toggleStats" checked>
+                        <label class="form-check-label" for="toggleStats">Tampilkan Statistik</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="toggleCountdown" checked>
+                        <label class="form-check-label" for="toggleCountdown">Tampilkan Countdown</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="togglePlano" checked>
+                        <label class="form-check-label" for="togglePlano">Tampilkan Bukti Plano</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="toggleVoteButtons" checked>
+                        <label class="form-check-label" for="toggleVoteButtons">Tampilkan Tombol Vote</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs for Tahap 1 and 2 -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tahap1-tab" data-bs-toggle="tab" data-bs-target="#tahap1" type="button" role="tab">
+                    <i class="fas fa-list-ol me-1"></i> Tahap 1 - Unsur Lama
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tahap2-tab" data-bs-toggle="tab" data-bs-target="#tahap2" type="button" role="tab">
+                    <i class="fas fa-list-ol me-1"></i> Tahap 2 - Unsur Baru
+                </button>
+            </li>
+            <li class="nav-item ms-auto" id="addCandidateBtnContainer" style="display: none;">
+                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#candidateModal">
+                    <i class="fas fa-plus me-1"></i> Tambah Kandidat
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <!-- Tahap 1 Content -->
+            <div class="tab-pane fade show active" id="tahap1" role="tabpanel">
+                <div class="vote-info" id="tahap1VoteInfo" style="display: none;">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <span id="tahap1VoteText">Anda dapat memilih 1 kandidat. Klik tombol "Pilih" untuk memilih dan klik lagi untuk membatalkan pilihan.</span>
+                </div>
+                
+                <!-- Vote Summary Tahap 1 -->
+                <div class="vote-summary" id="tahap1Summary" style="display: none;">
+                    <h5><i class="fas fa-clipboard-list me-2"></i> Ringkasan Pilihan Anda - Tahap 1</h5>
+                    <div id="tahap1SummaryContent"></div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <!-- Kring sections will be dynamically shown/hidden based on user role -->
+                        <div id="kring1-tahap1-container">
+                            <h4 class="kring-title">Kring 1 - Memilih 1 Pimpinan</h4>
+                            <div class="row" id="kring1-tahap1">
+                                <!-- Candidate cards will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        
+                        <div id="kring2-tahap1-container">
+                            <h4 class="kring-title mt-5">Kring 2 - Memilih 1 Pimpinan</h4>
+                            <div class="row" id="kring2-tahap1">
+                                <!-- Candidate cards will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        
+                        <div id="kring3-tahap1-container">
+                            <h4 class="kring-title mt-5">Kring 3 - Memilih 1 Pimpinan</h4>
+                            <div class="row" id="kring3-tahap1">
+                                <!-- Candidate cards will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Plano Upload Section Tahap 1 -->
+                <div class="plano-upload-section" id="planoSectionTahap1" style="display: none;">
+                    <h5><i class="fas fa-camera me-2"></i> Upload Bukti Plano - Tahap 1</h5>
+                    <div class="plano-upload-info" id="planoInfoTahap1">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <span id="planoInfoTextTahap1">Silakan upload foto bukti plano untuk tahap 1:</span>
+                    </div>
+                    <div class="row" id="planoContainerTahap1">
+                        <div class="col-md-4 plano-ruang-container" data-ruang="1">
+                            <div class="mb-3">
+                                <label for="planoRuang1Tahap1" class="form-label">Ruang 1 <span class="plano-status plano-missing" id="planoStatusRuang1Tahap1">Belum Upload</span></label>
+                                <input type="file" class="form-control plano-input" id="planoRuang1Tahap1" accept="image/*">
+                                <img id="previewPlanoRuang1Tahap1" class="plano-preview" src="" alt="Preview Plano Ruang 1">
+                            </div>
+                        </div>
+                        <div class="col-md-4 plano-ruang-container" data-ruang="2">
+                            <div class="mb-3">
+                                <label for="planoRuang2Tahap1" class="form-label">Ruang 2 <span class="plano-status plano-missing" id="planoStatusRuang2Tahap1">Belum Upload</span></label>
+                                <input type="file" class="form-control plano-input" id="planoRuang2Tahap1" accept="image/*">
+                                <img id="previewPlanoRuang2Tahap1" class="plano-preview" src="" alt="Preview Plano Ruang 2">
+                            </div>
+                        </div>
+                        <div class="col-md-4 plano-ruang-container" data-ruang="3">
+                            <div class="mb-3">
+                                <label for="planoRuang3Tahap1" class="form-label">Ruang 3 <span class="plano-status plano-missing" id="planoStatusRuang3Tahap1">Belum Upload</span></label>
+                                <input type="file" class="form-control plano-input" id="planoRuang3Tahap1" accept="image/*">
+                                <img id="previewPlanoRuang3Tahap1" class="plano-preview" src="" alt="Preview Plano Ruang 3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Submit Section Tahap 1 -->
+                <div class="submit-section" id="submitSectionTahap1" style="display: none;">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5><i class="fas fa-paper-plane me-2"></i> Submit Votes Tahap 1</h5>
+                            <p class="mb-0" id="submitInfoTahap1">Anda memiliki <span id="pendingCountTahap1">0</span> vote yang akan disubmit</p>
+                            <div id="planoSubmitInfoTahap1" class="mt-2"></div>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button type="button" class="btn btn-success submit-btn" id="submitVotesTahap1">
+                                <i class="fas fa-paper-plane me-2"></i> Submit Votes
+                            </button>
+                            <div id="submitStatusTahap1" class="mt-2" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tahap 2 Content -->
+            <div class="tab-pane fade" id="tahap2" role="tabpanel">
+                <div class="vote-info" id="tahap2VoteInfo" style="display: none;">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <span id="tahap2VoteText">Anda dapat memilih hingga 3 kandidat. Klik tombol "Pilih" untuk memilih dan klik lagi untuk membatalkan pilihan.</span>
+                </div>
+                
+                <!-- Vote Limit Info Tahap 2 -->
+                <div class="vote-limit-info" id="tahap2VoteLimitInfo" style="display: none;">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <span id="tahap2VoteLimitText">Anda dapat memilih hingga 3 kandidat. Saat ini Anda telah memilih <span id="currentVotesTahap2">0</span> dari 3 kandidat.</span>
+                </div>
+                
+                <!-- Vote Summary Tahap 2 -->
+                <div class="vote-summary" id="tahap2Summary" style="display: none;">
+                    <h5><i class="fas fa-clipboard-list me-2"></i> Ringkasan Pilihan Anda - Tahap 2</h5>
+                    <div id="tahap2SummaryContent"></div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <!-- Kring sections will be dynamically shown/hidden based on user role -->
+                        <div id="kring1-tahap2-container">
+                            <h4 class="kring-title">Kring 1 - Memilih 2 Pimpinan</h4>
+                            <div class="row" id="kring1-tahap2">
+                                <!-- Candidate cards will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        
+                        <div id="kring2-tahap2-container">
+                            <h4 class="kring-title mt-5">Kring 2 - Memilih 2 Pimpinan</h4>
+                            <div class="row" id="kring2-tahap2">
+                                <!-- Candidate cards will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        
+                        <div id="kring3-tahap2-container">
+                            <h4 class="kring-title mt-5">Kring 3 - Memilih 2 Pimpinan</h4>
+                            <div class="row" id="kring3-tahap2">
+                                <!-- Candidate cards will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Plano Upload Section Tahap 2 -->
+                <div class="plano-upload-section" id="planoSectionTahap2" style="display: none;">
+                    <h5><i class="fas fa-camera me-2"></i> Upload Bukti Plano - Tahap 2</h5>
+                    <div class="plano-upload-info" id="planoInfoTahap2">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <span id="planoInfoTextTahap2">Silakan upload foto bukti plano untuk tahap 2:</span>
+                    </div>
+                    <div class="row" id="planoContainerTahap2">
+                        <div class="col-md-4 plano-ruang-container" data-ruang="1">
+                            <div class="mb-3">
+                                <label for="planoRuang1Tahap2" class="form-label">Ruang 1 <span class="plano-status plano-missing" id="planoStatusRuang1Tahap2">Belum Upload</span></label>
+                                <input type="file" class="form-control plano-input" id="planoRuang1Tahap2" accept="image/*">
+                                <img id="previewPlanoRuang1Tahap2" class="plano-preview" src="" alt="Preview Plano Ruang 1">
+                            </div>
+                        </div>
+                        <div class="col-md-4 plano-ruang-container" data-ruang="2">
+                            <div class="mb-3">
+                                <label for="planoRuang2Tahap2" class="form-label">Ruang 2 <span class="plano-status plano-missing" id="planoStatusRuang2Tahap2">Belum Upload</span></label>
+                                <input type="file" class="form-control plano-input" id="planoRuang2Tahap2" accept="image/*">
+                                <img id="previewPlanoRuang2Tahap2" class="plano-preview" src="" alt="Preview Plano Ruang 2">
+                            </div>
+                        </div>
+                        <div class="col-md-4 plano-ruang-container" data-ruang="3">
+                            <div class="mb-3">
+                                <label for="planoRuang3Tahap2" class="form-label">Ruang 3 <span class="plano-status plano-missing" id="planoStatusRuang3Tahap2">Belum Upload</span></label>
+                                <input type="file" class="form-control plano-input" id="planoRuang3Tahap2" accept="image/*">
+                                <img id="previewPlanoRuang3Tahap2" class="plano-preview" src="" alt="Preview Plano Ruang 3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Submit Section Tahap 2 -->
+                <div class="submit-section" id="submitSectionTahap2" style="display: none;">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5><i class="fas fa-paper-plane me-2"></i> Submit Votes Tahap 2</h5>
+                            <p class="mb-0" id="submitInfoTahap2">Anda memiliki <span id="pendingCountTahap2">0</span> vote yang akan disubmit</p>
+                            <div id="planoSubmitInfoTahap2" class="mt-2"></div>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button type="button" class="btn btn-success submit-btn" id="submitVotesTahap2">
+                                <i class="fas fa-paper-plane me-2"></i> Submit Votes
+                            </button>
+                            <div id="submitStatusTahap2" class="mt-2" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Section (Hidden by default) -->
+    <div id="summarySection" style="display: none;">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="kring-title text-center"><i class="fas fa-chart-pie me-2"></i> Ringkasan Hasil Pemilihan</h3>
+                    
+                    <!-- Statistics Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="summary-stats-card">
+                                <h5><i class="fas fa-users me-2"></i> Total Pemilih</h5>
+                                <h2 id="summaryTotalVoters">350</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-stats-card">
+                                <h5><i class="fas fa-check-circle me-2"></i> Sudah Memilih</h5>
+                                <h2 id="summaryVoted">215</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-stats-card">
+                                <h5><i class="fas fa-percentage me-2"></i> Partisipasi</h5>
+                                <h2 id="summaryParticipation">61.4%</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-stats-card">
+                                <h5><i class="fas fa-clock me-2"></i> Status</h5>
+                                <h2 id="summaryStatus">Aktif</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">Perolehan Suara per Kring - Tahap 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="chartTahap1" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-success text-white">
+                                    <h5 class="mb-0">Perolehan Suara per Kring - Tahap 2</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="chartTahap2" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Results Table -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Detail Perolehan Suara per Kandidat</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Kandidat</th>
+                                            <th>Tahap</th>
+                                            <th>Kring</th>
+                                            <th>Jumlah Suara</th>
+                                            <th>Persentase</th>
+                                            <th>Rank</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="summaryTableBody">
+                                        <!-- Summary data will be inserted here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bukti Plano Section -->
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0"><i class="fas fa-camera me-2"></i> Bukti Plano Semua Ruangan</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Tab untuk Tahap 1 dan Tahap 2 Plano -->
+                            <ul class="nav nav-tabs mb-3" id="planoTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="plano-tahap1-tab" data-bs-toggle="tab" data-bs-target="#plano-tahap1" type="button">
+                                        <i class="fas fa-list-ol me-1"></i> Bukti Plano Tahap 1
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="plano-tahap2-tab" data-bs-toggle="tab" data-bs-target="#plano-tahap2" type="button">
+                                        <i class="fas fa-list-ol me-1"></i> Bukti Plano Tahap 2
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content" id="planoTabContent">
+                                <!-- Plano Tahap 1 -->
+                                <div class="tab-pane fade show active" id="plano-tahap1" role="tabpanel">
+                                    <div class="row plano-gallery" id="planoSummaryTahap1">
+                                        <!-- Plano images will be inserted here -->
+                                        <div class="col-md-4 text-center">
+                                            <div class="alert alert-info">Memuat bukti plano...</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Plano Tahap 2 -->
+                                <div class="tab-pane fade" id="plano-tahap2" role="tabpanel">
+                                    <div class="row plano-gallery" id="planoSummaryTahap2">
+                                        <!-- Plano images will be inserted here -->
+                                        <div class="col-md-4 text-center">
+                                            <div class="alert alert-info">Memuat bukti plano...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Export Controls -->
+                    <div class="card mt-4">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0"><i class="fas fa-download me-2"></i> Ekspor Data</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-primary w-100" id="exportSummaryPDF">
+                                        <i class="fas fa-file-pdf me-2"></i> Ekspor ke PDF
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-success w-100" id="exportSummaryExcel">
+                                        <i class="fas fa-file-excel me-2"></i> Ekspor ke Excel
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-info w-100" id="refreshSummary">
+                                        <i class="fas fa-sync-alt me-2"></i> Refresh Data
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Quick Count BKM Bangunharjo</h5>
+                    <p>Sistem penghitungan suara real-time untuk pemilihan pimpinan kolektif BKM Kalurahan Bangunharjo.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Tautan Cepat</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light" data-section="home">Beranda</a></li>
+                        <li id="footerSummaryLink" style="display: none;"><a href="#" class="text-light" data-section="summary">Summary</a></li>
+                        <li><a href="#" class="text-light" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Kontak</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Kalurahan Bangunharjo</li>
+                        <li><i class="fas fa-phone me-2"></i> (0274) 123456</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@bkmbangunharjo.org</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2023 BKM Kalurahan Bangunharjo. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal fade login-modal" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="login-header">
+                    <h4 class="modal-title">Login Quick Count</h4>
+                    <p class="mb-0">Masuk dengan role yang sesuai</p>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label for="loginRole" class="form-label">Pilih Role</label>
+                        <select class="form-select" id="loginRole">
+                            <option value="">-- Pilih Role --</option>
+                            <option value="admin">Admin</option>
+                            <option value="ruang1">Member Ruang 1 (Kring 1)</option>
+                            <option value="ruang2">Member Ruang 2 (Kring 2)</option>
+                            <option value="ruang3">Member Ruang 3 (Kring 3)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Masukkan password">
+                    </div>
+                    <div class="form-text mb-3">
+                        <strong>Default Password:</strong><br>
+                        Admin: <code>admin123</code><br>
+                        Member: <code>member123</code>
+                    </div>
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-primary" id="doLogin">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Countdown Setting Modal -->
+    <div class="modal fade" id="countdownModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Atur Countdown Pemilihan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="countdownDate" class="form-label">Tanggal dan Waktu Berakhir</label>
+                        <input type="datetime-local" class="form-control" id="countdownDate">
+                    </div>
+                    <div class="form-text">Atur tanggal dan waktu berakhirnya pemungutan suara.</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="saveCountdown">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Candidate Modal -->
+    <div class="modal fade" id="candidateModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Kandidat Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="candidateName" class="form-label">Nama Kandidat</label>
+                        <input type="text" class="form-control" id="candidateName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="candidateTahap" class="form-label">Tahap</label>
+                        <select class="form-select" id="candidateTahap">
+                            <option value="tahap1">Tahap 1 - Unsur Lama</option>
+                            <option value="tahap2">Tahap 2 - Unsur Baru</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="candidateKring" class="form-label">Kring</label>
+                        <select class="form-select" id="candidateKring">
+                            <option value="kring1">Kring 1</option>
+                            <option value="kring2">Kring 2</option>
+                            <option value="kring3">Kring 3</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="candidatePhoto" class="form-label">Foto Kandidat</label>
+                        <input type="file" class="form-control" id="candidatePhoto" accept="image/*">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="saveCandidate">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pengaturan Sistem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="maxVotesPerUser" class="form-label">Maksimal Suara per User</label>
+                        <select class="form-select" id="maxVotesPerUser">
+                            <option value="1">1 Kali</option>
+                            <option value="2">2 Kali</option>
+                            <option value="3" selected>3 Kali</option>
+                        </select>
+                        <div class="form-text">Jumlah maksimal suara yang dapat diberikan oleh satu user.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="allowManualInput" class="form-label">Izinkan Input Manual</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="allowManualInput" checked>
+                            <label class="form-check-label" for="allowManualInput">Aktifkan input manual suara</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="allowVoting" class="form-label">Izinkan Voting</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="allowVoting" checked>
+                            <label class="form-check-label" for="allowVoting">Aktifkan fitur voting</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="totalVotersSetting" class="form-label">Total Pemilih Terdaftar</label>
+                        <input type="number" class="form-control" id="totalVotersSetting" value="350" min="1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="saveSettings">Simpan Pengaturan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Display Settings Modal -->
+    <div class="modal fade" id="displaySettingsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kontrol Tampilan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <h6>Elemen Tampilan</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="modalTogglePercentage" checked>
+                                    <label class="form-check-label" for="modalTogglePercentage">Tampilkan Persentase</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="modalToggleProgressBar" checked>
+                                    <label class="form-check-label" for="modalToggleProgressBar">Tampilkan Progress Bar</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="modalToggleVoteCount" checked>
+                                    <label class="form-check-label" for="modalToggleVoteCount">Tampilkan Jumlah Suara</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="modalToggleCandidatePhotos" checked>
+                                    <label class="form-check-label" for="modalToggleCandidatePhotos">Tampilkan Foto Kandidat</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="modalToggleStats" checked>
+                                    <label class="form-check-label" for="modalToggleStats">Tampilkan Statistik</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="modalToggleCountdown" checked>
+                                    <label class="form-check-label" for="modalToggleCountdown">Tampilkan Countdown</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="modalTogglePlano" checked>
+                                    <label class="form-check-label" for="modalTogglePlano">Tampilkan Bukti Plano</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="modalToggleVoteButtons" checked>
+                                    <label class="form-check-label" for="modalToggleVoteButtons">Tampilkan Tombol Vote</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h6>Preset Tampilan</h6>
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-outline-primary" id="presetMinimal">Tampilan Minimal</button>
+                            <button type="button" class="btn btn-outline-success" id="presetFull">Tampilan Lengkap</button>
+                            <button type="button" class="btn btn-outline-info" id="presetResultsOnly">Hanya Hasil</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="saveDisplaySettings">Simpan Pengaturan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // ========== KONFIGURASI APLIKASI ========== //
+        
+        // GANTI DENGAN URL WEB APP ANDA
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzUzp3FVEm6mHO2LGm500dFwq5fJoNj5eVMc14cScLuXXcPVU9oo3C30E7T9PYPekEZ/exec';
+        
+        // Sample candidate data (fallback jika server offline)
+        let candidates = {
+            tahap1: {
+                kring1: [
+                    { id: 1, name: "Ahmad Santoso", votes: 45, photo: "https://via.placeholder.com/150" },
+                    { id: 2, name: "Budi Raharjo", votes: 32, photo: "https://via.placeholder.com/150" },
+                    { id: 3, name: "Citra Dewi", votes: 28, photo: "https://via.placeholder.com/150" }
+                ],
+                kring2: [
+                    { id: 1, name: "Dian Pratama", votes: 38, photo: "https://via.placeholder.com/150" },
+                    { id: 2, name: "Eko Wijaya", votes: 41, photo: "https://via.placeholder.com/150" }
+                ],
+                kring3: [
+                    { id: 1, name: "Fajar Nugroho", votes: 35, photo: "https://via.placeholder.com/150" },
+                    { id: 2, name: "Gita Sari", votes: 29, photo: "https://via.placeholder.com/150" },
+                    { id: 3, name: "Hendra Setiawan", votes: 31, photo: "https://via.placeholder.com/150" }
+                ]
+            },
+            tahap2: {
+                kring1: [
+                    { id: 1, name: "Indra Permana", votes: 42, photo: "https://via.placeholder.com/150" },
+                    { id: 2, name: "Joko Susilo", votes: 37, photo: "https://via.placeholder.com/150" },
+                    { id: 3, name: "Kartika Wulandari", votes: 39, photo: "https://via.placeholder.com/150" }
+                ],
+                kring2: [
+                    { id: 1, name: "Lia Amelia", votes: 44, photo: "https://via.placeholder.com/150" },
+                    { id: 2, name: "Mulyadi", votes: 36, photo: "https://via.placeholder.com/150" },
+                    { id: 3, name: "Nina Handayani", votes: 40, photo: "https://via.placeholder.com/150" }
+                ],
+                kring3: [
+                    { id: 1, name: "Oki Pratama", votes: 33, photo: "https://via.placeholder.com/150" },
+                    { id: 2, name: "Putri Anggraini", votes: 41, photo: "https://via.placeholder.com/150" }
+                ]
+            }
+        };
+
+        // Current user and settings
+        let currentUser = null;
+        let appSettings = {
+            maxVotesPerUser: 3,
+            allowManualInput: true,
+            allowVoting: true,
+            totalVoters: 350
+        };
+
+        // Display settings
+        let displaySettings = {
+            showPercentage: true,
+            showProgressBar: true,
+            showVoteCount: true,
+            showCandidatePhotos: true,
+            showStats: true,
+            showCountdown: true,
+            showPlano: true,
+            showVoteButtons: true
+        };
+
+        // User votes tracking
+        let userVotes = {
+            tahap1: [], // Array of candidate IDs for tahap1
+            tahap2: []  // Array of candidate IDs for tahap2
+        };
+
+        // Track votes yang belum disubmit
+        let pendingVotes = {
+            tahap1: [],
+            tahap2: []
+        };
+
+        // Track plano photos
+        let planoPhotos = {
+            tahap1: {
+                ruang1: null,
+                ruang2: null,
+                ruang3: null
+            },
+            tahap2: {
+                ruang1: null,
+                ruang2: null,
+                ruang3: null
+            }
+        };
+
+        // Connection status
+        let isOnline = false;
+
+        // ========== FUNGSI UTAMA APLIKASI ========== //
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load app settings dari localStorage
+            try {
+                const savedAppSettings = localStorage.getItem('appSettings');
+                if (savedAppSettings) {
+                    appSettings = { ...appSettings, ...JSON.parse(savedAppSettings) };
+                }
+            } catch (error) {
+                console.warn('Gagal memuat pengaturan:', error);
+            }
+
+            // Test koneksi terlebih dahulu
+            testConnection().then(connected => {
+                if (connected) {
+                    // Load data dari server
+                    loadCandidatesFromServer();
+                    loadSettingsFromServer();
+                } else {
+                    // Gunakan data sample
+                    renderCandidates();
+                    updateStats();
+                    console.log('Mode offline: menggunakan data sample');
+                }
+            });
+            
+            initializeCountdown();
+            setupEventListeners();
+            checkLoginStatus();
+            loadUserVotes();
+            loadDisplaySettings();
+            applyDisplaySettings();
+            setupPlanoUploadHandlers();
+            
+            // Terapkan pembatasan voting
+            applyVotingRestrictions();
+            
+            // Update vote limit dropdown
+            const voteLimit = document.getElementById('voteLimit');
+            if (voteLimit) voteLimit.value = appSettings.maxVotesPerUser;
+        });
+
+        // Setup event listeners dengan pengecekan elemen
+        function setupEventListeners() {
+            // Login/Logout
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const doLogin = document.getElementById('doLogin');
+
+            if (loginBtn) loginBtn.addEventListener('click', openLoginModal);
+            if (logoutBtn) logoutBtn.addEventListener('click', logout);
+            if (doLogin) doLogin.addEventListener('click', login);
+            
+            // Navigation dengan proteksi akses
+            document.querySelectorAll('[data-section]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    
+                    // Proteksi akses untuk summary
+                    if (section === 'summary' && (!currentUser || currentUser.role !== 'admin')) {
+                        alert('Maaf, hanya administrator yang dapat mengakses halaman Summary.');
+                        return;
+                    }
+                    
+                    showSection(section);
+                });
+            });
+            
+            // Modals
+            const saveCountdown = document.getElementById('saveCountdown');
+            const saveCandidate = document.getElementById('saveCandidate');
+            const saveSettings = document.getElementById('saveSettings');
+            const saveDisplaySettings = document.getElementById('saveDisplaySettings');
+            
+            if (saveCountdown) saveCountdown.addEventListener('click', saveCountdownHandler);
+            if (saveCandidate) saveCandidate.addEventListener('click', saveCandidateHandler);
+            if (saveSettings) saveSettings.addEventListener('click', saveSettingsHandler);
+            if (saveDisplaySettings) saveDisplaySettings.addEventListener('click', saveDisplaySettingsHandler);
+            
+            // Admin controls
+            const resetVotes = document.getElementById('resetVotes');
+            const exportData = document.getElementById('exportData');
+            const resetData = document.getElementById('resetData');
+            const voteLimit = document.getElementById('voteLimit');
+
+            if (resetVotes) resetVotes.addEventListener('click', resetAllVotes);
+            if (exportData) exportData.addEventListener('click', exportToExcel);
+            if (resetData) resetData.addEventListener('click', resetAllData);
+            if (voteLimit) voteLimit.addEventListener('change', updateVoteLimit);
+            
+            // Display controls
+            const togglePercentage = document.getElementById('togglePercentage');
+            const toggleProgressBar = document.getElementById('toggleProgressBar');
+            const toggleVoteCount = document.getElementById('toggleVoteCount');
+            const toggleCandidatePhotos = document.getElementById('toggleCandidatePhotos');
+            const toggleStats = document.getElementById('toggleStats');
+            const toggleCountdown = document.getElementById('toggleCountdown');
+            const togglePlano = document.getElementById('togglePlano');
+            const toggleVoteButtons = document.getElementById('toggleVoteButtons');
+
+            if (togglePercentage) togglePercentage.addEventListener('change', togglePercentageHandler);
+            if (toggleProgressBar) toggleProgressBar.addEventListener('change', toggleProgressBarHandler);
+            if (toggleVoteCount) toggleVoteCount.addEventListener('change', toggleVoteCountHandler);
+            if (toggleCandidatePhotos) toggleCandidatePhotos.addEventListener('change', toggleCandidatePhotosHandler);
+            if (toggleStats) toggleStats.addEventListener('change', toggleStatsHandler);
+            if (toggleCountdown) toggleCountdown.addEventListener('change', toggleCountdownHandler);
+            if (togglePlano) togglePlano.addEventListener('change', togglePlanoHandler);
+            if (toggleVoteButtons) toggleVoteButtons.addEventListener('change', toggleVoteButtonsHandler);
+            
+            // Display presets
+            const presetMinimal = document.getElementById('presetMinimal');
+            const presetFull = document.getElementById('presetFull');
+            const presetResultsOnly = document.getElementById('presetResultsOnly');
+
+            if (presetMinimal) presetMinimal.addEventListener('click', setMinimalPreset);
+            if (presetFull) presetFull.addEventListener('click', setFullPreset);
+            if (presetResultsOnly) presetResultsOnly.addEventListener('click', setResultsOnlyPreset);
+            
+            // Submit buttons
+            const submitVotesTahap1 = document.getElementById('submitVotesTahap1');
+            const submitVotesTahap2 = document.getElementById('submitVotesTahap2');
+
+            if (submitVotesTahap1) submitVotesTahap1.addEventListener('click', () => submitVotes('tahap1'));
+            if (submitVotesTahap2) submitVotesTahap2.addEventListener('click', () => submitVotes('tahap2'));
+
+            // Settings modal show event
+            const settingsModal = document.getElementById('settingsModal');
+            if (settingsModal) {
+                settingsModal.addEventListener('show.bs.modal', function() {
+                    loadSettingsToModal();
+                });
+            }
+            
+            // Display settings modal show event
+            const displaySettingsModal = document.getElementById('displaySettingsModal');
+            if (displaySettingsModal) {
+                displaySettingsModal.addEventListener('show.bs.modal', function() {
+                    loadDisplaySettingsToModal();
+                });
+            }
+
+            // Summary section buttons
+            const refreshSummary = document.getElementById('refreshSummary');
+            const exportSummaryPDF = document.getElementById('exportSummaryPDF');
+            const exportSummaryExcel = document.getElementById('exportSummaryExcel');
+
+            if (refreshSummary) refreshSummary.addEventListener('click', function() {
+                loadSummaryData();
+                showNotification('Data summary berhasil diperbarui!', 'success');
+            });
+
+            if (exportSummaryPDF) exportSummaryPDF.addEventListener('click', function() {
+                alert('Fitur ekspor ke PDF akan segera tersedia!');
+            });
+
+            if (exportSummaryExcel) exportSummaryExcel.addEventListener('click', function() {
+                exportToExcel();
+            });
+        }
+
+        // Setup plano upload handlers
+        function setupPlanoUploadHandlers() {
+            // Setup plano upload for tahap 1
+            const planoInputsTahap1 = [
+                { id: 'planoRuang1Tahap1', ruang: 'ruang1' },
+                { id: 'planoRuang2Tahap1', ruang: 'ruang2' },
+                { id: 'planoRuang3Tahap1', ruang: 'ruang3' }
+            ];
+            
+            planoInputsTahap1.forEach(input => {
+                const element = document.getElementById(input.id);
+                if (element) {
+                    element.addEventListener('change', function(e) {
+                        handlePlanoUpload(e, 'tahap1', input.ruang);
+                    });
+                }
+            });
+            
+            // Setup plano upload for tahap 2
+            const planoInputsTahap2 = [
+                { id: 'planoRuang1Tahap2', ruang: 'ruang1' },
+                { id: 'planoRuang2Tahap2', ruang: 'ruang2' },
+                { id: 'planoRuang3Tahap2', ruang: 'ruang3' }
+            ];
+            
+            planoInputsTahap2.forEach(input => {
+                const element = document.getElementById(input.id);
+                if (element) {
+                    element.addEventListener('change', function(e) {
+                        handlePlanoUpload(e, 'tahap2', input.ruang);
+                    });
+                }
+            });
+        }
+
+        // Handle plano upload
+        function handlePlanoUpload(event, tahap, ruang) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Check if file is an image
+            if (!file.type.match('image.*')) {
+                alert('Hanya file gambar yang diizinkan!');
+                event.target.value = '';
+                return;
+            }
+            
+            // Check file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Ukuran file terlalu besar. Maksimal 5MB.');
+                event.target.value = '';
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Save plano photo
+                planoPhotos[tahap][ruang] = e.target.result;
+                
+                // Show preview
+                const previewId = `previewPlano${ruang.charAt(0).toUpperCase() + ruang.slice(1)}${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`;
+                const preview = document.getElementById(previewId);
+                if (preview) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                
+                // Update status
+                const statusId = `planoStatus${ruang.charAt(0).toUpperCase() + ruang.slice(1)}${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`;
+                const statusElement = document.getElementById(statusId);
+                if (statusElement) {
+                    statusElement.textContent = 'Sudah Upload';
+                    statusElement.className = 'plano-status plano-uploaded';
+                }
+                
+                console.log(`Plano uploaded for ${tahap} - ${ruang}`);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // ========== ADMIN CONTROLS IMPLEMENTATION ========== //
+
+        /**
+         * Update vote limit untuk semua user
+         */
+        function updateVoteLimit() {
+            const voteLimit = document.getElementById('voteLimit');
+            if (!voteLimit) return;
+            
+            const newLimit = parseInt(voteLimit.value);
+            appSettings.maxVotesPerUser = newLimit;
+            
+            // Simpan ke localStorage
+            try {
+                localStorage.setItem('appSettings', JSON.stringify(appSettings));
+            } catch (error) {
+                console.warn('Gagal menyimpan pengaturan:', error);
+            }
+            
+            // Update UI untuk member
+            updateVoteLimitInfo('tahap2');
+            
+            // Kirim ke server jika online
+            if (isOnline) {
+                postToGoogleScript('updateSettings', {
+                    settings: JSON.stringify(appSettings)
+                }).catch(error => {
+                    console.error('Gagal update settings ke server:', error);
+                });
+            }
+            
+            showNotification(`Batas vote diubah menjadi ${newLimit} kali`, 'success');
+        }
+
+        /**
+         * Load settings ke modal pengaturan
+         */
+        function loadSettingsToModal() {
+            const maxVotesPerUser = document.getElementById('maxVotesPerUser');
+            const allowManualInput = document.getElementById('allowManualInput');
+            const allowVoting = document.getElementById('allowVoting');
+            const totalVotersSetting = document.getElementById('totalVotersSetting');
+            const voteLimit = document.getElementById('voteLimit');
+            
+            if (maxVotesPerUser) maxVotesPerUser.value = appSettings.maxVotesPerUser;
+            if (allowManualInput) allowManualInput.checked = appSettings.allowManualInput;
+            if (allowVoting) allowVoting.checked = appSettings.allowVoting;
+            if (totalVotersSetting) totalVotersSetting.value = appSettings.totalVoters;
+            if (voteLimit) voteLimit.value = appSettings.maxVotesPerUser;
+        }
+
+        /**
+         * Load display settings ke modal
+         */
+        function loadDisplaySettingsToModal() {
+            const modalToggles = [
+                'modalTogglePercentage', 'modalToggleProgressBar', 'modalToggleVoteCount',
+                'modalToggleCandidatePhotos', 'modalToggleStats', 'modalToggleCountdown',
+                'modalTogglePlano', 'modalToggleVoteButtons'
+            ];
+            
+            modalToggles.forEach(toggleId => {
+                const toggle = document.getElementById(toggleId);
+                if (toggle) {
+                    const settingKey = 'show' + toggleId.replace('modalToggle', '');
+                    toggle.checked = displaySettings[settingKey] !== false;
+                }
+            });
+        }
+
+        /**
+         * Enhanced save settings handler
+         */
+        function saveSettingsHandler() {
+            const maxVotesPerUser = document.getElementById('maxVotesPerUser');
+            const allowManualInput = document.getElementById('allowManualInput');
+            const allowVoting = document.getElementById('allowVoting');
+            const totalVotersSetting = document.getElementById('totalVotersSetting');
+            
+            if (maxVotesPerUser) appSettings.maxVotesPerUser = parseInt(maxVotesPerUser.value);
+            if (allowManualInput) appSettings.allowManualInput = allowManualInput.checked;
+            if (allowVoting) appSettings.allowVoting = allowVoting.checked;
+            if (totalVotersSetting) appSettings.totalVoters = parseInt(totalVotersSetting.value);
+            
+            // Update vote limit dropdown di admin controls
+            const voteLimit = document.getElementById('voteLimit');
+            if (voteLimit) voteLimit.value = appSettings.maxVotesPerUser;
+            
+            // Simpan ke localStorage
+            try {
+                localStorage.setItem('appSettings', JSON.stringify(appSettings));
+            } catch (error) {
+                console.warn('Gagal menyimpan pengaturan:', error);
+            }
+            
+            // Update stats dan UI
+            updateStats();
+            updateVoteLimitInfo('tahap2');
+            applyVotingRestrictions();
+            
+            // Kirim ke server jika online
+            if (isOnline) {
+                postToGoogleScript('updateSettings', {
+                    settings: JSON.stringify(appSettings)
+                }).then(() => {
+                    showNotification('Pengaturan berhasil disimpan!', 'success');
+                }).catch(error => {
+                    console.error('Gagal menyimpan pengaturan ke server:', error);
+                    showNotification('Pengaturan disimpan secara lokal', 'warning');
+                });
+            } else {
+                showNotification('Pengaturan berhasil disimpan secara lokal!', 'success');
+            }
+            
+            const settingsModal = bootstrap.Modal.getInstance(document.getElementById('settingsModal'));
+            if (settingsModal) settingsModal.hide();
+        }
+
+        /**
+         * Terapkan pembatasan voting berdasarkan settings
+         */
+        function applyVotingRestrictions() {
+            const voteButtons = document.querySelectorAll('.toggle-vote-btn');
+            const voteInfos = document.querySelectorAll('.vote-info, .vote-limit-info');
+            
+            if (!appSettings.allowVoting) {
+                // Nonaktifkan semua tombol vote
+                voteButtons.forEach(btn => {
+                    btn.disabled = true;
+                    btn.title = 'Voting sedang dinonaktifkan oleh admin';
+                    btn.classList.add('vote-disabled');
+                });
+                
+                // Update info text
+                voteInfos.forEach(info => {
+                    const originalContent = info.getAttribute('data-original-content') || info.innerHTML;
+                    info.setAttribute('data-original-content', originalContent);
+                    info.innerHTML = '<i class="fas fa-ban me-2"></i> Voting sedang dinonaktifkan oleh admin';
+                    info.classList.add('vote-disabled-info');
+                });
+            } else {
+                // Aktifkan tombol vote
+                voteButtons.forEach(btn => {
+                    btn.disabled = false;
+                    btn.title = '';
+                    btn.classList.remove('vote-disabled');
+                });
+                
+                // Kembalikan info text
+                voteInfos.forEach(info => {
+                    const originalContent = info.getAttribute('data-original-content');
+                    if (originalContent) {
+                        info.innerHTML = originalContent;
+                        info.classList.remove('vote-disabled-info');
+                    }
+                });
+            }
+            
+            // Update vote limit info
+            updateVoteLimitInfo('tahap2');
+        }
+
+        // ========== VOTE SUBMISSION SYSTEM ========== //
+
+        /**
+         * Fungsi untuk menambahkan vote ke pending
+         */
+        function addPendingVote(tahap, kring, candidateId, action) {
+            // Cek apakah vote sudah ada di pending
+            const existingVoteIndex = pendingVotes[tahap].findIndex(vote => 
+                vote.candidateId === candidateId && vote.kring === kring
+            );
+            
+            if (existingVoteIndex === -1) {
+                pendingVotes[tahap].push({
+                    tahap: tahap,
+                    kring: kring,
+                    candidateId: candidateId,
+                    action: action,
+                    timestamp: new Date()
+                });
+            } else {
+                // Update existing vote
+                pendingVotes[tahap][existingVoteIndex].action = action;
+                pendingVotes[tahap][existingVoteIndex].timestamp = new Date();
+            }
+            
+            // Update UI
+            updateSubmitButtonVisibility(tahap);
+            updateVoteSummary(tahap);
+            updateVoteLimitInfo(tahap);
+        }
+
+        /**
+         * Fungsi untuk menghapus vote dari pending
+         */
+        function removePendingVote(tahap, candidateId, kring) {
+            pendingVotes[tahap] = pendingVotes[tahap].filter(vote => 
+                !(vote.candidateId === candidateId && vote.kring === kring)
+            );
+            
+            // Update UI
+            updateSubmitButtonVisibility(tahap);
+            updateVoteSummary(tahap);
+            updateVoteLimitInfo(tahap);
+        }
+
+        /**
+         * Update visibilitas tombol submit
+         */
+        function updateSubmitButtonVisibility(tahap) {
+            const submitSection = document.getElementById(`submitSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const pendingCount = document.getElementById(`pendingCount${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const submitInfo = document.getElementById(`submitInfo${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const planoSection = document.getElementById(`planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const planoSubmitInfo = document.getElementById(`planoSubmitInfo${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            
+            if (submitSection && pendingCount && submitInfo && planoSection && planoSubmitInfo) {
+                if (pendingVotes[tahap].length > 0) {
+                    submitSection.style.display = 'block';
+                    planoSection.style.display = 'block';
+                    pendingCount.textContent = pendingVotes[tahap].length;
+                    
+                    // Update info text berdasarkan tahap
+                    const maxVotes = (tahap === 'tahap1') ? 1 : appSettings.maxVotesPerUser;
+                    const currentVotesCount = userVotes[tahap].length;
+                    submitInfo.textContent = `Anda telah memilih ${currentVotesCount} dari ${maxVotes} kandidat yang diizinkan`;
+                    
+                    // Update plano info
+                    updatePlanoSubmitInfo(tahap);
+                } else {
+                    submitSection.style.display = 'none';
+                    planoSection.style.display = 'none';
+                }
+            }
+        }
+
+        /**
+         * Update plano submit info
+         */
+        function updatePlanoSubmitInfo(tahap) {
+            const planoSubmitInfo = document.getElementById(`planoSubmitInfo${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const userRuang = getUserRuang();
+            
+            if (!planoSubmitInfo) return;
+            
+            if (currentUser && currentUser.role === 'admin') {
+                // Admin harus upload semua ruang
+                const uploadedCount = ['ruang1', 'ruang2', 'ruang3'].filter(ruang => 
+                    planoPhotos[tahap][ruang] !== null
+                ).length;
+                
+                if (uploadedCount === 3) {
+                    planoSubmitInfo.innerHTML = '<span class="badge bg-success"><i class="fas fa-check me-1"></i> Semua bukti plano sudah diupload</span>';
+                } else {
+                    planoSubmitInfo.innerHTML = `<span class="badge bg-warning"><i class="fas fa-exclamation-triangle me-1"></i> ${3 - uploadedCount} bukti plano belum diupload</span>`;
+                }
+            } else if (currentUser && userRuang) {
+                // Member hanya perlu upload ruang mereka
+                if (planoPhotos[tahap][`ruang${userRuang}`] !== null) {
+                    planoSubmitInfo.innerHTML = '<span class="badge bg-success"><i class="fas fa-check me-1"></i> Bukti plano sudah diupload</span>';
+                } else {
+                    planoSubmitInfo.innerHTML = '<span class="badge bg-warning"><i class="fas fa-exclamation-triangle me-1"></i> Bukti plano belum diupload</span>';
+                }
+            }
+        }
+
+        /**
+         * Update vote summary display
+         */
+        function updateVoteSummary(tahap) {
+            const summaryElement = document.getElementById(`${tahap}Summary`);
+            const summaryContent = document.getElementById(`${tahap}SummaryContent`);
+            
+            if (summaryElement && summaryContent) {
+                const voteVotes = pendingVotes[tahap].filter(v => v.action === 'vote');
+                
+                if (voteVotes.length > 0) {
+                    summaryElement.style.display = 'block';
+                    
+                    let summaryHTML = '';
+                    voteVotes.forEach(vote => {
+                        const candidate = findCandidate(vote.tahap, vote.kring, vote.candidateId);
+                        if (candidate) {
+                            summaryHTML += `
+                                <div class="summary-item">
+                                    <span>${candidate.name}</span>
+                                    <span class="badge bg-primary">${vote.kring}</span>
+                                </div>
+                            `;
+                        }
+                    });
+                    
+                    summaryContent.innerHTML = summaryHTML;
+                } else {
+                    summaryElement.style.display = 'none';
+                }
+            }
+        }
+
+        /**
+         * Update vote limit info display
+         */
+        function updateVoteLimitInfo(tahap) {
+            if (tahap === 'tahap2') {
+                const voteLimitInfo = document.getElementById('tahap2VoteLimitInfo');
+                const voteLimitText = document.getElementById('tahap2VoteLimitText');
+                const currentVotesElement = document.getElementById('currentVotesTahap2');
+                
+                if (voteLimitInfo && voteLimitText && currentVotesElement) {
+                    const currentVotesCount = userVotes[tahap].length;
+                    const maxVotes = appSettings.maxVotesPerUser;
+                    currentVotesElement.textContent = currentVotesCount;
+                    
+                    voteLimitText.innerHTML = `Anda dapat memilih hingga <strong>${maxVotes}</strong> kandidat. Saat ini Anda telah memilih <strong>${currentVotesCount}</strong> dari ${maxVotes} kandidat.`;
+                    
+                    if (currentUser && currentUser.role !== 'admin') {
+                        voteLimitInfo.style.display = 'block';
+                        
+                        // Update warna berdasarkan jumlah vote
+                        if (currentVotesCount >= maxVotes) {
+                            voteLimitInfo.style.backgroundColor = '#d4edda';
+                            voteLimitInfo.style.borderLeftColor = '#28a745';
+                        } else if (currentVotesCount >= maxVotes - 1) {
+                            voteLimitInfo.style.backgroundColor = '#fff3cd';
+                            voteLimitInfo.style.borderLeftColor = '#ffc107';
+                        } else {
+                            voteLimitInfo.style.backgroundColor = '#e8f4fd';
+                            voteLimitInfo.style.borderLeftColor = '#17a2b8';
+                        }
+                    }
+                }
+            }
+        }
+
+        /**
+         * Find candidate by ID, tahap, and kring
+         */
+        function findCandidate(tahap, kring, candidateId) {
+            if (candidates[tahap] && candidates[tahap][kring]) {
+                return candidates[tahap][kring].find(c => c.id === candidateId);
+            }
+            return null;
+        }
+
+        /**
+         * Enhanced toggle vote candidate dengan validasi settings admin
+         */
+        function toggleVoteCandidate(tahap, kring, candidateId) {
+            if (!currentUser) {
+                alert('Silakan login terlebih dahulu!');
+                openLoginModal();
+                return;
+            }
+            
+            // Cek jika voting tidak diizinkan
+            if (!appSettings.allowVoting) {
+                showNotification('Voting sedang dinonaktifkan oleh admin!', 'error');
+                return;
+            }
+            
+            // Periksa apakah kandidat sudah dipilih
+            const isSelected = userVotes[tahap].includes(candidateId);
+            
+            if (isSelected) {
+                // Unvote candidate
+                removePendingVote(tahap, candidateId, kring);
+                
+                // Update UI
+                const card = document.querySelector(`.candidate-card[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
+                const voteBtn = document.querySelector(`.toggle-vote-btn[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
+                
+                if (card && voteBtn) {
+                    card.classList.remove('selected-candidate');
+                    voteBtn.innerHTML = '<i class="fas fa-vote-yea me-1"></i> Pilih';
+                    voteBtn.classList.remove('btn-danger');
+                    voteBtn.classList.add('btn-primary');
+                }
+                
+                // Hapus dari user votes tracking
+                const index = userVotes[tahap].indexOf(candidateId);
+                if (index > -1) {
+                    userVotes[tahap].splice(index, 1);
+                    saveUserVotes();
+                }
+            } else {
+                // Periksa apakah user sudah mencapai batas vote untuk tahap ini
+                const maxVotes = (tahap === 'tahap1') ? 1 : appSettings.maxVotesPerUser;
+                const currentVotesCount = userVotes[tahap].length;
+                
+                if (currentVotesCount >= maxVotes) {
+                    showNotification(`Anda hanya dapat memilih ${maxVotes} kandidat pada ${tahap === 'tahap1' ? 'Tahap 1' : 'Tahap 2'}.`, 'warning');
+                    return;
+                }
+                
+                // Vote candidate
+                addPendingVote(tahap, kring, candidateId, 'vote');
+                
+                // Update UI
+                const card = document.querySelector(`.candidate-card[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
+                const voteBtn = document.querySelector(`.toggle-vote-btn[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
+                
+                if (card && voteBtn) {
+                    card.classList.add('selected-candidate');
+                    voteBtn.innerHTML = '<i class="fas fa-times me-1"></i> Batalkan';
+                    voteBtn.classList.remove('btn-primary');
+                    voteBtn.classList.add('btn-danger');
+                }
+                
+                // Tambahkan ke user votes tracking
+                userVotes[tahap].push(candidateId);
+                saveUserVotes();
+            }
+        }
+
+        /**
+         * Fungsi untuk submit votes
+         */
+        async function submitVotes(tahap) {
+            if (!currentUser) {
+                alert('Silakan login terlebih dahulu!');
+                return;
+            }
+            
+            if (pendingVotes[tahap].length === 0) {
+                alert('Tidak ada votes yang perlu disubmit!');
+                return;
+            }
+            
+            const submitButton = document.getElementById(`submitVotes${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const submitStatus = document.getElementById(`submitStatus${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            
+            if (!submitButton || !submitStatus) return;
+            
+            // Disable tombol selama proses submit
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Submitting...';
+            submitStatus.innerHTML = '<span class="badge bg-info">Mengirim votes dan plano...</span>';
+            submitStatus.style.display = 'block';
+            
+            try {
+                // Upload plano photos jika ada
+                await uploadPlanos(tahap);
+                
+                // Kirim votes ke server
+                const result = await postToGoogleScript('submitVotes', {
+                    userId: currentUser.role,
+                    tahap: tahap,
+                    votes: JSON.stringify(pendingVotes[tahap])
+                });
+                
+                // Reset pending votes setelah berhasil
+                pendingVotes[tahap] = [];
+                
+                // Reset plano photos
+                planoPhotos[tahap] = { ruang1: null, ruang2: null, ruang3: null };
+                
+                // Update UI
+                submitButton.innerHTML = '<i class="fas fa-check me-2"></i> Submit Successful!';
+                submitStatus.innerHTML = '<span class="badge bg-success">Votes dan plano berhasil dikirim!</span>';
+                
+                // Refresh data dari server
+                setTimeout(() => {
+                    loadCandidatesFromServer();
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<i class="fas fa-paper-plane me-2"></i> Submit Votes';
+                    submitStatus.style.display = 'none';
+                    
+                    // Reset user votes tracking
+                    userVotes[tahap] = [];
+                    saveUserVotes();
+                    
+                    // Reset UI untuk pemilih berikutnya
+                    resetVotingUI(tahap);
+                    
+                    alert(`Votes untuk ${tahap === 'tahap1' ? 'Tahap 1' : 'Tahap 2'} berhasil disubmit!`);
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error submitting votes:', error);
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fas fa-paper-plane me-2"></i> Submit Votes';
+                submitStatus.innerHTML = '<span class="badge bg-danger">Error: ' + error.message + '</span>';
+                alert('Terjadi error saat submit votes: ' + error.message);
+            }
+        }
+
+        /**
+         * Upload plano photos
+         */
+        async function uploadPlanos(tahap) {
+            const userRuang = getUserRuang();
+            
+            if (currentUser.role === 'admin') {
+                // Admin upload semua ruang
+                for (let ruang of ['1', '2', '3']) {
+                    if (planoPhotos[tahap][`ruang${ruang}`]) {
+                        await uploadPlanoToServer(tahap, ruang, planoPhotos[tahap][`ruang${ruang}`]);
+                    }
+                }
+            } else if (userRuang) {
+                // Member upload hanya ruang mereka
+                if (planoPhotos[tahap][`ruang${userRuang}`]) {
+                    await uploadPlanoToServer(tahap, userRuang, planoPhotos[tahap][`ruang${userRuang}`]);
+                }
+            }
+        }
+
+        /**
+         * Upload plano to server
+         */
+        async function uploadPlanoToServer(tahap, ruang, planoData) {
+            try {
+                // Simulasi upload ke server
+                console.log(`Uploading plano for ${tahap} - ruang ${ruang}`);
+                
+                // Dalam implementasi nyata, ini akan mengirim file ke server
+                // Untuk saat ini, kita hanya mensimulasikan
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        console.log(`Plano uploaded successfully for ${tahap} - ruang ${ruang}`);
+                        resolve(true);
+                    }, 1000);
+                });
+            } catch (error) {
+                console.error('Error uploading plano:', error);
+                throw error;
+            }
+        }
+
+        /**
+         * Reset UI voting setelah submit
+         */
+        function resetVotingUI(tahap) {
+            // Reset semua tombol vote/unvote
+            const krings = ['kring1', 'kring2', 'kring3'];
+            krings.forEach(kring => {
+                if (candidates[tahap] && candidates[tahap][kring]) {
+                    candidates[tahap][kring].forEach(candidate => {
+                        const card = document.querySelector(`.candidate-card[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidate.id}"]`);
+                        const voteBtn = document.querySelector(`.toggle-vote-btn[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidate.id}"]`);
+                        
+                        if (card && voteBtn) {
+                            card.classList.remove('selected-candidate');
+                            voteBtn.innerHTML = '<i class="fas fa-vote-yea me-1"></i> Pilih';
+                            voteBtn.classList.remove('btn-danger');
+                            voteBtn.classList.add('btn-primary');
+                            voteBtn.disabled = !appSettings.allowVoting;
+                        }
+                    });
+                }
+            });
+            
+            // Hide submit section
+            const submitSection = document.getElementById(`submitSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            if (submitSection) submitSection.style.display = 'none';
+            
+            // Hide plano section
+            const planoSection = document.getElementById(`planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            if (planoSection) planoSection.style.display = 'none';
+            
+            // Hide vote summary
+            const summaryElement = document.getElementById(`${tahap}Summary`);
+            if (summaryElement) summaryElement.style.display = 'none';
+            
+            // Reset plano inputs
+            const planoInputs = document.querySelectorAll(`#planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)} input[type="file"]`);
+            planoInputs.forEach(input => {
+                input.value = '';
+            });
+            
+            // Hide plano previews
+            const planoPreviews = document.querySelectorAll(`#planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)} .plano-preview`);
+            planoPreviews.forEach(preview => {
+                preview.style.display = 'none';
+            });
+            
+            // Reset plano status
+            const planoStatuses = document.querySelectorAll(`#planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)} .plano-status`);
+            planoStatuses.forEach(status => {
+                status.textContent = 'Belum Upload';
+                status.className = 'plano-status plano-missing';
+            });
+            
+            // Hide vote limit info for tahap 2
+            if (tahap === 'tahap2') {
+                const voteLimitInfo = document.getElementById('tahap2VoteLimitInfo');
+                if (voteLimitInfo) voteLimitInfo.style.display = 'none';
+            }
+        }
+
+        // ========== FUNGSI DATA SERVER ========== //
+
+        /**
+         * Fungsi untuk POST data ke Google Apps Script
+         */
+        async function postToGoogleScript(action, params = {}) {
+            return new Promise((resolve, reject) => {
+                const formData = new FormData();
+                formData.append('action', action);
+                
+                Object.keys(params).forEach(key => {
+                    if (params[key] !== null && params[key] !== undefined) {
+                        formData.append(key, params[key]);
+                    }
+                });
+
+                console.log('Posting to Google Script:', action, params);
+
+                fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                })
+                .then(response => {
+                    console.log('POST request sent successfully');
+                    resolve({ success: true, message: 'Request sent' });
+                    
+                    // Refresh data setelah aksi berhasil
+                    setTimeout(() => {
+                        loadCandidatesFromServer();
+                        loadSettingsFromServer();
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error posting to Google Script:', error);
+                    reject(error);
+                });
+            });
+        }
+
+        /**
+         * Fungsi untuk test koneksi ke server
+         */
+        async function testConnection() {
+            try {
+                updateConnectionStatus('Menyambungkan...', 'connecting');
+                
+                // Coba akses health check endpoint
+                const response = await fetch(`${WEB_APP_URL}?action=healthCheck&_=${Date.now()}`, {
+                    method: 'GET',
+                    mode: 'no-cors'
+                });
+                
+                // Jika tidak ada error CORS, anggap berhasil
+                updateConnectionStatus('Terhubung', 'online');
+                isOnline = true;
+                return true;
+            } catch (error) {
+                console.error('Connection test failed:', error);
+                updateConnectionStatus('Offline', 'offline');
+                isOnline = false;
+                return false;
+            }
+        }
+
+        /**
+         * Update status koneksi di UI
+         */
+        function updateConnectionStatus(text, status) {
+            const statusElement = document.getElementById('connectionStatus');
+            const textElement = document.getElementById('connectionText');
+            
+            if (statusElement && textElement) {
+                statusElement.style.display = 'block';
+                textElement.textContent = text;
+                
+                statusElement.classList.remove('connection-online', 'connection-offline', 'connection-connecting');
+                
+                if (status === 'online') {
+                    statusElement.classList.add('connection-online');
+                } else if (status === 'offline') {
+                    statusElement.classList.add('connection-offline');
+                } else {
+                    statusElement.classList.add('connection-connecting');
+                }
+            }
+        }
+
+        /**
+         * Load candidates dari Google Apps Script
+         */
+        async function loadCandidatesFromServer() {
+            try {
+                console.log('Loading candidates from server...');
+                
+                // Simulasikan loading
+                setTimeout(() => {
+                    renderCandidates();
+                    updateStats();
+                }, 500);
+                
+            } catch (error) {
+                console.error('Error loading candidates from server:', error);
+                // Fallback ke data sample
+                renderCandidates();
+                updateStats();
+            }
+        }
+
+        /**
+         * Load settings dari Google Apps Script
+         */
+        async function loadSettingsFromServer() {
+            try {
+                console.log('Loading settings from server...');
+                
+                // Simulasikan loading settings
+                setTimeout(() => {
+                    updateStats();
+                }, 500);
+                
+            } catch (error) {
+                console.error('Error loading settings from server:', error);
+                // Gunakan default settings
+                updateStats();
+            }
+        }
+
+        // ========== FUNGSI LOGIN & AUTH ========== //
+
+        /**
+         * Login function yang terhubung ke Google Apps Script
+         */
+        async function login() {
+            const role = document.getElementById('loginRole');
+            const password = document.getElementById('loginPassword');
+            
+            if (!role || !password) return;
+            
+            const roleValue = role.value;
+            const passwordValue = password.value;
+            
+            if (!roleValue) {
+                alert('Pilih role terlebih dahulu!');
+                return;
+            }
+            
+            try {
+                // Coba login ke server
+                if (isOnline) {
+                    const result = await postToGoogleScript('login', {
+                        username: roleValue,
+                        password: passwordValue
+                    });
+                    
+                    // Karena kita menggunakan mode no-cors, kita tidak bisa membaca response
+                    // Jadi kita asumsikan login berhasil jika tidak ada error
+                    currentUser = {
+                        role: roleValue,
+                        name: roleValue === 'admin' ? 'Administrator' : `Member ${roleValue.toUpperCase()}`,
+                        loginTime: new Date()
+                    };
+                    
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    updateUIForUser();
+                    
+                    const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                    if (loginModal) loginModal.hide();
+                    
+                    password.value = '';
+                    
+                    alert(`Login berhasil sebagai ${currentUser.name}`);
+                    
+                    // Refresh data setelah login
+                    loadCandidatesFromServer();
+                } else {
+                    // Mode offline - gunakan validasi sederhana
+                    if ((roleValue === 'admin' && passwordValue === 'admin123') || 
+                        (roleValue !== 'admin' && passwordValue === 'member123')) {
+                        
+                        currentUser = {
+                            role: roleValue,
+                            name: roleValue === 'admin' ? 'Administrator' : `Member ${roleValue.toUpperCase()}`,
+                            loginTime: new Date()
+                        };
+                        
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                        updateUIForUser();
+                        
+                        const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                        if (loginModal) loginModal.hide();
+                        
+                        password.value = '';
+                        
+                        alert(`Login berhasil sebagai ${currentUser.name} (Mode Offline)`);
+                    } else {
+                        alert('Username atau password salah!');
+                    }
+                }
+            } catch (error) {
+                alert('Terjadi kesalahan saat login: ' + error.message);
+            }
+        }
+
+        // ========== FUNGSI BANTUAN ========== //
+
+        // Load display settings from localStorage
+        function loadDisplaySettings() {
+            try {
+                const savedDisplaySettings = localStorage.getItem('displaySettings');
+                if (savedDisplaySettings) {
+                    displaySettings = JSON.parse(savedDisplaySettings);
+                }
+            } catch (error) {
+                console.warn('Gagal mengakses localStorage:', error);
+            }
+            
+            // Update toggle switches
+            const toggles = [
+                'togglePercentage', 'toggleProgressBar', 'toggleVoteCount', 'toggleCandidatePhotos',
+                'toggleStats', 'toggleCountdown', 'togglePlano', 'toggleVoteButtons'
+            ];
+            
+            toggles.forEach(toggleId => {
+                const toggle = document.getElementById(toggleId);
+                if (toggle) {
+                    const settingKey = 'show' + toggleId.replace('toggle', '');
+                    toggle.checked = displaySettings[settingKey] !== false;
+                }
+            });
+        }
+
+        // Check if user is logged in
+        function checkLoginStatus() {
+            try {
+                const savedUser = localStorage.getItem('currentUser');
+                if (savedUser) {
+                    currentUser = JSON.parse(savedUser);
+                    updateUIForUser();
+                }
+            } catch (error) {
+                console.warn('Gagal mengakses localStorage:', error);
+            }
+        }
+
+        // Load user votes from localStorage
+        function loadUserVotes() {
+            try {
+                const savedVotes = localStorage.getItem('userVotes');
+                if (savedVotes) {
+                    userVotes = JSON.parse(savedVotes);
+                }
+            } catch (error) {
+                console.warn('Gagal mengakses localStorage:', error);
+            }
+        }
+
+        // Save user votes to localStorage
+        function saveUserVotes() {
+            try {
+                localStorage.setItem('userVotes', JSON.stringify(userVotes));
+            } catch (error) {
+                console.warn('Gagal menyimpan ke localStorage:', error);
+            }
+        }
+
+        /**
+         * Get user's kring based on role
+         */
+        function getUserKring() {
+            if (!currentUser) return null;
+            
+            if (currentUser.role === 'ruang1') return '1';
+            if (currentUser.role === 'ruang2') return '2';
+            if (currentUser.role === 'ruang3') return '3';
+            
+            return null;
+        }
+
+        /**
+         * Get user's ruang number based on role
+         */
+        function getUserRuang() {
+            if (!currentUser) return null;
+            
+            if (currentUser.role === 'ruang1') return '1';
+            if (currentUser.role === 'ruang2') return '2';
+            if (currentUser.role === 'ruang3') return '3';
+            
+            return null;
+        }
+
+        // Open login modal
+        function openLoginModal() {
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            try {
+                localStorage.removeItem('currentUser');
+            } catch (error) {
+                console.warn('Gagal menghapus dari localStorage:', error);
+            }
+            updateUIForUser();
+            alert('Anda telah logout');
+        }
+
+        /**
+         * Update plano upload UI based on user role
+         */
+        function updatePlanoUI() {
+            const planoContainersTahap1 = document.querySelectorAll('#planoContainerTahap1 .plano-ruang-container');
+            const planoContainersTahap2 = document.querySelectorAll('#planoContainerTahap2 .plano-ruang-container');
+            const planoInfoTextTahap1 = document.getElementById('planoInfoTextTahap1');
+            const planoInfoTextTahap2 = document.getElementById('planoInfoTextTahap2');
+            
+            const userRuang = getUserRuang();
+            
+            if (currentUser && currentUser.role === 'admin') {
+                // Admin bisa melihat semua ruangan
+                planoContainersTahap1.forEach(container => {
+                    container.style.display = 'block';
+                    container.classList.remove('col-md-12');
+                    container.classList.add('col-md-4');
+                });
+                planoContainersTahap2.forEach(container => {
+                    container.style.display = 'block';
+                    container.classList.remove('col-md-12');
+                    container.classList.add('col-md-4');
+                });
+                
+                if (planoInfoTextTahap1) planoInfoTextTahap1.textContent = 'Silakan upload foto bukti plano untuk semua ruang di tahap 1:';
+                if (planoInfoTextTahap2) planoInfoTextTahap2.textContent = 'Silakan upload foto bukti plano untuk semua ruang di tahap 2:';
+                
+            } else if (currentUser && userRuang) {
+                // Member hanya bisa melihat ruangannya sendiri
+                planoContainersTahap1.forEach(container => {
+                    const ruang = container.getAttribute('data-ruang');
+                    if (ruang === userRuang) {
+                        container.style.display = 'block';
+                        // Untuk member, ubah menjadi full width
+                        container.classList.remove('col-md-4');
+                        container.classList.add('col-md-12');
+                    } else {
+                        container.style.display = 'none';
+                    }
+                });
+                planoContainersTahap2.forEach(container => {
+                    const ruang = container.getAttribute('data-ruang');
+                    if (ruang === userRuang) {
+                        container.style.display = 'block';
+                        // Untuk member, ubah menjadi full width
+                        container.classList.remove('col-md-4');
+                        container.classList.add('col-md-12');
+                    } else {
+                        container.style.display = 'none';
+                    }
+                });
+                
+                // Update label untuk member
+                const labelsTahap1 = document.querySelectorAll('#planoContainerTahap1 .plano-ruang-container .form-label');
+                labelsTahap1.forEach(label => {
+                    const container = label.closest('.plano-ruang-container');
+                    if (container && container.style.display !== 'none') {
+                        label.textContent = 'Bukti Plano';
+                    }
+                });
+                const labelsTahap2 = document.querySelectorAll('#planoContainerTahap2 .plano-ruang-container .form-label');
+                labelsTahap2.forEach(label => {
+                    const container = label.closest('.plano-ruang-container');
+                    if (container && container.style.display !== 'none') {
+                        label.textContent = 'Bukti Plano';
+                    }
+                });
+                
+                if (planoInfoTextTahap1) planoInfoTextTahap1.textContent = 'Silakan upload foto bukti plano untuk ruang Anda di tahap 1:';
+                if (planoInfoTextTahap2) planoInfoTextTahap2.textContent = 'Silakan upload foto bukti plano untuk ruang Anda di tahap 2:';
+                
+            } else {
+                // Non-logged in user - sembunyikan semua
+                planoContainersTahap1.forEach(container => {
+                    container.style.display = 'none';
+                });
+                planoContainersTahap2.forEach(container => {
+                    container.style.display = 'none';
+                });
+            }
+        }
+
+        // Update UI based on user role
+        function updateUIForUser() {
+            const userInfo = document.getElementById('userInfo');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const adminMenu = document.getElementById('adminMenu');
+            const adminControls = document.getElementById('adminControls');
+            const displayControls = document.getElementById('displayControls');
+            const memberKringInfo = document.getElementById('memberKringInfo');
+            const memberKringName = document.getElementById('memberKringName');
+            const addCandidateBtnContainer = document.getElementById('addCandidateBtnContainer');
+            const countdownSettingsBtn = document.getElementById('countdownSettingsBtn');
+            const tahap1VoteInfo = document.getElementById('tahap1VoteInfo');
+            const tahap2VoteInfo = document.getElementById('tahap2VoteInfo');
+            const tahap2VoteLimitInfo = document.getElementById('tahap2VoteLimitInfo');
+            const summaryMenu = document.getElementById('summaryMenu');
+            const footerSummaryLink = document.getElementById('footerSummaryLink');
+            
+            if (currentUser) {
+                if (userInfo) userInfo.innerHTML = `<i class="fas fa-user me-1"></i> ${currentUser.name}`;
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'inline-block';
+                
+                if (currentUser.role === 'admin') {
+                    if (adminMenu) adminMenu.style.display = 'block';
+                    if (adminControls) adminControls.style.display = 'block';
+                    if (displayControls) displayControls.style.display = 'block';
+                    if (addCandidateBtnContainer) addCandidateBtnContainer.style.display = 'block';
+                    if (countdownSettingsBtn) countdownSettingsBtn.style.display = 'inline-block';
+                    if (memberKringInfo) memberKringInfo.style.display = 'none';
+                    if (tahap1VoteInfo) tahap1VoteInfo.style.display = 'none';
+                    if (tahap2VoteInfo) tahap2VoteInfo.style.display = 'none';
+                    if (tahap2VoteLimitInfo) tahap2VoteLimitInfo.style.display = 'none';
+                    
+                    // Tampilkan menu Summary hanya untuk admin
+                    if (summaryMenu) summaryMenu.style.display = 'block';
+                    if (footerSummaryLink) footerSummaryLink.style.display = 'block';
+                } else {
+                    if (adminMenu) adminMenu.style.display = 'none';
+                    if (adminControls) adminControls.style.display = 'none';
+                    if (displayControls) displayControls.style.display = 'none';
+                    if (addCandidateBtnContainer) addCandidateBtnContainer.style.display = 'none';
+                    if (countdownSettingsBtn) countdownSettingsBtn.style.display = 'none';
+                    if (memberKringInfo) memberKringInfo.style.display = 'block';
+                    if (tahap1VoteInfo) tahap1VoteInfo.style.display = 'block';
+                    if (tahap2VoteInfo) tahap2VoteInfo.style.display = 'block';
+                    
+                    // Sembunyikan menu Summary untuk non-admin
+                    if (summaryMenu) summaryMenu.style.display = 'none';
+                    if (footerSummaryLink) footerSummaryLink.style.display = 'none';
+                    
+                    // Set kring name based on role
+                    if (memberKringName) {
+                        if (currentUser.role === 'ruang1') {
+                            memberKringName.textContent = 'Kring 1';
+                        } else if (currentUser.role === 'ruang2') {
+                            memberKringName.textContent = 'Kring 2';
+                        } else if (currentUser.role === 'ruang3') {
+                            memberKringName.textContent = 'Kring 3';
+                        }
+                    }
+                    
+                    // Show/hide kring sections based on user role
+                    const userKring = getUserKring();
+                    const kringContainers = document.querySelectorAll('[id$="-tahap1-container"], [id$="-tahap2-container"]');
+                    
+                    kringContainers.forEach(container => {
+                        if (container.id.includes(`kring${userKring}`)) {
+                            container.style.display = 'block';
+                        } else {
+                            container.style.display = 'none';
+                        }
+                    });
+                }
+                
+                // Update plano UI
+                updatePlanoUI();
+                
+            } else {
+                if (userInfo) userInfo.innerHTML = '';
+                if (loginBtn) loginBtn.style.display = 'inline-block';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+                if (adminMenu) adminMenu.style.display = 'none';
+                if (adminControls) adminControls.style.display = 'none';
+                if (displayControls) displayControls.style.display = 'none';
+                if (memberKringInfo) memberKringInfo.style.display = 'none';
+                if (addCandidateBtnContainer) addCandidateBtnContainer.style.display = 'none';
+                if (countdownSettingsBtn) countdownSettingsBtn.style.display = 'none';
+                if (tahap1VoteInfo) tahap1VoteInfo.style.display = 'none';
+                if (tahap2VoteInfo) tahap2VoteInfo.style.display = 'none';
+                if (tahap2VoteLimitInfo) tahap2VoteLimitInfo.style.display = 'none';
+                
+                // Sembunyikan menu Summary untuk user yang belum login
+                if (summaryMenu) summaryMenu.style.display = 'none';
+                if (footerSummaryLink) footerSummaryLink.style.display = 'none';
+                
+                // Show all kring sections for non-logged in users
+                const kringContainers = document.querySelectorAll('[id$="-tahap1-container"], [id$="-tahap2-container"]');
+                kringContainers.forEach(container => {
+                    container.style.display = 'block';
+                });
+                
+                // Update plano UI
+                updatePlanoUI();
+            }
+            
+            // Re-render candidates to update UI based on user role
+            renderCandidates();
+        }
+
+        // Render candidates to the UI
+        function renderCandidates() {
+            // Clear existing candidate cards
+            const containers = [
+                'kring1-tahap1', 'kring2-tahap1', 'kring3-tahap1',
+                'kring1-tahap2', 'kring2-tahap2', 'kring3-tahap2'
+            ];
+            
+            containers.forEach(containerId => {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.innerHTML = '';
+                }
+            });
+            
+            // Render candidates for each tahap and kring
+            Object.keys(candidates).forEach(tahap => {
+                Object.keys(candidates[tahap]).forEach(kring => {
+                    const container = document.getElementById(`${kring}-${tahap}`);
+                    if (!container) return;
+                    
+                    candidates[tahap][kring].forEach(candidate => {
+                        const isSelected = userVotes[tahap].includes(candidate.id);
+                        const cardClass = isSelected ? 'card-candidate selected-candidate' : 'card-candidate';
+                        const buttonClass = isSelected ? 'btn-danger' : 'btn-primary';
+                        const buttonText = isSelected ? '<i class="fas fa-times me-1"></i> Batalkan' : '<i class="fas fa-vote-yea me-1"></i> Pilih';
+                        
+                        const isVotingAllowed = appSettings.allowVoting;
+                        const buttonDisabled = !isVotingAllowed ? 'disabled' : '';
+                        const buttonTitle = !isVotingAllowed ? 'title="Voting dinonaktifkan oleh admin"' : '';
+                        
+                        const card = document.createElement('div');
+                        card.className = 'col-md-4';
+                        card.innerHTML = `
+                            <div class="card h-100 candidate-card ${cardClass}" 
+                                 data-tahap="${tahap}" data-kring="${kring}" data-candidate="${candidate.id}">
+                                ${currentUser && currentUser.role === 'admin' ? '<span class="role-badge">ID: ' + candidate.id + '</span>' : ''}
+                                <img src="${candidate.photo}" class="card-img-top" alt="${candidate.name}" style="height: 200px; object-fit: cover;">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">${candidate.name}</h5>
+                                    <div class="mt-auto">
+                                        <div class="vote-count">${candidate.votes} Suara</div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" 
+                                                 style="width: ${calculatePercentage(candidate.votes, tahap, kring)}%">
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button class="btn ${buttonClass} toggle-vote-btn" ${buttonDisabled} ${buttonTitle}
+                                                    data-tahap="${tahap}" data-kring="${kring}" data-candidate="${candidate.id}">
+                                                ${buttonText}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                });
+            });
+            
+            // Add event listeners to toggle vote buttons
+            document.querySelectorAll('.toggle-vote-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const tahap = this.getAttribute('data-tahap');
+                    const kring = this.getAttribute('data-kring');
+                    const candidateId = parseInt(this.getAttribute('data-candidate'));
+                    toggleVoteCandidate(tahap, kring, candidateId);
+                });
+            });
+        }
+
+        // Calculate percentage for progress bar
+        function calculatePercentage(votes, tahap, kring) {
+            let totalVotes = 0;
+            if (candidates[tahap] && candidates[tahap][kring]) {
+                candidates[tahap][kring].forEach(candidate => {
+                    totalVotes += candidate.votes;
+                });
+            }
+            
+            if (totalVotes === 0) return 0;
+            return (votes / totalVotes) * 100;
+        }
+
+        // Update statistics
+        function updateStats() {
+            let totalVotes = 0;
+            
+            // Calculate total votes from all candidates
+            Object.keys(candidates).forEach(tahap => {
+                Object.keys(candidates[tahap]).forEach(kring => {
+                    candidates[tahap][kring].forEach(candidate => {
+                        totalVotes += candidate.votes;
+                    });
+                });
+            });
+            
+            const totalVoters = appSettings.totalVoters || 350;
+            const participation = totalVoters > 0 ? ((totalVotes / totalVoters) * 100).toFixed(1) : 0;
+            
+            const totalVotersEl = document.getElementById('totalVoters');
+            const votedEl = document.getElementById('voted');
+            const participationEl = document.getElementById('participation');
+            
+            if (totalVotersEl) totalVotersEl.textContent = totalVoters;
+            if (votedEl) votedEl.textContent = totalVotes;
+            if (participationEl) participationEl.textContent = `${participation}%`;
+        }
+
+        // Initialize countdown timer
+        function initializeCountdown() {
+            // Set countdown to 7 days from now
+            const countdownDate = new Date();
+            countdownDate.setDate(countdownDate.getDate() + 7);
+            
+            // Update countdown every second
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countdownDate.getTime() - now;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+                
+                if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+                if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+                if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+                if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+                
+                if (distance < 0) {
+                    if (daysEl) daysEl.textContent = '00';
+                    if (hoursEl) hoursEl.textContent = '00';
+                    if (minutesEl) minutesEl.textContent = '00';
+                    if (secondsEl) secondsEl.textContent = '00';
+                }
+            }, 1000);
+        }
+
+        // Show/hide sections dengan proteksi akses
+        function showSection(section) {
+            // Proteksi akses untuk section summary - hanya admin yang boleh akses
+            if (section === 'summary' && (!currentUser || currentUser.role !== 'admin')) {
+                alert('Maaf, hanya administrator yang dapat mengakses halaman Summary.');
+                return;
+            }
+            
+            const mainContent = document.getElementById('mainContent');
+            const summarySection = document.getElementById('summarySection');
+            
+            if (section === 'home') {
+                if (mainContent) mainContent.style.display = 'block';
+                if (summarySection) summarySection.style.display = 'none';
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.getAttribute('data-section') === 'home') {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            } else if (section === 'summary') {
+                if (mainContent) mainContent.style.display = 'none';
+                if (summarySection) summarySection.style.display = 'block';
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.getAttribute('data-section') === 'summary') {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+                
+                // Load summary data
+                loadSummaryData();
+            }
+        }
+
+        // ========== SUMMARY SECTION FUNCTIONS ========== //
+
+        /**
+         * Load data untuk summary section
+         */
+        function loadSummaryData() {
+            // Update statistics
+            updateSummaryStats();
+            
+            // Load charts
+            initializeCharts();
+            
+            // Load summary table
+            initializeSummaryTable();
+            
+            // Load plano images
+            loadPlanoImages();
+        }
+
+        /**
+         * Update statistik di summary section
+         */
+        function updateSummaryStats() {
+            const summaryTotalVoters = document.getElementById('summaryTotalVoters');
+            const summaryVoted = document.getElementById('summaryVoted');
+            const summaryParticipation = document.getElementById('summaryParticipation');
+            const summaryStatus = document.getElementById('summaryStatus');
+            
+            if (summaryTotalVoters) summaryTotalVoters.textContent = appSettings.totalVoters;
+            
+            // Hitung total suara
+            let totalVotes = 0;
+            Object.keys(candidates).forEach(tahap => {
+                Object.keys(candidates[tahap]).forEach(kring => {
+                    candidates[tahap][kring].forEach(candidate => {
+                        totalVotes += candidate.votes;
+                    });
+                });
+            });
+            
+            if (summaryVoted) summaryVoted.textContent = totalVotes;
+            
+            // Hitung persentase partisipasi
+            const participation = appSettings.totalVoters > 0 ? 
+                ((totalVotes / appSettings.totalVoters) * 100).toFixed(1) : 0;
+            if (summaryParticipation) summaryParticipation.textContent = `${participation}%`;
+            
+            // Tentukan status berdasarkan partisipasi
+            let status = 'Aktif';
+            let statusClass = 'text-success';
+            if (participation >= 80) {
+                status = 'Tinggi';
+                statusClass = 'text-success';
+            } else if (participation >= 50) {
+                status = 'Sedang';
+                statusClass = 'text-warning';
+            } else {
+                status = 'Rendah';
+                statusClass = 'text-danger';
+            }
+            
+            if (summaryStatus) {
+                summaryStatus.textContent = status;
+                summaryStatus.className = statusClass;
+            }
+        }
+
+        /**
+         * Load plano images untuk summary section
+         */
+        function loadPlanoImages() {
+            // Untuk demo, kita gunakan placeholder
+            // Dalam implementasi nyata, ini akan mengambil data dari server
+            
+            const planoSummaryTahap1 = document.getElementById('planoSummaryTahap1');
+            const planoSummaryTahap2 = document.getElementById('planoSummaryTahap2');
+            
+            if (planoSummaryTahap1) {
+                planoSummaryTahap1.innerHTML = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0">Kring 1 - Ruang 1</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Plano+Kring+1+Tahap+1" 
+                                     class="img-fluid rounded mb-2" alt="Plano Kring 1 Tahap 1">
+                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h6 class="mb-0">Kring 2 - Ruang 2</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <img src="https://via.placeholder.com/300x200/2196F3/FFFFFF?text=Plano+Kring+2+Tahap+1" 
+                                     class="img-fluid rounded mb-2" alt="Plano Kring 2 Tahap 1">
+                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h6 class="mb-0">Kring 3 - Ruang 3</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <img src="https://via.placeholder.com/300x200/FF9800/FFFFFF?text=Plano+Kring+3+Tahap+1" 
+                                     class="img-fluid rounded mb-2" alt="Plano Kring 3 Tahap 1">
+                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (planoSummaryTahap2) {
+                planoSummaryTahap2.innerHTML = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0">Kring 1 - Ruang 1</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Plano+Kring+1+Tahap+2" 
+                                     class="img-fluid rounded mb-2" alt="Plano Kring 1 Tahap 2">
+                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h6 class="mb-0">Kring 2 - Ruang 2</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <img src="https://via.placeholder.com/300x200/2196F3/FFFFFF?text=Plano+Kring+2+Tahap+2" 
+                                     class="img-fluid rounded mb-2" alt="Plano Kring 2 Tahap 2">
+                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h6 class="mb-0">Kring 3 - Ruang 3</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <img src="https://via.placeholder.com/300x200/FF9800/FFFFFF?text=Plano+Kring+3+Tahap+2" 
+                                     class="img-fluid rounded mb-2" alt="Plano Kring 3 Tahap 2">
+                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Inisialisasi chart untuk summary section
+         */
+        function initializeCharts() {
+            const ctx1 = document.getElementById('chartTahap1');
+            const ctx2 = document.getElementById('chartTahap2');
+            
+            if (ctx1 && ctx2) {
+                // Data untuk chart tahap 1
+                const tahap1Data = {
+                    kring1: candidates.tahap1.kring1.reduce((sum, candidate) => sum + candidate.votes, 0),
+                    kring2: candidates.tahap1.kring2.reduce((sum, candidate) => sum + candidate.votes, 0),
+                    kring3: candidates.tahap1.kring3.reduce((sum, candidate) => sum + candidate.votes, 0)
+                };
+                
+                // Data untuk chart tahap 2
+                const tahap2Data = {
+                    kring1: candidates.tahap2.kring1.reduce((sum, candidate) => sum + candidate.votes, 0),
+                    kring2: candidates.tahap2.kring2.reduce((sum, candidate) => sum + candidate.votes, 0),
+                    kring3: candidates.tahap2.kring3.reduce((sum, candidate) => sum + candidate.votes, 0)
+                };
+                
+                // Chart untuk tahap 1
+                new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Kring 1', 'Kring 2', 'Kring 3'],
+                        datasets: [{
+                            label: 'Jumlah Suara',
+                            data: [tahap1Data.kring1, tahap1Data.kring2, tahap1Data.kring3],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(153, 102, 255, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Distribusi Suara Tahap 1'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Jumlah Suara'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Kring'
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                // Chart untuk tahap 2
+                new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Kring 1', 'Kring 2', 'Kring 3'],
+                        datasets: [{
+                            label: 'Jumlah Suara',
+                            data: [tahap2Data.kring1, tahap2Data.kring2, tahap2Data.kring3],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(255, 159, 64, 0.7)',
+                                'rgba(255, 205, 86, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 205, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Distribusi Suara Tahap 2'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Jumlah Suara'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Kring'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        /**
+         * Inisialisasi tabel summary
+         */
+        function initializeSummaryTable() {
+            const tableBody = document.getElementById('summaryTableBody');
+            if (!tableBody) return;
+            
+            let allCandidates = [];
+            
+            // Kumpulkan semua kandidat dalam satu array
+            Object.keys(candidates).forEach(tahap => {
+                Object.keys(candidates[tahap]).forEach(kring => {
+                    candidates[tahap][kring].forEach(candidate => {
+                        allCandidates.push({
+                            ...candidate,
+                            tahap: tahap,
+                            kring: kring
+                        });
+                    });
+                });
+            });
+            
+            // Urutkan berdasarkan jumlah suara (descending)
+            allCandidates.sort((a, b) => b.votes - a.votes);
+            
+            let tableHTML = '';
+            
+            allCandidates.forEach((candidate, index) => {
+                const tahapText = candidate.tahap === 'tahap1' ? 'Tahap 1' : 'Tahap 2';
+                const kringText = candidate.kring.replace('kring', 'Kring ');
+                
+                // Hitung persentase
+                const totalKringVotes = candidates[candidate.tahap][candidate.kring].reduce((sum, c) => sum + c.votes, 0);
+                const percentage = totalKringVotes > 0 ? ((candidate.votes / totalKringVotes) * 100).toFixed(1) : 0;
+                
+                // Tentukan badge rank
+                let rankBadge = '';
+                if (index === 0) {
+                    rankBadge = '<span class="badge bg-warning">#1</span>';
+                } else if (index === 1) {
+                    rankBadge = '<span class="badge bg-secondary">#2</span>';
+                } else if (index === 2) {
+                    rankBadge = '<span class="badge bg-danger">#3</span>';
+                } else {
+                    rankBadge = `<span class="badge bg-light text-dark">#${index + 1}</span>`;
+                }
+                
+                tableHTML += `
+                    <tr>
+                        <td>${candidate.name} ${rankBadge}</td>
+                        <td>${tahapText}</td>
+                        <td>${kringText}</td>
+                        <td><strong>${candidate.votes}</strong></td>
+                        <td>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: ${percentage}%" 
+                                     aria-valuenow="${percentage}" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="100">
+                                    ${percentage}%
+                                </div>
+                            </div>
+                        </td>
+                        <td>${index + 1}</td>
+                    </tr>
+                `;
+            });
+            
+            tableBody.innerHTML = tableHTML;
+        }
+
+        // ========== DISPLAY CONTROLS ========== //
+
+        // Apply display settings
+        function applyDisplaySettings() {
+            // Apply display settings to UI elements
+            const elementsToToggle = [
+                { setting: 'showPercentage', selector: '.progress-bar', action: 'text' },
+                { setting: 'showProgressBar', selector: '.progress', action: 'display' },
+                { setting: 'showVoteCount', selector: '.vote-count', action: 'display' },
+                { setting: 'showCandidatePhotos', selector: '.card-img-top', action: 'display' },
+                { setting: 'showStats', selector: '.stats-card', action: 'display' },
+                { setting: 'showCountdown', selector: '.countdown-container', action: 'display' },
+                { setting: 'showVoteButtons', selector: '.toggle-vote-btn', action: 'display' },
+                { setting: 'showPlano', selector: '.plano-upload-section', action: 'display' }
+            ];
+            
+            elementsToToggle.forEach(item => {
+                const elements = document.querySelectorAll(item.selector);
+                elements.forEach(el => {
+                    if (item.action === 'display') {
+                        el.style.display = displaySettings[item.setting] ? '' : 'none';
+                    } else if (item.action === 'text') {
+                        if (!displaySettings[item.setting]) {
+                            el.textContent = '';
+                        }
+                    }
+                });
+            });
+            
+            // Update toggle switches in display settings modal
+            const modalToggles = [
+                'modalTogglePercentage', 'modalToggleProgressBar', 'modalToggleVoteCount', 
+                'modalToggleCandidatePhotos', 'modalToggleStats', 'modalToggleCountdown',
+                'modalTogglePlano', 'modalToggleVoteButtons'
+            ];
+            
+            modalToggles.forEach(toggleId => {
+                const toggle = document.getElementById(toggleId);
+                if (toggle) {
+                    const settingKey = 'show' + toggleId.replace('modalToggle', '');
+                    toggle.checked = displaySettings[settingKey] !== false;
+                }
+            });
+        }
+
+        // Display control toggle functions
+        function togglePercentageHandler() {
+            displaySettings.showPercentage = this.checked;
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        function toggleProgressBarHandler() {
+            displaySettings.showProgressBar = this.checked;
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        function toggleVoteCountHandler() {
+            displaySettings.showVoteCount = this.checked;
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        function toggleCandidatePhotosHandler() {
+            displaySettings.showCandidatePhotos = this.checked;
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        function toggleStatsHandler() {
+            displaySettings.showStats = this.checked;
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        function toggleCountdownHandler() {
+            displaySettings.showCountdown = this.checked;
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        function togglePlanoHandler() {
+            displaySettings.showPlano = this.checked;
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        function toggleVoteButtonsHandler() {
+            displaySettings.showVoteButtons = this.checked;
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        // Save display settings to localStorage
+        function saveDisplaySettings() {
+            try {
+                localStorage.setItem('displaySettings', JSON.stringify(displaySettings));
+            } catch (error) {
+                console.warn('Gagal menyimpan ke localStorage:', error);
+            }
+        }
+
+        // Display presets
+        function setMinimalPreset() {
+            displaySettings = {
+                showPercentage: false,
+                showProgressBar: false,
+                showVoteCount: true,
+                showCandidatePhotos: false,
+                showStats: true,
+                showCountdown: true,
+                showPlano: false,
+                showVoteButtons: true
+            };
+            loadDisplaySettings();
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        function setFullPreset() {
+            displaySettings = {
+                showPercentage: true,
+                showProgressBar: true,
+                showVoteCount: true,
+                showCandidatePhotos: true,
+                showStats: true,
+                showCountdown: true,
+                showPlano: true,
+                showVoteButtons: true
+            };
+            loadDisplaySettings();
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        function setResultsOnlyPreset() {
+            displaySettings = {
+                showPercentage: true,
+                showProgressBar: true,
+                showVoteCount: true,
+                showCandidatePhotos: false,
+                showStats: true,
+                showCountdown: false,
+                showPlano: false,
+                showVoteButtons: false
+            };
+            loadDisplaySettings();
+            applyDisplaySettings();
+            saveDisplaySettings();
+        }
+
+        // ========== MODAL FUNCTIONS ========== //
+
+        function saveCountdownHandler() {
+            const countdownDate = document.getElementById('countdownDate');
+            if (countdownDate && countdownDate.value) {
+                alert('Countdown berhasil diatur');
+                const countdownModal = bootstrap.Modal.getInstance(document.getElementById('countdownModal'));
+                if (countdownModal) countdownModal.hide();
+            } else {
+                alert('Silakan pilih tanggal dan waktu');
+            }
+        }
+
+        function saveCandidateHandler() {
+            const candidateName = document.getElementById('candidateName');
+            const candidateTahap = document.getElementById('candidateTahap');
+            const candidateKring = document.getElementById('candidateKring');
+            const candidatePhoto = document.getElementById('candidatePhoto');
+            
+            if (!candidateName || !candidateName.value) {
+                alert('Nama kandidat harus diisi!');
+                return;
+            }
+            
+            // Generate ID baru untuk kandidat
+            const tahap = candidateTahap.value;
+            const kring = candidateKring.value;
+            const newId = candidates[tahap][kring].length > 0 ? 
+                Math.max(...candidates[tahap][kring].map(c => c.id)) + 1 : 1;
+            
+            // Buat objek kandidat baru
+            const newCandidate = {
+                id: newId,
+                name: candidateName.value,
+                votes: 0,
+                photo: candidatePhoto.files.length > 0 ? 
+                    URL.createObjectURL(candidatePhoto.files[0]) : 
+                    'https://via.placeholder.com/150'
+            };
+            
+            // Tambahkan ke data kandidat
+            if (!candidates[tahap][kring]) {
+                candidates[tahap][kring] = [];
+            }
+            candidates[tahap][kring].push(newCandidate);
+            
+            // Render ulang kandidat
+            renderCandidates();
+            
+            // Reset form dan tutup modal
+            candidateName.value = '';
+            candidatePhoto.value = '';
+            
+            const candidateModal = bootstrap.Modal.getInstance(document.getElementById('candidateModal'));
+            if (candidateModal) candidateModal.hide();
+            
+            alert('Kandidat berhasil ditambahkan!');
+        }
+
+        function saveDisplaySettingsHandler() {
+            // Update display settings from modal toggles
+            const modalToggles = [
+                'modalTogglePercentage', 'modalToggleProgressBar', 'modalToggleVoteCount', 
+                'modalToggleCandidatePhotos', 'modalToggleStats', 'modalToggleCountdown',
+                'modalTogglePlano', 'modalToggleVoteButtons'
+            ];
+            
+            modalToggles.forEach(toggleId => {
+                const toggle = document.getElementById(toggleId);
+                if (toggle) {
+                    const settingKey = 'show' + toggleId.replace('modalToggle', '');
+                    displaySettings[settingKey] = toggle.checked;
+                }
+            });
+            
+            // Update main toggles
+            loadDisplaySettings();
+            applyDisplaySettings();
+            saveDisplaySettings();
+            
+            const displayModal = bootstrap.Modal.getInstance(document.getElementById('displaySettingsModal'));
+            if (displayModal) displayModal.hide();
+            
+            alert('Pengaturan tampilan berhasil disimpan!');
+        }
+
+        /**
+         * Reset semua suara dengan konfirmasi
+         */
+        function resetAllVotes() {
+            if (!confirm('APAKAH ANDA YAKIN INGIN MERESET SEMUA SUARA?\n\nTindakan ini akan:' +
+                         '\n- Menghapus semua suara yang terkumpul' +
+                         '\n- Mengembalikan jumlah suara semua kandidat ke 0' +
+                         '\n- Tidak dapat dibatalkan!')) {
+                return;
+            }
+            
+            // Reset semua vote counts ke 0
+            Object.keys(candidates).forEach(tahap => {
+                Object.keys(candidates[tahap]).forEach(kring => {
+                    candidates[tahap][kring].forEach(candidate => {
+                        candidate.votes = 0;
+                    });
+                });
+            });
+            
+            // Reset user votes tracking
+            userVotes = { tahap1: [], tahap2: [] };
+            pendingVotes = { tahap1: [], tahap2: [] };
+            saveUserVotes();
+            
+            // Reset plano photos
+            planoPhotos = {
+                tahap1: { ruang1: null, ruang2: null, ruang3: null },
+                tahap2: { ruang1: null, ruang2: null, ruang3: null }
+            };
+            
+            // Render ulang kandidat dan update stats
+            renderCandidates();
+            updateStats();
+            updateVoteLimitInfo('tahap2');
+            
+            // Kirim ke server jika online
+            if (isOnline) {
+                postToGoogleScript('resetVotes', {}).then(() => {
+                    showNotification('Semua suara berhasil direset!', 'success');
+                }).catch(error => {
+                    console.error('Gagal reset suara ke server:', error);
+                    showNotification('Suara direset secara lokal', 'warning');
+                });
+            } else {
+                showNotification('Semua suara berhasil direset secara lokal!', 'success');
+            }
+            
+            // Reset UI voting
+            resetVotingUI('tahap1');
+            resetVotingUI('tahap2');
+        }
+
+        /**
+         * Enhanced export to Excel dengan data lengkap
+         */
+        function exportToExcel() {
+            // Collect semua data
+            let exportData = "Nama Kandidat,Tahap,Kring,Jumlah Suara,Persentase,Total Suara Tahap,Total Suara Kring\n";
+            
+            let totalVotesTahap1 = 0;
+            let totalVotesTahap2 = 0;
+            let totalVotesKring1 = 0;
+            let totalVotesKring2 = 0;
+            let totalVotesKring3 = 0;
+            
+            // Hitung total suara
+            Object.keys(candidates).forEach(tahap => {
+                Object.keys(candidates[tahap]).forEach(kring => {
+                    let totalKringVotes = 0;
+                    candidates[tahap][kring].forEach(candidate => {
+                        totalKringVotes += candidate.votes;
+                        if (tahap === 'tahap1') totalVotesTahap1 += candidate.votes;
+                        if (tahap === 'tahap2') totalVotesTahap2 += candidate.votes;
+                        
+                        if (kring === 'kring1') totalVotesKring1 += candidate.votes;
+                        if (kring === 'kring2') totalVotesKring2 += candidate.votes;
+                        if (kring === 'kring3') totalVotesKring3 += candidate.votes;
+                    });
+                    
+                    // Tambahkan data kandidat
+                    candidates[tahap][kring].forEach(candidate => {
+                        const percentage = totalKringVotes > 0 ? 
+                            ((candidate.votes / totalKringVotes) * 100).toFixed(2) : 0;
+                        
+                        exportData += `"${candidate.name}",${tahap},${kring},${candidate.votes},${percentage}%,${tahap === 'tahap1' ? totalVotesTahap1 : totalVotesTahap2},${totalKringVotes}\n`;
+                    });
+                });
+            });
+            
+            // Tambahkan summary
+            exportData += "\n\nSUMMARY\n";
+            exportData += `Total Pemilih Terdaftar,${appSettings.totalVoters}\n`;
+            exportData += `Total Suara Tahap 1,${totalVotesTahap1}\n`;
+            exportData += `Total Suara Tahap 2,${totalVotesTahap2}\n`;
+            exportData += `Total Suara Keseluruhan,${totalVotesTahap1 + totalVotesTahap2}\n`;
+            exportData += `Tingkat Partisipasi,${((totalVotesTahap1 + totalVotesTahap2) / appSettings.totalVoters * 100).toFixed(2)}%\n`;
+            exportData += `Suara Kring 1,${totalVotesKring1}\n`;
+            exportData += `Suara Kring 2,${totalVotesKring2}\n`;
+            exportData += `Suara Kring 3,${totalVotesKring3}\n`;
+            exportData += `Waktu Ekspor,${new Date().toLocaleString('id-ID')}\n`;
+            
+            // Buat blob dan download
+            const blob = new Blob([exportData], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `quick-count-data-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('Data berhasil diekspor!', 'success');
+        }
+
+        function resetAllData() {
+            if (!confirm('PERINGATAN: Ini akan menghapus SEMUA data termasuk kandidat dan pengaturan! Apakah Anda yakin?')) {
+                return;
+            }
+            
+            // Reset ke data sample
+            candidates = {
+                tahap1: {
+                    kring1: [
+                        { id: 1, name: "Ahmad Santoso", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 2, name: "Budi Raharjo", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 3, name: "Citra Dewi", votes: 0, photo: "https://via.placeholder.com/150" }
+                    ],
+                    kring2: [
+                        { id: 1, name: "Dian Pratama", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 2, name: "Eko Wijaya", votes: 0, photo: "https://via.placeholder.com/150" }
+                    ],
+                    kring3: [
+                        { id: 1, name: "Fajar Nugroho", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 2, name: "Gita Sari", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 3, name: "Hendra Setiawan", votes: 0, photo: "https://via.placeholder.com/150" }
+                    ]
+                },
+                tahap2: {
+                    kring1: [
+                        { id: 1, name: "Indra Permana", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 2, name: "Joko Susilo", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 3, name: "Kartika Wulandari", votes: 0, photo: "https://via.placeholder.com/150" }
+                    ],
+                    kring2: [
+                        { id: 1, name: "Lia Amelia", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 2, name: "Mulyadi", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 3, name: "Nina Handayani", votes: 0, photo: "https://via.placeholder.com/150" }
+                    ],
+                    kring3: [
+                        { id: 1, name: "Oki Pratama", votes: 0, photo: "https://via.placeholder.com/150" },
+                        { id: 2, name: "Putri Anggraini", votes: 0, photo: "https://via.placeholder.com/150" }
+                    ]
+                }
+            };
+            
+            // Reset settings
+            appSettings = {
+                maxVotesPerUser: 3,
+                allowManualInput: true,
+                allowVoting: true,
+                totalVoters: 350
+            };
+            
+            // Reset user votes
+            userVotes = {
+                tahap1: [],
+                tahap2: []
+            };
+            
+            // Reset plano photos
+            planoPhotos = {
+                tahap1: { ruang1: null, ruang2: null, ruang3: null },
+                tahap2: { ruang1: null, ruang2: null, ruang3: null }
+            };
+            
+            // Render ulang dan update
+            renderCandidates();
+            updateStats();
+            saveUserVotes();
+            
+            alert('Semua data telah direset ke kondisi awal!');
+        }
+
+        /**
+         * Helper untuk menampilkan notifikasi
+         */
+        function showNotification(message, type = 'info') {
+            // Hapus notifikasi existing
+            const existingNotification = document.getElementById('customNotification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.id = 'customNotification';
+            notification.className = `alert alert-${type} alert-dismissible fade show custom-notification`;
+            
+            let icon = 'info-circle';
+            if (type === 'success') icon = 'check-circle';
+            if (type === 'warning') icon = 'exclamation-triangle';
+            if (type === 'error') icon = 'times-circle';
+            
+            notification.innerHTML = `
+                <i class="fas fa-${icon} me-2"></i>
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto dismiss setelah 5 detik
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
