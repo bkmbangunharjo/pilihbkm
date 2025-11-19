@@ -479,6 +479,58 @@
             min-width: 300px;
             text-align: center;
         }
+
+        /* Manual Vote Styles */
+        .manual-vote-modified {
+            background-color: #fff3cd !important;
+            border-left: 4px solid #ffc107;
+        }
+
+        .manual-vote-input {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .manual-vote-status {
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            color: #856404;
+        }
+
+        .status-saved {
+            color: #155724;
+        }
+
+        .manual-vote-table th {
+            position: sticky;
+            top: 0;
+            background-color: #2c3e50;
+            z-index: 10;
+        }
+
+        /* Plano Gallery Styles */
+        .plano-gallery-image {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .plano-gallery-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Plano Modal Styles */
+        #planoViewModal .modal-dialog {
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        #planoViewImage {
+            max-height: 70vh;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -513,6 +565,7 @@
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="fas fa-sliders-h me-1"></i> Pengaturan</a></li>
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#candidateModal"><i class="fas fa-user-plus me-1"></i> Tambah Kandidat</a></li>
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#displaySettingsModal"><i class="fas fa-eye me-1"></i> Kontrol Tampilan</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#manualVoteModal"><i class="fas fa-edit me-1"></i> Input Manual Suara</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#" id="resetData"><i class="fas fa-redo me-1"></i> Reset Data</a></li>
                         </ul>
@@ -585,14 +638,14 @@
             <div class="col-md-4">
                 <div class="stats-card">
                     <h5><i class="fas fa-check-circle me-2"></i> Sudah Memilih</h5>
-                    <h2 id="voted">215</h2>
+                    <h2 id="voted">0</h2>
                     <p>Pemilih yang telah menggunakan hak pilih</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="stats-card">
                     <h5><i class="fas fa-percentage me-2"></i> Partisipasi</h5>
-                    <h2 id="participation">61.4%</h2>
+                    <h2 id="participation">0%</h2>
                     <p>Tingkat partisipasi pemilih</p>
                 </div>
             </div>
@@ -755,21 +808,21 @@
                         <span id="planoInfoTextTahap1">Silakan upload foto bukti plano untuk tahap 1:</span>
                     </div>
                     <div class="row" id="planoContainerTahap1">
-                        <div class="col-md-4 plano-ruang-container" data-ruang="1">
+                        <div class="col-md-4 plano-ruang-container" data-ruang="ruang1">
                             <div class="mb-3">
                                 <label for="planoRuang1Tahap1" class="form-label">Ruang 1 <span class="plano-status plano-missing" id="planoStatusRuang1Tahap1">Belum Upload</span></label>
                                 <input type="file" class="form-control plano-input" id="planoRuang1Tahap1" accept="image/*">
                                 <img id="previewPlanoRuang1Tahap1" class="plano-preview" src="" alt="Preview Plano Ruang 1">
                             </div>
                         </div>
-                        <div class="col-md-4 plano-ruang-container" data-ruang="2">
+                        <div class="col-md-4 plano-ruang-container" data-ruang="ruang2">
                             <div class="mb-3">
                                 <label for="planoRuang2Tahap1" class="form-label">Ruang 2 <span class="plano-status plano-missing" id="planoStatusRuang2Tahap1">Belum Upload</span></label>
                                 <input type="file" class="form-control plano-input" id="planoRuang2Tahap1" accept="image/*">
                                 <img id="previewPlanoRuang2Tahap1" class="plano-preview" src="" alt="Preview Plano Ruang 2">
                             </div>
                         </div>
-                        <div class="col-md-4 plano-ruang-container" data-ruang="3">
+                        <div class="col-md-4 plano-ruang-container" data-ruang="ruang3">
                             <div class="mb-3">
                                 <label for="planoRuang3Tahap1" class="form-label">Ruang 3 <span class="plano-status plano-missing" id="planoStatusRuang3Tahap1">Belum Upload</span></label>
                                 <input type="file" class="form-control plano-input" id="planoRuang3Tahap1" accept="image/*">
@@ -850,21 +903,21 @@
                         <span id="planoInfoTextTahap2">Silakan upload foto bukti plano untuk tahap 2:</span>
                     </div>
                     <div class="row" id="planoContainerTahap2">
-                        <div class="col-md-4 plano-ruang-container" data-ruang="1">
+                        <div class="col-md-4 plano-ruang-container" data-ruang="ruang1">
                             <div class="mb-3">
                                 <label for="planoRuang1Tahap2" class="form-label">Ruang 1 <span class="plano-status plano-missing" id="planoStatusRuang1Tahap2">Belum Upload</span></label>
                                 <input type="file" class="form-control plano-input" id="planoRuang1Tahap2" accept="image/*">
                                 <img id="previewPlanoRuang1Tahap2" class="plano-preview" src="" alt="Preview Plano Ruang 1">
                             </div>
                         </div>
-                        <div class="col-md-4 plano-ruang-container" data-ruang="2">
+                        <div class="col-md-4 plano-ruang-container" data-ruang="ruang2">
                             <div class="mb-3">
                                 <label for="planoRuang2Tahap2" class="form-label">Ruang 2 <span class="plano-status plano-missing" id="planoStatusRuang2Tahap2">Belum Upload</span></label>
                                 <input type="file" class="form-control plano-input" id="planoRuang2Tahap2" accept="image/*">
                                 <img id="previewPlanoRuang2Tahap2" class="plano-preview" src="" alt="Preview Plano Ruang 2">
                             </div>
                         </div>
-                        <div class="col-md-4 plano-ruang-container" data-ruang="3">
+                        <div class="col-md-4 plano-ruang-container" data-ruang="ruang3">
                             <div class="mb-3">
                                 <label for="planoRuang3Tahap2" class="form-label">Ruang 3 <span class="plano-status plano-missing" id="planoStatusRuang3Tahap2">Belum Upload</span></label>
                                 <input type="file" class="form-control plano-input" id="planoRuang3Tahap2" accept="image/*">
@@ -912,13 +965,13 @@
                         <div class="col-md-3">
                             <div class="summary-stats-card">
                                 <h5><i class="fas fa-check-circle me-2"></i> Sudah Memilih</h5>
-                                <h2 id="summaryVoted">215</h2>
+                                <h2 id="summaryVoted">0</h2>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="summary-stats-card">
                                 <h5><i class="fas fa-percentage me-2"></i> Partisipasi</h5>
-                                <h2 id="summaryParticipation">61.4%</h2>
+                                <h2 id="summaryParticipation">0%</h2>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -1081,7 +1134,7 @@
             <hr class="my-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="mb-0">&copy; 2023 BKM Kalurahan Bangunharjo. All rights reserved.</p>
+                    <p class="mb-0">&copy; 2025 BKM Kalurahan Bangunharjo. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
@@ -1323,47 +1376,123 @@
         </div>
     </div>
 
+    <!-- Manual Vote Input Modal -->
+    <div class="modal fade" id="manualVoteModal" tabindex="-1" aria-labelledby="manualVoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="manualVoteModalLabel">
+                        <i class="fas fa-edit me-2"></i> Input Manual Suara - Semua Kandidat
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Anda dapat mengubah jumlah suara untuk semua kandidat secara manual. Perubahan akan langsung tersimpan.
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <input type="text" id="searchCandidates" class="form-control" placeholder="Cari kandidat...">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" id="showOnlyModified">
+                                <label class="form-check-label" for="showOnlyModified">Tampilkan hanya yang diubah</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover manual-vote-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th width="5%">ID</th>
+                                    <th width="25%">Nama Kandidat</th>
+                                    <th width="10%">Tahap</th>
+                                    <th width="10%">Kring</th>
+                                    <th width="15%">Suara Saat Ini</th>
+                                    <th width="20%">Input Manual</th>
+                                    <th width="15%">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="manualVoteTableBody">
+                                <!-- Data akan diisi oleh JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div id="manualVoteSummary" class="alert alert-warning">
+                                <i class="fas fa-sync-alt me-2"></i>
+                                <span id="modifiedCount">0</span> data akan diupdate
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <button type="button" class="btn btn-success" id="saveAllManualVotes">
+                                <i class="fas fa-save me-2"></i> Simpan Semua Perubahan
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="resetAllManualVotes">
+                                <i class="fas fa-undo me-2"></i> Reset Semua
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plano Upload Confirmation Modal -->
+    <div class="modal fade" id="planoUploadModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Upload Bukti Plano</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="planoUploadPreview" class="text-center mb-3"></div>
+                    <p>Apakah Anda yakin ingin mengupload bukti plano ini?</p>
+                    <div class="mb-3">
+                        <label for="planoDescription" class="form-label">Keterangan (opsional):</label>
+                        <input type="text" class="form-control" id="planoDescription" placeholder="Contoh: Ruang 1 Tahap 1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="confirmPlanoUpload">Upload ke Drive</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // ========== KONFIGURASI APLIKASI ========== //
         
-        // GANTI DENGAN URL WEB APP ANDA
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxa3_7y1h5G1_p1iodCKPTCRuX9NA39Wm1a0-bagiBwDLendz12W34tAtYTkTXo-mU/exec';
+        // GANTI DENGAN URL WEB APP ANDA YANG BARU
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxpx68Zu3T2ivwXVEy1wbf4ooADqUHKKnXmpl3ePI6L44zsEL0kVUps67_pHn7LY5VK/exec';
         
         // Sample candidate data (fallback jika server offline)
         let candidates = {
             tahap1: {
-                kring1: [
-                    { id: 1, name: "Ahmad Santoso", votes: 45, photo: "https://via.placeholder.com/150" },
-                    { id: 2, name: "Budi Raharjo", votes: 32, photo: "https://via.placeholder.com/150" },
-                    { id: 3, name: "Citra Dewi", votes: 28, photo: "https://via.placeholder.com/150" }
-                ],
-                kring2: [
-                    { id: 1, name: "Dian Pratama", votes: 38, photo: "https://via.placeholder.com/150" },
-                    { id: 2, name: "Eko Wijaya", votes: 41, photo: "https://via.placeholder.com/150" }
-                ],
-                kring3: [
-                    { id: 1, name: "Fajar Nugroho", votes: 35, photo: "https://via.placeholder.com/150" },
-                    { id: 2, name: "Gita Sari", votes: 29, photo: "https://via.placeholder.com/150" },
-                    { id: 3, name: "Hendra Setiawan", votes: 31, photo: "https://via.placeholder.com/150" }
-                ]
+                kring1: [],
+                kring2: [],
+                kring3: []
             },
             tahap2: {
-                kring1: [
-                    { id: 1, name: "Indra Permana", votes: 42, photo: "https://via.placeholder.com/150" },
-                    { id: 2, name: "Joko Susilo", votes: 37, photo: "https://via.placeholder.com/150" },
-                    { id: 3, name: "Kartika Wulandari", votes: 39, photo: "https://via.placeholder.com/150" }
-                ],
-                kring2: [
-                    { id: 1, name: "Lia Amelia", votes: 44, photo: "https://via.placeholder.com/150" },
-                    { id: 2, name: "Mulyadi", votes: 36, photo: "https://via.placeholder.com/150" },
-                    { id: 3, name: "Nina Handayani", votes: 40, photo: "https://via.placeholder.com/150" }
-                ],
-                kring3: [
-                    { id: 1, name: "Oki Pratama", votes: 33, photo: "https://via.placeholder.com/150" },
-                    { id: 2, name: "Putri Anggraini", votes: 41, photo: "https://via.placeholder.com/150" }
-                ]
+                kring1: [],
+                kring2: [],
+                kring3: []
             }
         };
 
@@ -1414,8 +1543,20 @@
             }
         };
 
+        // Manual vote data
+        let manualVoteData = {};
+        let originalVoteData = {};
+
         // Connection status
         let isOnline = false;
+
+        // Variabel untuk menyimpan data plano yang akan diupload
+        let pendingPlanoUpload = {
+            tahap: null,
+            ruang: null,
+            file: null,
+            fileName: null
+        };
 
         // ========== FUNGSI UTAMA APLIKASI ========== //
 
@@ -1460,6 +1601,195 @@
             const voteLimit = document.getElementById('voteLimit');
             if (voteLimit) voteLimit.value = appSettings.maxVotesPerUser;
         });
+
+        /**
+         * Fungsi untuk test koneksi ke server - ENHANCED VERSION
+         */
+        async function testConnection() {
+            try {
+                updateConnectionStatus('Menyambungkan...', 'connecting');
+                
+                // Gunakan approach yang lebih kompatibel
+                const timestamp = new Date().getTime();
+                const testUrl = `${WEB_APP_URL}?action=healthCheck&timestamp=${timestamp}`;
+                
+                const response = await fetch(testUrl, {
+                    method: 'GET',
+                    mode: 'no-cors', // Mode no-cors untuk menghindari CORS issues
+                    cache: 'no-cache'
+                });
+
+                // Jika berhasil sampai sini, anggap terhubung
+                updateConnectionStatus('Terhubung', 'online');
+                isOnline = true;
+                return true;
+                
+            } catch (error) {
+                console.error('❌ Connection test failed:', error);
+                updateConnectionStatus('Offline', 'offline');
+                isOnline = false;
+                return false;
+            }
+        }
+
+        /**
+         * Update status koneksi di UI
+         */
+        function updateConnectionStatus(text, status) {
+            const statusElement = document.getElementById('connectionStatus');
+            const textElement = document.getElementById('connectionText');
+            
+            if (statusElement && textElement) {
+                statusElement.style.display = 'block';
+                textElement.textContent = text;
+                
+                statusElement.classList.remove('connection-online', 'connection-offline', 'connection-connecting');
+                
+                if (status === 'online') {
+                    statusElement.classList.add('connection-online');
+                } else if (status === 'offline') {
+                    statusElement.classList.add('connection-offline');
+                } else {
+                    statusElement.classList.add('connection-connecting');
+                }
+            }
+        }
+
+        /**
+         * Fungsi untuk POST data ke Google Apps Script - FIXED VERSION
+         */
+        async function postToGoogleScript(action, params = {}) {
+            // Jika offline, simpan ke localStorage untuk sync nanti
+            if (!isOnline) {
+                return handleOfflineAction(action, params);
+            }
+            
+            try {
+                console.log(`🔄 Posting to Google Script: ${action}`, {
+                    ...params,
+                    imageData: params.imageData ? `[Base64 data: ${params.imageData.length} chars]` : 'No image data'
+                });
+                
+                // Gunakan URLSearchParams untuk form data yang lebih kompatibel
+                const formData = new URLSearchParams();
+                formData.append('action', action);
+                
+                Object.keys(params).forEach(key => {
+                    if (params[key] !== null && params[key] !== undefined) {
+                        // Untuk data base64 yang panjang, kita batasi logging
+                        if (key === 'imageData' && params[key].length > 1000) {
+                            console.log(`📤 Sending ${key}: ${params[key].length} characters`);
+                        }
+                        formData.append(key, params[key]);
+                    }
+                });
+
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const text = await response.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    throw new Error('Invalid JSON response: ' + text.substring(0, 200));
+                }
+                
+                console.log(`✅ ${action} response:`, data);
+                return data;
+            } catch (error) {
+                console.error(`❌ Error in ${action}:`, error);
+                // Fallback ke offline mode
+                return handleOfflineAction(action, params);
+            }
+        }
+
+        /**
+         * Handle actions ketika offline
+         */
+        function handleOfflineAction(action, params) {
+            console.log(`📴 Offline mode: ${action}`, params);
+            
+            // Simpan action untuk di-sync ketika online kembali
+            const pendingActions = JSON.parse(localStorage.getItem('pendingActions') || '[]');
+            pendingActions.push({
+                action: action,
+                params: params,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('pendingActions', JSON.stringify(pendingActions));
+            
+            // Return response offline
+            return {
+                success: true,
+                offline: true,
+                message: 'Data disimpan secara offline dan akan di-sync ketika online'
+            };
+        }
+
+        /**
+         * Load candidates dari Google Apps Script
+         */
+        async function loadCandidatesFromServer() {
+            try {
+                console.log('🔄 Loading candidates from server...');
+                
+                const data = await postToGoogleScript('getCandidates');
+                
+                if (data.success && data.candidates) {
+                    candidates = data.candidates;
+                    renderCandidates();
+                    updateStats();
+                    showNotification('Data kandidat diperbarui dari server', 'success');
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                console.error('❌ Error loading candidates from server:', error);
+                showNotification('Gagal memuat data dari server, menggunakan data lokal', 'warning');
+                // Tetap render dengan data sample sebagai fallback
+                renderCandidates();
+                updateStats();
+            }
+        }
+
+        /**
+         * Load settings dari Google Apps Script
+         */
+        async function loadSettingsFromServer() {
+            try {
+                console.log('🔄 Loading settings from server...');
+                
+                const data = await postToGoogleScript('getSettings');
+                
+                if (data.success && data.settings) {
+                    // Update app settings dengan data dari server
+                    appSettings = {
+                        ...appSettings,
+                        ...data.settings
+                    };
+                    
+                    // Update UI dengan settings baru
+                    updateStats();
+                    applyVotingRestrictions();
+                    updateVoteLimitInfo('tahap2');
+                    
+                    console.log('✅ Settings loaded from server:', appSettings);
+                }
+            } catch (error) {
+                console.error('❌ Error loading settings from server:', error);
+                // Tetap gunakan settings lokal
+            }
+        }
 
         // Setup event listeners dengan pengecekan elemen
         function setupEventListeners() {
@@ -1578,808 +1908,41 @@
             if (exportSummaryExcel) exportSummaryExcel.addEventListener('click', function() {
                 exportToExcel();
             });
-        }
 
-        // Setup plano upload handlers
-        function setupPlanoUploadHandlers() {
-            // Setup plano upload for tahap 1
-            const planoInputsTahap1 = [
-                { id: 'planoRuang1Tahap1', ruang: 'ruang1' },
-                { id: 'planoRuang2Tahap1', ruang: 'ruang2' },
-                { id: 'planoRuang3Tahap1', ruang: 'ruang3' }
-            ];
-            
-            planoInputsTahap1.forEach(input => {
-                const element = document.getElementById(input.id);
-                if (element) {
-                    element.addEventListener('change', function(e) {
-                        handlePlanoUpload(e, 'tahap1', input.ruang);
-                    });
-                }
-            });
-            
-            // Setup plano upload for tahap 2
-            const planoInputsTahap2 = [
-                { id: 'planoRuang1Tahap2', ruang: 'ruang1' },
-                { id: 'planoRuang2Tahap2', ruang: 'ruang2' },
-                { id: 'planoRuang3Tahap2', ruang: 'ruang3' }
-            ];
-            
-            planoInputsTahap2.forEach(input => {
-                const element = document.getElementById(input.id);
-                if (element) {
-                    element.addEventListener('change', function(e) {
-                        handlePlanoUpload(e, 'tahap2', input.ruang);
-                    });
-                }
-            });
-        }
-
-        // Handle plano upload
-        function handlePlanoUpload(event, tahap, ruang) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            // Check if file is an image
-            if (!file.type.match('image.*')) {
-                alert('Hanya file gambar yang diizinkan!');
-                event.target.value = '';
-                return;
+            // Manual vote modal events
+            const manualVoteModal = document.getElementById('manualVoteModal');
+            if (manualVoteModal) {
+                manualVoteModal.addEventListener('show.bs.modal', openManualVoteModal);
             }
             
-            // Check file size (max 5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                alert('Ukuran file terlalu besar. Maksimal 5MB.');
-                event.target.value = '';
-                return;
+            // Manual vote search functionality
+            const searchInput = document.getElementById('searchCandidates');
+            const showOnlyModified = document.getElementById('showOnlyModified');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', renderManualVoteTable);
+            }
+            if (showOnlyModified) {
+                showOnlyModified.addEventListener('change', renderManualVoteTable);
             }
             
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                // Save plano photo
-                planoPhotos[tahap][ruang] = e.target.result;
-                
-                // Show preview
-                const previewId = `previewPlano${ruang.charAt(0).toUpperCase() + ruang.slice(1)}${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`;
-                const preview = document.getElementById(previewId);
-                if (preview) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                
-                // Update status
-                const statusId = `planoStatus${ruang.charAt(0).toUpperCase() + ruang.slice(1)}${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`;
-                const statusElement = document.getElementById(statusId);
-                if (statusElement) {
-                    statusElement.textContent = 'Sudah Upload';
-                    statusElement.className = 'plano-status plano-uploaded';
-                }
-                
-                console.log(`Plano uploaded for ${tahap} - ${ruang}`);
-            };
-            reader.readAsDataURL(file);
-        }
-
-        // ========== ADMIN CONTROLS IMPLEMENTATION ========== //
-
-        /**
-         * Update vote limit untuk semua user
-         */
-        function updateVoteLimit() {
-            const voteLimit = document.getElementById('voteLimit');
-            if (!voteLimit) return;
+            // Manual vote save and reset buttons
+            const saveAllManualVotesBtn = document.getElementById('saveAllManualVotes');
+            const resetAllManualVotesBtn = document.getElementById('resetAllManualVotes');
             
-            const newLimit = parseInt(voteLimit.value);
-            appSettings.maxVotesPerUser = newLimit;
-            
-            // Simpan ke localStorage
-            try {
-                localStorage.setItem('appSettings', JSON.stringify(appSettings));
-            } catch (error) {
-                console.warn('Gagal menyimpan pengaturan:', error);
+            if (saveAllManualVotesBtn) {
+                saveAllManualVotesBtn.addEventListener('click', saveAllManualVotes);
             }
-            
-            // Update UI untuk member
-            updateVoteLimitInfo('tahap2');
-            
-            // Kirim ke server jika online
-            if (isOnline) {
-                postToGoogleScript('updateSettings', {
-                    settings: JSON.stringify(appSettings)
-                }).catch(error => {
-                    console.error('Gagal update settings ke server:', error);
-                });
+            if (resetAllManualVotesBtn) {
+                resetAllManualVotesBtn.addEventListener('click', resetAllManualVotes);
             }
-            
-            showNotification(`Batas vote diubah menjadi ${newLimit} kali`, 'success');
-        }
 
-        /**
-         * Load settings ke modal pengaturan
-         */
-        function loadSettingsToModal() {
-            const maxVotesPerUser = document.getElementById('maxVotesPerUser');
-            const allowManualInput = document.getElementById('allowManualInput');
-            const allowVoting = document.getElementById('allowVoting');
-            const totalVotersSetting = document.getElementById('totalVotersSetting');
-            const voteLimit = document.getElementById('voteLimit');
-            
-            if (maxVotesPerUser) maxVotesPerUser.value = appSettings.maxVotesPerUser;
-            if (allowManualInput) allowManualInput.checked = appSettings.allowManualInput;
-            if (allowVoting) allowVoting.checked = appSettings.allowVoting;
-            if (totalVotersSetting) totalVotersSetting.value = appSettings.totalVoters;
-            if (voteLimit) voteLimit.value = appSettings.maxVotesPerUser;
-        }
-
-        /**
-         * Load display settings ke modal
-         */
-        function loadDisplaySettingsToModal() {
-            const modalToggles = [
-                'modalTogglePercentage', 'modalToggleProgressBar', 'modalToggleVoteCount',
-                'modalToggleCandidatePhotos', 'modalToggleStats', 'modalToggleCountdown',
-                'modalTogglePlano', 'modalToggleVoteButtons'
-            ];
-            
-            modalToggles.forEach(toggleId => {
-                const toggle = document.getElementById(toggleId);
-                if (toggle) {
-                    const settingKey = 'show' + toggleId.replace('modalToggle', '');
-                    toggle.checked = displaySettings[settingKey] !== false;
-                }
-            });
-        }
-
-        /**
-         * Enhanced save settings handler
-         */
-        function saveSettingsHandler() {
-            const maxVotesPerUser = document.getElementById('maxVotesPerUser');
-            const allowManualInput = document.getElementById('allowManualInput');
-            const allowVoting = document.getElementById('allowVoting');
-            const totalVotersSetting = document.getElementById('totalVotersSetting');
-            
-            if (maxVotesPerUser) appSettings.maxVotesPerUser = parseInt(maxVotesPerUser.value);
-            if (allowManualInput) appSettings.allowManualInput = allowManualInput.checked;
-            if (allowVoting) appSettings.allowVoting = allowVoting.checked;
-            if (totalVotersSetting) appSettings.totalVoters = parseInt(totalVotersSetting.value);
-            
-            // Update vote limit dropdown di admin controls
-            const voteLimit = document.getElementById('voteLimit');
-            if (voteLimit) voteLimit.value = appSettings.maxVotesPerUser;
-            
-            // Simpan ke localStorage
-            try {
-                localStorage.setItem('appSettings', JSON.stringify(appSettings));
-            } catch (error) {
-                console.warn('Gagal menyimpan pengaturan:', error);
-            }
-            
-            // Update stats dan UI
-            updateStats();
-            updateVoteLimitInfo('tahap2');
-            applyVotingRestrictions();
-            
-            // Kirim ke server jika online
-            if (isOnline) {
-                postToGoogleScript('updateSettings', {
-                    settings: JSON.stringify(appSettings)
-                }).then(() => {
-                    showNotification('Pengaturan berhasil disimpan!', 'success');
-                }).catch(error => {
-                    console.error('Gagal menyimpan pengaturan ke server:', error);
-                    showNotification('Pengaturan disimpan secara lokal', 'warning');
-                });
-            } else {
-                showNotification('Pengaturan berhasil disimpan secara lokal!', 'success');
-            }
-            
-            const settingsModal = bootstrap.Modal.getInstance(document.getElementById('settingsModal'));
-            if (settingsModal) settingsModal.hide();
-        }
-
-        /**
-         * Terapkan pembatasan voting berdasarkan settings
-         */
-        function applyVotingRestrictions() {
-            const voteButtons = document.querySelectorAll('.toggle-vote-btn');
-            const voteInfos = document.querySelectorAll('.vote-info, .vote-limit-info');
-            
-            if (!appSettings.allowVoting) {
-                // Nonaktifkan semua tombol vote
-                voteButtons.forEach(btn => {
-                    btn.disabled = true;
-                    btn.title = 'Voting sedang dinonaktifkan oleh admin';
-                    btn.classList.add('vote-disabled');
-                });
-                
-                // Update info text
-                voteInfos.forEach(info => {
-                    const originalContent = info.getAttribute('data-original-content') || info.innerHTML;
-                    info.setAttribute('data-original-content', originalContent);
-                    info.innerHTML = '<i class="fas fa-ban me-2"></i> Voting sedang dinonaktifkan oleh admin';
-                    info.classList.add('vote-disabled-info');
-                });
-            } else {
-                // Aktifkan tombol vote
-                voteButtons.forEach(btn => {
-                    btn.disabled = false;
-                    btn.title = '';
-                    btn.classList.remove('vote-disabled');
-                });
-                
-                // Kembalikan info text
-                voteInfos.forEach(info => {
-                    const originalContent = info.getAttribute('data-original-content');
-                    if (originalContent) {
-                        info.innerHTML = originalContent;
-                        info.classList.remove('vote-disabled-info');
-                    }
-                });
-            }
-            
-            // Update vote limit info
-            updateVoteLimitInfo('tahap2');
-        }
-
-        // ========== VOTE SUBMISSION SYSTEM ========== //
-
-        /**
-         * Fungsi untuk menambahkan vote ke pending
-         */
-        function addPendingVote(tahap, kring, candidateId, action) {
-            // Cek apakah vote sudah ada di pending
-            const existingVoteIndex = pendingVotes[tahap].findIndex(vote => 
-                vote.candidateId === candidateId && vote.kring === kring
-            );
-            
-            if (existingVoteIndex === -1) {
-                pendingVotes[tahap].push({
-                    tahap: tahap,
-                    kring: kring,
-                    candidateId: candidateId,
-                    action: action,
-                    timestamp: new Date()
-                });
-            } else {
-                // Update existing vote
-                pendingVotes[tahap][existingVoteIndex].action = action;
-                pendingVotes[tahap][existingVoteIndex].timestamp = new Date();
-            }
-            
-            // Update UI
-            updateSubmitButtonVisibility(tahap);
-            updateVoteSummary(tahap);
-            updateVoteLimitInfo(tahap);
-        }
-
-        /**
-         * Fungsi untuk menghapus vote dari pending
-         */
-        function removePendingVote(tahap, candidateId, kring) {
-            pendingVotes[tahap] = pendingVotes[tahap].filter(vote => 
-                !(vote.candidateId === candidateId && vote.kring === kring)
-            );
-            
-            // Update UI
-            updateSubmitButtonVisibility(tahap);
-            updateVoteSummary(tahap);
-            updateVoteLimitInfo(tahap);
-        }
-
-        /**
-         * Update visibilitas tombol submit
-         */
-        function updateSubmitButtonVisibility(tahap) {
-            const submitSection = document.getElementById(`submitSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            const pendingCount = document.getElementById(`pendingCount${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            const submitInfo = document.getElementById(`submitInfo${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            const planoSection = document.getElementById(`planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            const planoSubmitInfo = document.getElementById(`planoSubmitInfo${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            
-            if (submitSection && pendingCount && submitInfo && planoSection && planoSubmitInfo) {
-                if (pendingVotes[tahap].length > 0) {
-                    submitSection.style.display = 'block';
-                    planoSection.style.display = 'block';
-                    pendingCount.textContent = pendingVotes[tahap].length;
-                    
-                    // Update info text berdasarkan tahap
-                    const maxVotes = (tahap === 'tahap1') ? 1 : appSettings.maxVotesPerUser;
-                    const currentVotesCount = userVotes[tahap].length;
-                    submitInfo.textContent = `Anda telah memilih ${currentVotesCount} dari ${maxVotes} kandidat yang diizinkan`;
-                    
-                    // Update plano info
-                    updatePlanoSubmitInfo(tahap);
-                } else {
-                    submitSection.style.display = 'none';
-                    planoSection.style.display = 'none';
-                }
+            // Plano upload confirmation
+            const confirmPlanoUploadBtn = document.getElementById('confirmPlanoUpload');
+            if (confirmPlanoUploadBtn) {
+                confirmPlanoUploadBtn.addEventListener('click', confirmPlanoUpload);
             }
         }
-
-        /**
-         * Update plano submit info
-         */
-        function updatePlanoSubmitInfo(tahap) {
-            const planoSubmitInfo = document.getElementById(`planoSubmitInfo${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            const userRuang = getUserRuang();
-            
-            if (!planoSubmitInfo) return;
-            
-            if (currentUser && currentUser.role === 'admin') {
-                // Admin harus upload semua ruang
-                const uploadedCount = ['ruang1', 'ruang2', 'ruang3'].filter(ruang => 
-                    planoPhotos[tahap][ruang] !== null
-                ).length;
-                
-                if (uploadedCount === 3) {
-                    planoSubmitInfo.innerHTML = '<span class="badge bg-success"><i class="fas fa-check me-1"></i> Semua bukti plano sudah diupload</span>';
-                } else {
-                    planoSubmitInfo.innerHTML = `<span class="badge bg-warning"><i class="fas fa-exclamation-triangle me-1"></i> ${3 - uploadedCount} bukti plano belum diupload</span>`;
-                }
-            } else if (currentUser && userRuang) {
-                // Member hanya perlu upload ruang mereka
-                if (planoPhotos[tahap][`ruang${userRuang}`] !== null) {
-                    planoSubmitInfo.innerHTML = '<span class="badge bg-success"><i class="fas fa-check me-1"></i> Bukti plano sudah diupload</span>';
-                } else {
-                    planoSubmitInfo.innerHTML = '<span class="badge bg-warning"><i class="fas fa-exclamation-triangle me-1"></i> Bukti plano belum diupload</span>';
-                }
-            }
-        }
-
-        /**
-         * Update vote summary display
-         */
-        function updateVoteSummary(tahap) {
-            const summaryElement = document.getElementById(`${tahap}Summary`);
-            const summaryContent = document.getElementById(`${tahap}SummaryContent`);
-            
-            if (summaryElement && summaryContent) {
-                const voteVotes = pendingVotes[tahap].filter(v => v.action === 'vote');
-                
-                if (voteVotes.length > 0) {
-                    summaryElement.style.display = 'block';
-                    
-                    let summaryHTML = '';
-                    voteVotes.forEach(vote => {
-                        const candidate = findCandidate(vote.tahap, vote.kring, vote.candidateId);
-                        if (candidate) {
-                            summaryHTML += `
-                                <div class="summary-item">
-                                    <span>${candidate.name}</span>
-                                    <span class="badge bg-primary">${vote.kring}</span>
-                                </div>
-                            `;
-                        }
-                    });
-                    
-                    summaryContent.innerHTML = summaryHTML;
-                } else {
-                    summaryElement.style.display = 'none';
-                }
-            }
-        }
-
-        /**
-         * Update vote limit info display
-         */
-        function updateVoteLimitInfo(tahap) {
-            if (tahap === 'tahap2') {
-                const voteLimitInfo = document.getElementById('tahap2VoteLimitInfo');
-                const voteLimitText = document.getElementById('tahap2VoteLimitText');
-                const currentVotesElement = document.getElementById('currentVotesTahap2');
-                
-                if (voteLimitInfo && voteLimitText && currentVotesElement) {
-                    const currentVotesCount = userVotes[tahap].length;
-                    const maxVotes = appSettings.maxVotesPerUser;
-                    currentVotesElement.textContent = currentVotesCount;
-                    
-                    voteLimitText.innerHTML = `Anda dapat memilih hingga <strong>${maxVotes}</strong> kandidat. Saat ini Anda telah memilih <strong>${currentVotesCount}</strong> dari ${maxVotes} kandidat.`;
-                    
-                    if (currentUser && currentUser.role !== 'admin') {
-                        voteLimitInfo.style.display = 'block';
-                        
-                        // Update warna berdasarkan jumlah vote
-                        if (currentVotesCount >= maxVotes) {
-                            voteLimitInfo.style.backgroundColor = '#d4edda';
-                            voteLimitInfo.style.borderLeftColor = '#28a745';
-                        } else if (currentVotesCount >= maxVotes - 1) {
-                            voteLimitInfo.style.backgroundColor = '#fff3cd';
-                            voteLimitInfo.style.borderLeftColor = '#ffc107';
-                        } else {
-                            voteLimitInfo.style.backgroundColor = '#e8f4fd';
-                            voteLimitInfo.style.borderLeftColor = '#17a2b8';
-                        }
-                    }
-                }
-            }
-        }
-
-        /**
-         * Find candidate by ID, tahap, and kring
-         */
-        function findCandidate(tahap, kring, candidateId) {
-            if (candidates[tahap] && candidates[tahap][kring]) {
-                return candidates[tahap][kring].find(c => c.id === candidateId);
-            }
-            return null;
-        }
-
-        /**
-         * Enhanced toggle vote candidate dengan validasi settings admin
-         */
-        function toggleVoteCandidate(tahap, kring, candidateId) {
-            if (!currentUser) {
-                alert('Silakan login terlebih dahulu!');
-                openLoginModal();
-                return;
-            }
-            
-            // Cek jika voting tidak diizinkan
-            if (!appSettings.allowVoting) {
-                showNotification('Voting sedang dinonaktifkan oleh admin!', 'error');
-                return;
-            }
-            
-            // Periksa apakah kandidat sudah dipilih
-            const isSelected = userVotes[tahap].includes(candidateId);
-            
-            if (isSelected) {
-                // Unvote candidate
-                removePendingVote(tahap, candidateId, kring);
-                
-                // Update UI
-                const card = document.querySelector(`.candidate-card[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
-                const voteBtn = document.querySelector(`.toggle-vote-btn[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
-                
-                if (card && voteBtn) {
-                    card.classList.remove('selected-candidate');
-                    voteBtn.innerHTML = '<i class="fas fa-vote-yea me-1"></i> Pilih';
-                    voteBtn.classList.remove('btn-danger');
-                    voteBtn.classList.add('btn-primary');
-                }
-                
-                // Hapus dari user votes tracking
-                const index = userVotes[tahap].indexOf(candidateId);
-                if (index > -1) {
-                    userVotes[tahap].splice(index, 1);
-                    saveUserVotes();
-                }
-            } else {
-                // Periksa apakah user sudah mencapai batas vote untuk tahap ini
-                const maxVotes = (tahap === 'tahap1') ? 1 : appSettings.maxVotesPerUser;
-                const currentVotesCount = userVotes[tahap].length;
-                
-                if (currentVotesCount >= maxVotes) {
-                    showNotification(`Anda hanya dapat memilih ${maxVotes} kandidat pada ${tahap === 'tahap1' ? 'Tahap 1' : 'Tahap 2'}.`, 'warning');
-                    return;
-                }
-                
-                // Vote candidate
-                addPendingVote(tahap, kring, candidateId, 'vote');
-                
-                // Update UI
-                const card = document.querySelector(`.candidate-card[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
-                const voteBtn = document.querySelector(`.toggle-vote-btn[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
-                
-                if (card && voteBtn) {
-                    card.classList.add('selected-candidate');
-                    voteBtn.innerHTML = '<i class="fas fa-times me-1"></i> Batalkan';
-                    voteBtn.classList.remove('btn-primary');
-                    voteBtn.classList.add('btn-danger');
-                }
-                
-                // Tambahkan ke user votes tracking
-                userVotes[tahap].push(candidateId);
-                saveUserVotes();
-            }
-        }
-
-        /**
-         * Fungsi untuk submit votes
-         */
-        async function submitVotes(tahap) {
-            if (!currentUser) {
-                alert('Silakan login terlebih dahulu!');
-                return;
-            }
-            
-            if (pendingVotes[tahap].length === 0) {
-                alert('Tidak ada votes yang perlu disubmit!');
-                return;
-            }
-            
-            const submitButton = document.getElementById(`submitVotes${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            const submitStatus = document.getElementById(`submitStatus${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            
-            if (!submitButton || !submitStatus) return;
-            
-            // Disable tombol selama proses submit
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Submitting...';
-            submitStatus.innerHTML = '<span class="badge bg-info">Mengirim votes dan plano...</span>';
-            submitStatus.style.display = 'block';
-            
-            try {
-                // Upload plano photos jika ada
-                await uploadPlanos(tahap);
-                
-                // Kirim votes ke server
-                const result = await postToGoogleScript('submitVotes', {
-                    userId: currentUser.role,
-                    tahap: tahap,
-                    votes: JSON.stringify(pendingVotes[tahap])
-                });
-                
-                // Reset pending votes setelah berhasil
-                pendingVotes[tahap] = [];
-                
-                // Reset plano photos
-                planoPhotos[tahap] = { ruang1: null, ruang2: null, ruang3: null };
-                
-                // Update UI
-                submitButton.innerHTML = '<i class="fas fa-check me-2"></i> Submit Successful!';
-                submitStatus.innerHTML = '<span class="badge bg-success">Votes dan plano berhasil dikirim!</span>';
-                
-                // Refresh data dari server
-                setTimeout(() => {
-                    loadCandidatesFromServer();
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = '<i class="fas fa-paper-plane me-2"></i> Submit Votes';
-                    submitStatus.style.display = 'none';
-                    
-                    // Reset user votes tracking
-                    userVotes[tahap] = [];
-                    saveUserVotes();
-                    
-                    // Reset UI untuk pemilih berikutnya
-                    resetVotingUI(tahap);
-                    
-                    alert(`Votes untuk ${tahap === 'tahap1' ? 'Tahap 1' : 'Tahap 2'} berhasil disubmit!`);
-                }, 2000);
-                
-            } catch (error) {
-                console.error('Error submitting votes:', error);
-                submitButton.disabled = false;
-                submitButton.innerHTML = '<i class="fas fa-paper-plane me-2"></i> Submit Votes';
-                submitStatus.innerHTML = '<span class="badge bg-danger">Error: ' + error.message + '</span>';
-                alert('Terjadi error saat submit votes: ' + error.message);
-            }
-        }
-
-        /**
-         * Upload plano photos
-         */
-        async function uploadPlanos(tahap) {
-            const userRuang = getUserRuang();
-            
-            if (currentUser.role === 'admin') {
-                // Admin upload semua ruang
-                for (let ruang of ['1', '2', '3']) {
-                    if (planoPhotos[tahap][`ruang${ruang}`]) {
-                        await uploadPlanoToServer(tahap, ruang, planoPhotos[tahap][`ruang${ruang}`]);
-                    }
-                }
-            } else if (userRuang) {
-                // Member upload hanya ruang mereka
-                if (planoPhotos[tahap][`ruang${userRuang}`]) {
-                    await uploadPlanoToServer(tahap, userRuang, planoPhotos[tahap][`ruang${userRuang}`]);
-                }
-            }
-        }
-
-        /**
-         * Upload plano to server
-         */
-        async function uploadPlanoToServer(tahap, ruang, planoData) {
-            try {
-                // Simulasi upload ke server
-                console.log(`Uploading plano for ${tahap} - ruang ${ruang}`);
-                
-                // Dalam implementasi nyata, ini akan mengirim file ke server
-                // Untuk saat ini, kita hanya mensimulasikan
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        console.log(`Plano uploaded successfully for ${tahap} - ruang ${ruang}`);
-                        resolve(true);
-                    }, 1000);
-                });
-            } catch (error) {
-                console.error('Error uploading plano:', error);
-                throw error;
-            }
-        }
-
-        /**
-         * Reset UI voting setelah submit
-         */
-        function resetVotingUI(tahap) {
-            // Reset semua tombol vote/unvote
-            const krings = ['kring1', 'kring2', 'kring3'];
-            krings.forEach(kring => {
-                if (candidates[tahap] && candidates[tahap][kring]) {
-                    candidates[tahap][kring].forEach(candidate => {
-                        const card = document.querySelector(`.candidate-card[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidate.id}"]`);
-                        const voteBtn = document.querySelector(`.toggle-vote-btn[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidate.id}"]`);
-                        
-                        if (card && voteBtn) {
-                            card.classList.remove('selected-candidate');
-                            voteBtn.innerHTML = '<i class="fas fa-vote-yea me-1"></i> Pilih';
-                            voteBtn.classList.remove('btn-danger');
-                            voteBtn.classList.add('btn-primary');
-                            voteBtn.disabled = !appSettings.allowVoting;
-                        }
-                    });
-                }
-            });
-            
-            // Hide submit section
-            const submitSection = document.getElementById(`submitSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            if (submitSection) submitSection.style.display = 'none';
-            
-            // Hide plano section
-            const planoSection = document.getElementById(`planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
-            if (planoSection) planoSection.style.display = 'none';
-            
-            // Hide vote summary
-            const summaryElement = document.getElementById(`${tahap}Summary`);
-            if (summaryElement) summaryElement.style.display = 'none';
-            
-            // Reset plano inputs
-            const planoInputs = document.querySelectorAll(`#planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)} input[type="file"]`);
-            planoInputs.forEach(input => {
-                input.value = '';
-            });
-            
-            // Hide plano previews
-            const planoPreviews = document.querySelectorAll(`#planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)} .plano-preview`);
-            planoPreviews.forEach(preview => {
-                preview.style.display = 'none';
-            });
-            
-            // Reset plano status
-            const planoStatuses = document.querySelectorAll(`#planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)} .plano-status`);
-            planoStatuses.forEach(status => {
-                status.textContent = 'Belum Upload';
-                status.className = 'plano-status plano-missing';
-            });
-            
-            // Hide vote limit info for tahap 2
-            if (tahap === 'tahap2') {
-                const voteLimitInfo = document.getElementById('tahap2VoteLimitInfo');
-                if (voteLimitInfo) voteLimitInfo.style.display = 'none';
-            }
-        }
-
-        // ========== FUNGSI DATA SERVER ========== //
-
-        /**
-         * Fungsi untuk POST data ke Google Apps Script
-         */
-        async function postToGoogleScript(action, params = {}) {
-            return new Promise((resolve, reject) => {
-                const formData = new FormData();
-                formData.append('action', action);
-                
-                Object.keys(params).forEach(key => {
-                    if (params[key] !== null && params[key] !== undefined) {
-                        formData.append(key, params[key]);
-                    }
-                });
-
-                console.log('Posting to Google Script:', action, params);
-
-                fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors'
-                })
-                .then(response => {
-                    console.log('POST request sent successfully');
-                    resolve({ success: true, message: 'Request sent' });
-                    
-                    // Refresh data setelah aksi berhasil
-                    setTimeout(() => {
-                        loadCandidatesFromServer();
-                        loadSettingsFromServer();
-                    }, 1000);
-                })
-                .catch(error => {
-                    console.error('Error posting to Google Script:', error);
-                    reject(error);
-                });
-            });
-        }
-
-        /**
-         * Fungsi untuk test koneksi ke server
-         */
-        async function testConnection() {
-            try {
-                updateConnectionStatus('Menyambungkan...', 'connecting');
-                
-                // Coba akses health check endpoint
-                const response = await fetch(`${WEB_APP_URL}?action=healthCheck&_=${Date.now()}`, {
-                    method: 'GET',
-                    mode: 'no-cors'
-                });
-                
-                // Jika tidak ada error CORS, anggap berhasil
-                updateConnectionStatus('Terhubung', 'online');
-                isOnline = true;
-                return true;
-            } catch (error) {
-                console.error('Connection test failed:', error);
-                updateConnectionStatus('Offline', 'offline');
-                isOnline = false;
-                return false;
-            }
-        }
-
-        /**
-         * Update status koneksi di UI
-         */
-        function updateConnectionStatus(text, status) {
-            const statusElement = document.getElementById('connectionStatus');
-            const textElement = document.getElementById('connectionText');
-            
-            if (statusElement && textElement) {
-                statusElement.style.display = 'block';
-                textElement.textContent = text;
-                
-                statusElement.classList.remove('connection-online', 'connection-offline', 'connection-connecting');
-                
-                if (status === 'online') {
-                    statusElement.classList.add('connection-online');
-                } else if (status === 'offline') {
-                    statusElement.classList.add('connection-offline');
-                } else {
-                    statusElement.classList.add('connection-connecting');
-                }
-            }
-        }
-
-        /**
-         * Load candidates dari Google Apps Script
-         */
-        async function loadCandidatesFromServer() {
-            try {
-                console.log('Loading candidates from server...');
-                
-                // Simulasikan loading
-                setTimeout(() => {
-                    renderCandidates();
-                    updateStats();
-                }, 500);
-                
-            } catch (error) {
-                console.error('Error loading candidates from server:', error);
-                // Fallback ke data sample
-                renderCandidates();
-                updateStats();
-            }
-        }
-
-        /**
-         * Load settings dari Google Apps Script
-         */
-        async function loadSettingsFromServer() {
-            try {
-                console.log('Loading settings from server...');
-                
-                // Simulasikan loading settings
-                setTimeout(() => {
-                    updateStats();
-                }, 500);
-                
-            } catch (error) {
-                console.error('Error loading settings from server:', error);
-                // Gunakan default settings
-                updateStats();
-            }
-        }
-
-        // ========== FUNGSI LOGIN & AUTH ========== //
 
         /**
          * Login function yang terhubung ke Google Apps Script
@@ -2399,19 +1962,17 @@
             }
             
             try {
-                // Coba login ke server
-                if (isOnline) {
-                    const result = await postToGoogleScript('login', {
-                        username: roleValue,
-                        password: passwordValue
-                    });
-                    
-                    // Karena kita menggunakan mode no-cors, kita tidak bisa membaca response
-                    // Jadi kita asumsikan login berhasil jika tidak ada error
+                const result = await postToGoogleScript('login', {
+                    username: roleValue,
+                    password: passwordValue
+                });
+                
+                if (result.success) {
                     currentUser = {
                         role: roleValue,
                         name: roleValue === 'admin' ? 'Administrator' : `Member ${roleValue.toUpperCase()}`,
-                        loginTime: new Date()
+                        loginTime: new Date(),
+                        kring: result.user?.kring || ''
                     };
                     
                     localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -2422,36 +1983,17 @@
                     
                     password.value = '';
                     
-                    alert(`Login berhasil sebagai ${currentUser.name}`);
+                    showNotification(`Login berhasil sebagai ${currentUser.name}`, 'success');
                     
                     // Refresh data setelah login
-                    loadCandidatesFromServer();
+                    await loadCandidatesFromServer();
+                    await loadSettingsFromServer();
                 } else {
-                    // Mode offline - gunakan validasi sederhana
-                    if ((roleValue === 'admin' && passwordValue === 'admin123') || 
-                        (roleValue !== 'admin' && passwordValue === 'member123')) {
-                        
-                        currentUser = {
-                            role: roleValue,
-                            name: roleValue === 'admin' ? 'Administrator' : `Member ${roleValue.toUpperCase()}`,
-                            loginTime: new Date()
-                        };
-                        
-                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                        updateUIForUser();
-                        
-                        const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                        if (loginModal) loginModal.hide();
-                        
-                        password.value = '';
-                        
-                        alert(`Login berhasil sebagai ${currentUser.name} (Mode Offline)`);
-                    } else {
-                        alert('Username atau password salah!');
-                    }
+                    throw new Error(result.error || 'Login gagal');
                 }
             } catch (error) {
-                alert('Terjadi kesalahan saat login: ' + error.message);
+                console.error('Login error:', error);
+                alert('Login gagal: ' + error.message);
             }
         }
 
@@ -2523,9 +2065,9 @@
         function getUserKring() {
             if (!currentUser) return null;
             
-            if (currentUser.role === 'ruang1') return '1';
-            if (currentUser.role === 'ruang2') return '2';
-            if (currentUser.role === 'ruang3') return '3';
+            if (currentUser.role === 'ruang1') return 'kring1';
+            if (currentUser.role === 'ruang2') return 'kring2';
+            if (currentUser.role === 'ruang3') return 'kring3';
             
             return null;
         }
@@ -2536,9 +2078,9 @@
         function getUserRuang() {
             if (!currentUser) return null;
             
-            if (currentUser.role === 'ruang1') return '1';
-            if (currentUser.role === 'ruang2') return '2';
-            if (currentUser.role === 'ruang3') return '3';
+            if (currentUser.role === 'ruang1') return 'ruang1';
+            if (currentUser.role === 'ruang2') return 'ruang2';
+            if (currentUser.role === 'ruang3') return 'ruang3';
             
             return null;
         }
@@ -2589,7 +2131,7 @@
                 if (planoInfoTextTahap2) planoInfoTextTahap2.textContent = 'Silakan upload foto bukti plano untuk semua ruang di tahap 2:';
                 
             } else if (currentUser && userRuang) {
-                // Member hanya bisa melihat ruangannya sendiri
+                // Member hanya bisa melihat ruangnya sendiri
                 planoContainersTahap1.forEach(container => {
                     const ruang = container.getAttribute('data-ruang');
                     if (ruang === userRuang) {
@@ -2710,7 +2252,7 @@
                     const kringContainers = document.querySelectorAll('[id$="-tahap1-container"], [id$="-tahap2-container"]');
                     
                     kringContainers.forEach(container => {
-                        if (container.id.includes(`kring${userKring}`)) {
+                        if (container.id.includes(userKring)) {
                             container.style.display = 'block';
                         } else {
                             container.style.display = 'none';
@@ -2790,7 +2332,7 @@
                             <div class="card h-100 candidate-card ${cardClass}" 
                                  data-tahap="${tahap}" data-kring="${kring}" data-candidate="${candidate.id}">
                                 ${currentUser && currentUser.role === 'admin' ? '<span class="role-badge">ID: ' + candidate.id + '</span>' : ''}
-                                <img src="${candidate.photo}" class="card-img-top" alt="${candidate.name}" style="height: 200px; object-fit: cover;">
+                                <img src="${candidate.photo || 'https://via.placeholder.com/150'}" class="card-img-top" alt="${candidate.name}" style="height: 200px; object-fit: cover;">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">${candidate.name}</h5>
                                     <div class="mt-auto">
@@ -2866,10 +2408,9 @@
 
         // Initialize countdown timer
         function initializeCountdown() {
-            // Set countdown to 7 days from now
-            const countdownDate = new Date();
-            countdownDate.setDate(countdownDate.getDate() + 7);
             
+            const countdownDate = new Date('2025-11-21T19:30:00'); // 20 Januari 2025 jam 17:00
+
             // Update countdown every second
             setInterval(() => {
                 const now = new Date().getTime();
@@ -2940,6 +2481,963 @@
             }
         }
 
+        // ========== PLANO UPLOAD SYSTEM - FIXED VERSION ========== //
+
+        /**
+         * Enhanced plano upload handler dengan konfirmasi - FIXED VERSION
+         */
+        function setupPlanoUploadHandlers() {
+            // Setup plano upload for tahap 1
+            const planoInputsTahap1 = [
+                { id: 'planoRuang1Tahap1', ruang: 'ruang1' },
+                { id: 'planoRuang2Tahap1', ruang: 'ruang2' },
+                { id: 'planoRuang3Tahap1', ruang: 'ruang3' }
+            ];
+            
+            planoInputsTahap1.forEach(input => {
+                const element = document.getElementById(input.id);
+                if (element) {
+                    element.addEventListener('change', function(e) {
+                        handlePlanoUpload(e, 'tahap1', input.ruang);
+                    });
+                }
+            });
+            
+            // Setup plano upload for tahap 2
+            const planoInputsTahap2 = [
+                { id: 'planoRuang1Tahap2', ruang: 'ruang1' },
+                { id: 'planoRuang2Tahap2', ruang: 'ruang2' },
+                { id: 'planoRuang3Tahap2', ruang: 'ruang3' }
+            ];
+            
+            planoInputsTahap2.forEach(input => {
+                const element = document.getElementById(input.id);
+                if (element) {
+                    element.addEventListener('change', function(e) {
+                        handlePlanoUpload(e, 'tahap2', input.ruang);
+                    });
+                }
+            });
+
+            // Konfirmasi upload plano handler
+            const confirmUploadBtn = document.getElementById('confirmPlanoUpload');
+            if (confirmUploadBtn) {
+                confirmUploadBtn.addEventListener('click', confirmPlanoUpload);
+            }
+        }
+
+        /**
+         * Handle plano upload dengan preview dan konfirmasi - FIXED VERSION
+         */
+        function handlePlanoUpload(event, tahap, ruang) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Check if file is an image
+            if (!file.type.match('image.*')) {
+                alert('Hanya file gambar yang diizinkan!');
+                event.target.value = '';
+                return;
+            }
+            
+            // Check file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Ukuran file terlalu besar. Maksimal 5MB.');
+                event.target.value = '';
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Simpan data untuk konfirmasi upload
+                pendingPlanoUpload = {
+                    tahap: tahap,
+                    ruang: ruang,
+                    file: e.target.result,
+                    fileName: file.name
+                };
+                
+                console.log('📸 File selected for upload:', {
+                    tahap: tahap,
+                    ruang: ruang,
+                    fileName: file.name,
+                    fileSize: file.size,
+                    fileType: file.type
+                });
+                
+                // Tampilkan preview di modal
+                const previewContainer = document.getElementById('planoUploadPreview');
+                if (previewContainer) {
+                    previewContainer.innerHTML = `
+                        <img src="${e.target.result}" class="img-fluid rounded" style="max-height: 200px;" alt="Preview">
+                        <p class="mt-2 small">${file.name} (${(file.size / 1024).toFixed(2)} KB)</p>
+                    `;
+                }
+                
+                // Tampilkan modal konfirmasi
+                const planoModal = new bootstrap.Modal(document.getElementById('planoUploadModal'));
+                planoModal.show();
+            };
+            
+            reader.onerror = function(error) {
+                console.error('Error reading file:', error);
+                alert('Gagal membaca file!');
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        /**
+         * Konfirmasi upload plano ke Google Drive - FIXED VERSION
+         */
+        async function confirmPlanoUpload() {
+            const description = document.getElementById('planoDescription').value;
+            const { tahap, ruang, file, fileName } = pendingPlanoUpload;
+            
+            if (!file) {
+                alert('Tidak ada file yang dipilih!');
+                return;
+            }
+
+            try {
+                const uploadButton = document.getElementById('confirmPlanoUpload');
+                const originalText = uploadButton.innerHTML;
+                uploadButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Mengupload...';
+                uploadButton.disabled = true;
+                
+                // Pastikan parameter dikirim dengan nama yang benar
+                const uploadParams = {
+                    tahap: tahap,
+                    kring: ruang, // Kirim sebagai 'kring' bukan 'ruang'
+                    fileName: fileName,
+                    imageData: file,
+                    description: description || `Bukti Plano ${ruang} ${tahap}`,
+                    uploadedBy: currentUser ? currentUser.name : 'Unknown',
+                    timestamp: new Date().toISOString()
+                };
+
+                console.log('🔼 Upload parameters:', {
+                    tahap: uploadParams.tahap,
+                    kring: uploadParams.kring,
+                    fileName: uploadParams.fileName,
+                    imageDataLength: uploadParams.imageData?.length,
+                    description: uploadParams.description
+                });
+
+                // Upload ke Google Drive via Google Apps Script
+                const result = await postToGoogleScript('uploadPlano', uploadParams);
+                
+                if (result.success) {
+                    // Simpan informasi plano di localStorage
+                    savePlanoToLocalStorage(tahap, ruang, result.fileInfo);
+                    
+                    // Update UI
+                    updatePlanoUIAfterUpload(tahap, ruang, result.fileInfo);
+                    
+                    // Tutup modal
+                    const planoModal = bootstrap.Modal.getInstance(document.getElementById('planoUploadModal'));
+                    if (planoModal) planoModal.hide();
+                    
+                    // Reset form
+                    document.getElementById('planoDescription').value = '';
+                    pendingPlanoUpload = { tahap: null, ruang: null, file: null, fileName: null };
+                    
+                    showNotification('Bukti plano berhasil diupload ke Drive!', 'success');
+                } else {
+                    throw new Error(result.error || 'Gagal upload plano');
+                }
+                
+            } catch (error) {
+                console.error('Error uploading plano:', error);
+                showNotification('Gagal upload bukti plano: ' + error.message, 'error');
+            } finally {
+                const uploadButton = document.getElementById('confirmPlanoUpload');
+                if (uploadButton) {
+                    uploadButton.innerHTML = 'Upload ke Drive';
+                    uploadButton.disabled = false;
+                }
+            }
+        }
+
+        /**
+         * Simpan informasi plano ke localStorage
+         */
+        function savePlanoToLocalStorage(tahap, ruang, fileInfo) {
+            try {
+                const planos = JSON.parse(localStorage.getItem('uploadedPlanos') || '{}');
+                
+                if (!planos[tahap]) planos[tahap] = {};
+                planos[tahap][ruang] = {
+                    ...fileInfo,
+                    uploadedAt: new Date().toISOString(),
+                    uploadedBy: currentUser ? currentUser.name : 'Unknown'
+                };
+                
+                localStorage.setItem('uploadedPlanos', JSON.stringify(planos));
+                return true;
+            } catch (error) {
+                console.error('Error saving plano to localStorage:', error);
+                return false;
+            }
+        }
+
+        /**
+         * Update UI setelah upload plano berhasil
+         */
+        function updatePlanoUIAfterUpload(tahap, ruang, fileInfo) {
+            // Update status indicator
+            const statusId = `planoStatus${ruang.charAt(0).toUpperCase() + ruang.slice(1)}${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`;
+            const statusElement = document.getElementById(statusId);
+            if (statusElement) {
+                statusElement.textContent = 'Tersimpan di Drive';
+                statusElement.className = 'plano-status plano-uploaded';
+            }
+            
+            // Update preview image
+            const previewId = `previewPlano${ruang.charAt(0).toUpperCase() + ruang.slice(1)}${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`;
+            const preview = document.getElementById(previewId);
+            if (preview) {
+                preview.src = pendingPlanoUpload.file;
+                preview.style.display = 'block';
+            }
+            
+            // Update plano photos tracking
+            planoPhotos[tahap][ruang] = pendingPlanoUpload.file;
+            
+            // Update submit info
+            updatePlanoSubmitInfo(tahap);
+        }
+
+        /**
+         * Update plano submit info
+         */
+        function updatePlanoSubmitInfo(tahap) {
+            const planoSubmitInfo = document.getElementById(`planoSubmitInfo${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const userRuang = getUserRuang();
+            
+            if (!planoSubmitInfo) return;
+            
+            if (currentUser && currentUser.role === 'admin') {
+                // Admin harus upload semua ruang
+                const uploadedCount = ['ruang1', 'ruang2', 'ruang3'].filter(ruang => 
+                    planoPhotos[tahap][ruang] !== null
+                ).length;
+                
+                if (uploadedCount === 3) {
+                    planoSubmitInfo.innerHTML = '<span class="badge bg-success"><i class="fas fa-check me-1"></i> Semua bukti plano sudah diupload</span>';
+                } else {
+                    planoSubmitInfo.innerHTML = `<span class="badge bg-warning"><i class="fas fa-exclamation-triangle me-1"></i> ${3 - uploadedCount} bukti plano belum diupload</span>`;
+                }
+            } else if (currentUser && userRuang) {
+                // Member hanya perlu upload ruang mereka
+                if (planoPhotos[tahap][userRuang] !== null) {
+                    planoSubmitInfo.innerHTML = '<span class="badge bg-success"><i class="fas fa-check me-1"></i> Bukti plano sudah diupload</span>';
+                } else {
+                    planoSubmitInfo.innerHTML = '<span class="badge bg-warning"><i class="fas fa-exclamation-triangle me-1"></i> Bukti plano belum diupload</span>';
+                }
+            }
+        }
+
+        // ========== VOTE SUBMISSION SYSTEM ========== //
+
+        /**
+         * Enhanced toggle vote candidate dengan validasi settings admin
+         */
+        function toggleVoteCandidate(tahap, kring, candidateId) {
+            if (!currentUser) {
+                alert('Silakan login terlebih dahulu!');
+                openLoginModal();
+                return;
+            }
+            
+            // Cek jika voting tidak diizinkan
+            if (!appSettings.allowVoting) {
+                showNotification('Voting sedang dinonaktifkan oleh admin!', 'error');
+                return;
+            }
+            
+            // Periksa apakah kandidat sudah dipilih
+            const isSelected = userVotes[tahap].includes(candidateId);
+            
+            if (isSelected) {
+                // Unvote candidate
+                removePendingVote(tahap, candidateId, kring);
+                
+                // Update UI
+                const card = document.querySelector(`.candidate-card[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
+                const voteBtn = document.querySelector(`.toggle-vote-btn[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
+                
+                if (card && voteBtn) {
+                    card.classList.remove('selected-candidate');
+                    voteBtn.innerHTML = '<i class="fas fa-vote-yea me-1"></i> Pilih';
+                    voteBtn.classList.remove('btn-danger');
+                    voteBtn.classList.add('btn-primary');
+                }
+                
+                // Hapus dari user votes tracking
+                const index = userVotes[tahap].indexOf(candidateId);
+                if (index > -1) {
+                    userVotes[tahap].splice(index, 1);
+                    saveUserVotes();
+                }
+            } else {
+                // Periksa apakah user sudah mencapai batas vote untuk tahap ini
+                const maxVotes = (tahap === 'tahap1') ? 1 : appSettings.maxVotesPerUser;
+                const currentVotesCount = userVotes[tahap].length;
+                
+                if (currentVotesCount >= maxVotes) {
+                    showNotification(`Anda hanya dapat memilih ${maxVotes} kandidat pada ${tahap === 'tahap1' ? 'Tahap 1' : 'Tahap 2'}.`, 'warning');
+                    return;
+                }
+                
+                // Vote candidate
+                addPendingVote(tahap, kring, candidateId, 'vote');
+                
+                // Update UI
+                const card = document.querySelector(`.candidate-card[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
+                const voteBtn = document.querySelector(`.toggle-vote-btn[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidateId}"]`);
+                
+                if (card && voteBtn) {
+                    card.classList.add('selected-candidate');
+                    voteBtn.innerHTML = '<i class="fas fa-times me-1"></i> Batalkan';
+                    voteBtn.classList.remove('btn-primary');
+                    voteBtn.classList.add('btn-danger');
+                }
+                
+                // Tambahkan ke user votes tracking
+                userVotes[tahap].push(candidateId);
+                saveUserVotes();
+            }
+            
+            // Update UI elements
+            updateSubmitButtonVisibility(tahap);
+            updateVoteSummary(tahap);
+            updateVoteLimitInfo(tahap);
+        }
+
+        /**
+         * Fungsi untuk menambahkan vote ke pending
+         */
+        function addPendingVote(tahap, kring, candidateId, action) {
+            // Cek apakah vote sudah ada di pending
+            const existingVoteIndex = pendingVotes[tahap].findIndex(vote => 
+                vote.candidateId === candidateId && vote.kring === kring
+            );
+            
+            if (existingVoteIndex === -1) {
+                pendingVotes[tahap].push({
+                    tahap: tahap,
+                    kring: kring,
+                    candidateId: candidateId,
+                    action: action,
+                    timestamp: new Date()
+                });
+            } else {
+                // Update existing vote
+                pendingVotes[tahap][existingVoteIndex].action = action;
+                pendingVotes[tahap][existingVoteIndex].timestamp = new Date();
+            }
+        }
+
+        /**
+         * Fungsi untuk menghapus vote dari pending
+         */
+        function removePendingVote(tahap, candidateId, kring) {
+            pendingVotes[tahap] = pendingVotes[tahap].filter(vote => 
+                !(vote.candidateId === candidateId && vote.kring === kring)
+            );
+        }
+
+        /**
+         * Update visibilitas tombol submit
+         */
+        function updateSubmitButtonVisibility(tahap) {
+            const submitSection = document.getElementById(`submitSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const pendingCount = document.getElementById(`pendingCount${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const submitInfo = document.getElementById(`submitInfo${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const planoSection = document.getElementById(`planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const planoSubmitInfo = document.getElementById(`planoSubmitInfo${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            
+            if (submitSection && pendingCount && submitInfo && planoSection && planoSubmitInfo) {
+                if (pendingVotes[tahap].length > 0) {
+                    submitSection.style.display = 'block';
+                    planoSection.style.display = 'block';
+                    pendingCount.textContent = pendingVotes[tahap].length;
+                    
+                    // Update info text berdasarkan tahap
+                    const maxVotes = (tahap === 'tahap1') ? 1 : appSettings.maxVotesPerUser;
+                    const currentVotesCount = userVotes[tahap].length;
+                    submitInfo.textContent = `Anda telah memilih ${currentVotesCount} dari ${maxVotes} kandidat yang diizinkan`;
+                    
+                    // Update plano info
+                    updatePlanoSubmitInfo(tahap);
+                } else {
+                    submitSection.style.display = 'none';
+                    planoSection.style.display = 'none';
+                }
+            }
+        }
+
+        /**
+         * Update vote summary display
+         */
+        function updateVoteSummary(tahap) {
+            const summaryElement = document.getElementById(`${tahap}Summary`);
+            const summaryContent = document.getElementById(`${tahap}SummaryContent`);
+            
+            if (summaryElement && summaryContent) {
+                const voteVotes = pendingVotes[tahap].filter(v => v.action === 'vote');
+                
+                if (voteVotes.length > 0) {
+                    summaryElement.style.display = 'block';
+                    
+                    let summaryHTML = '';
+                    voteVotes.forEach(vote => {
+                        const candidate = findCandidate(vote.tahap, vote.kring, vote.candidateId);
+                        if (candidate) {
+                            summaryHTML += `
+                                <div class="summary-item">
+                                    <span>${candidate.name}</span>
+                                    <span class="badge bg-primary">${vote.kring}</span>
+                                </div>
+                            `;
+                        }
+                    });
+                    
+                    summaryContent.innerHTML = summaryHTML;
+                } else {
+                    summaryElement.style.display = 'none';
+                }
+            }
+        }
+
+        /**
+         * Update vote limit info display
+         */
+        function updateVoteLimitInfo(tahap) {
+            if (tahap === 'tahap2') {
+                const voteLimitInfo = document.getElementById('tahap2VoteLimitInfo');
+                const voteLimitText = document.getElementById('tahap2VoteLimitText');
+                const currentVotesElement = document.getElementById('currentVotesTahap2');
+                
+                if (voteLimitInfo && voteLimitText && currentVotesElement) {
+                    const currentVotesCount = userVotes[tahap].length;
+                    const maxVotes = appSettings.maxVotesPerUser;
+                    currentVotesElement.textContent = currentVotesCount;
+                    
+                    voteLimitText.innerHTML = `Anda dapat memilih hingga <strong>${maxVotes}</strong> kandidat. Saat ini Anda telah memilih <strong>${currentVotesCount}</strong> dari ${maxVotes} kandidat.`;
+                    
+                    if (currentUser && currentUser.role !== 'admin') {
+                        voteLimitInfo.style.display = 'block';
+                        
+                        // Update warna berdasarkan jumlah vote
+                        if (currentVotesCount >= maxVotes) {
+                            voteLimitInfo.style.backgroundColor = '#d4edda';
+                            voteLimitInfo.style.borderLeftColor = '#28a745';
+                        } else if (currentVotesCount >= maxVotes - 1) {
+                            voteLimitInfo.style.backgroundColor = '#fff3cd';
+                            voteLimitInfo.style.borderLeftColor = '#ffc107';
+                        } else {
+                            voteLimitInfo.style.backgroundColor = '#e8f4fd';
+                            voteLimitInfo.style.borderLeftColor = '#17a2b8';
+                        }
+                    }
+                }
+            }
+        }
+
+        /**
+         * Find candidate by ID, tahap, and kring
+         */
+        function findCandidate(tahap, kring, candidateId) {
+            if (candidates[tahap] && candidates[tahap][kring]) {
+                return candidates[tahap][kring].find(c => c.id === candidateId);
+            }
+            return null;
+        }
+
+        /**
+         * Fungsi untuk submit votes
+         */
+        async function submitVotes(tahap) {
+            if (!currentUser) {
+                alert('Silakan login terlebih dahulu!');
+                return;
+            }
+            
+            if (pendingVotes[tahap].length === 0) {
+                alert('Tidak ada votes yang perlu disubmit!');
+                return;
+            }
+            
+            const submitButton = document.getElementById(`submitVotes${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            const submitStatus = document.getElementById(`submitStatus${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            
+            if (!submitButton || !submitStatus) return;
+            
+            // Disable tombol selama proses submit
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Submitting...';
+            submitStatus.innerHTML = '<span class="badge bg-info">Mengirim votes dan plano...</span>';
+            submitStatus.style.display = 'block';
+            
+            try {
+                // Upload plano photos jika ada
+                const planoResults = await uploadPlanos(tahap);
+                
+                // Kirim votes ke server
+                const result = await postToGoogleScript('submitVotes', {
+                    userId: currentUser.role,
+                    tahap: tahap,
+                    votes: JSON.stringify(pendingVotes[tahap]),
+                    planos: JSON.stringify(planoResults)
+                });
+                
+                if (result.success) {
+                    // Reset pending votes setelah berhasil
+                    pendingVotes[tahap] = [];
+                    
+                    // Reset plano photos
+                    planoPhotos[tahap] = { ruang1: null, ruang2: null, ruang3: null };
+                    
+                    // Update UI
+                    submitButton.innerHTML = '<i class="fas fa-check me-2"></i> Submit Successful!';
+                    submitStatus.innerHTML = '<span class="badge bg-success">Votes dan plano berhasil dikirim!</span>';
+                    
+                    // Refresh data dari server
+                    setTimeout(() => {
+                        loadCandidatesFromServer();
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = '<i class="fas fa-paper-plane me-2"></i> Submit Votes';
+                        submitStatus.style.display = 'none';
+                        
+                        // Reset user votes tracking
+                        userVotes[tahap] = [];
+                        saveUserVotes();
+                        
+                        // Reset UI untuk pemilih berikutnya
+                        resetVotingUI(tahap);
+                        
+                        alert(`Votes untuk ${tahap === 'tahap1' ? 'Tahap 1' : 'Tahap 2'} berhasil disubmit!`);
+                    }, 2000);
+                } else {
+                    throw new Error(result.error || 'Gagal submit votes');
+                }
+                
+            } catch (error) {
+                console.error('Error submitting votes:', error);
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fas fa-paper-plane me-2"></i> Submit Votes';
+                submitStatus.innerHTML = '<span class="badge bg-danger">Error: ' + error.message + '</span>';
+                alert('Terjadi error saat submit votes: ' + error.message);
+            }
+        }
+
+        /**
+         * Enhanced upload plano photos dengan Google Drive integration
+         */
+        async function uploadPlanos(tahap) {
+            const userRuang = getUserRuang();
+            const planoResults = {};
+            
+            if (currentUser.role === 'admin') {
+                // Admin upload semua ruang
+                for (let ruang of ['ruang1', 'ruang2', 'ruang3']) {
+                    if (planoPhotos[tahap][ruang]) {
+                        const result = await uploadPlanoToServer(tahap, ruang, planoPhotos[tahap][ruang]);
+                        planoResults[ruang] = result;
+                    }
+                }
+            } else if (userRuang) {
+                // Member upload hanya ruang mereka
+                if (planoPhotos[tahap][userRuang]) {
+                    const result = await uploadPlanoToServer(tahap, userRuang, planoPhotos[tahap][userRuang]);
+                    planoResults[userRuang] = result;
+                }
+            }
+            
+            return planoResults;
+        }
+
+        /**
+         * Enhanced upload plano to server dengan Google Drive
+         */
+        async function uploadPlanoToServer(tahap, ruang, planoData) {
+            try {
+                const fileName = `plano_${tahap}_${ruang}_${new Date().getTime()}.jpg`;
+                
+                const result = await postToGoogleScript('uploadPlano', {
+                    tahap: tahap,
+                    kring: ruang,
+                    fileName: fileName,
+                    imageData: planoData,
+                    description: `Bukti Plano ${tahap} ${ruang}`,
+                    uploadedBy: currentUser ? currentUser.name : 'Unknown',
+                    timestamp: new Date().toISOString()
+                });
+                
+                if (result.success) {
+                    // Simpan ke localStorage
+                    savePlanoToLocalStorage(tahap, ruang, result.fileInfo);
+                    return result.fileInfo;
+                } else {
+                    throw new Error(result.error || 'Gagal upload plano');
+                }
+            } catch (error) {
+                console.error('Error uploading plano:', error);
+                throw error;
+            }
+        }
+
+        /**
+         * Reset UI voting setelah submit
+         */
+        function resetVotingUI(tahap) {
+            // Reset semua tombol vote/unvote
+            const krings = ['kring1', 'kring2', 'kring3'];
+            krings.forEach(kring => {
+                if (candidates[tahap] && candidates[tahap][kring]) {
+                    candidates[tahap][kring].forEach(candidate => {
+                        const card = document.querySelector(`.candidate-card[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidate.id}"]`);
+                        const voteBtn = document.querySelector(`.toggle-vote-btn[data-tahap="${tahap}"][data-kring="${kring}"][data-candidate="${candidate.id}"]`);
+                        
+                        if (card && voteBtn) {
+                            card.classList.remove('selected-candidate');
+                            voteBtn.innerHTML = '<i class="fas fa-vote-yea me-1"></i> Pilih';
+                            voteBtn.classList.remove('btn-danger');
+                            voteBtn.classList.add('btn-primary');
+                            voteBtn.disabled = !appSettings.allowVoting;
+                        }
+                    });
+                }
+            });
+            
+            // Hide submit section
+            const submitSection = document.getElementById(`submitSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            if (submitSection) submitSection.style.display = 'none';
+            
+            // Hide plano section
+            const planoSection = document.getElementById(`planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)}`);
+            if (planoSection) planoSection.style.display = 'none';
+            
+            // Hide vote summary
+            const summaryElement = document.getElementById(`${tahap}Summary`);
+            if (summaryElement) summaryElement.style.display = 'none';
+            
+            // Reset plano inputs
+            const planoInputs = document.querySelectorAll(`#planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)} input[type="file"]`);
+            planoInputs.forEach(input => {
+                input.value = '';
+            });
+            
+            // Hide plano previews
+            const planoPreviews = document.querySelectorAll(`#planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)} .plano-preview`);
+            planoPreviews.forEach(preview => {
+                preview.style.display = 'none';
+            });
+            
+            // Reset plano status
+            const planoStatuses = document.querySelectorAll(`#planoSection${tahap.charAt(0).toUpperCase() + tahap.slice(1)} .plano-status`);
+            planoStatuses.forEach(status => {
+                status.textContent = 'Belum Upload';
+                status.className = 'plano-status plano-missing';
+            });
+            
+            // Hide vote limit info for tahap 2
+            if (tahap === 'tahap2') {
+                const voteLimitInfo = document.getElementById('tahap2VoteLimitInfo');
+                if (voteLimitInfo) voteLimitInfo.style.display = 'none';
+            }
+        }
+
+        // ========== MANUAL VOTE INPUT FUNCTIONS ========== //
+
+        /**
+         * Open manual vote modal and load data
+         */
+        function openManualVoteModal() {
+            loadManualVoteData();
+        }
+
+        /**
+         * Load candidates data for manual input
+         */
+        async function loadManualVoteData() {
+            try {
+                const data = await postToGoogleScript('getAllCandidates');
+                
+                if (data.success && data.candidates) {
+                    manualVoteData = {};
+                    originalVoteData = {};
+                    
+                    // Store original data and prepare for editing
+                    data.candidates.forEach(candidate => {
+                        const key = `${candidate.tahap}-${candidate.kring}-${candidate.id}`;
+                        manualVoteData[key] = {
+                            ...candidate,
+                            modified: false,
+                            newVotes: candidate.votes
+                        };
+                        originalVoteData[key] = candidate.votes;
+                    });
+                    
+                    renderManualVoteTable();
+                    updateManualVoteSummary();
+                } else {
+                    throw new Error('Gagal memuat data kandidat');
+                }
+            } catch (error) {
+                console.error('Error loading manual vote data:', error);
+                showNotification('Gagal memuat data kandidat: ' + error.message, 'error');
+            }
+        }
+
+        /**
+         * Render manual vote table
+         */
+        function renderManualVoteTable() {
+            const tableBody = document.getElementById('manualVoteTableBody');
+            if (!tableBody) return;
+            
+            const searchTerm = document.getElementById('searchCandidates').value.toLowerCase();
+            const showOnlyModified = document.getElementById('showOnlyModified').checked;
+            
+            let tableHTML = '';
+            let displayedCount = 0;
+            
+            Object.values(manualVoteData).forEach(candidate => {
+                // Filter berdasarkan pencarian
+                const searchMatch = !searchTerm || 
+                    candidate.name.toLowerCase().includes(searchTerm) ||
+                    candidate.tahap.toLowerCase().includes(searchTerm) ||
+                    candidate.kring.toLowerCase().includes(searchTerm) ||
+                    candidate.id.toString().includes(searchTerm);
+                
+                // Filter hanya yang diubah
+                const modifiedFilter = !showOnlyModified || candidate.modified;
+                
+                if (!searchMatch || !modifiedFilter) return;
+                
+                displayedCount++;
+                
+                const statusText = candidate.modified ? 
+                    `<span class="manual-vote-status status-pending"><i class="fas fa-pencil-alt me-1"></i> Menunggu</span>` :
+                    `<span class="manual-vote-status status-saved"><i class="fas fa-check me-1"></i> Tersimpan</span>`;
+                
+                const rowClass = candidate.modified ? 'manual-vote-modified' : '';
+                
+                tableHTML += `
+                    <tr class="${rowClass}" data-key="${candidate.tahap}-${candidate.kring}-${candidate.id}">
+                        <td><strong>${candidate.id}</strong></td>
+                        <td>${candidate.name}</td>
+                        <td><span class="badge bg-primary">${candidate.tahap}</span></td>
+                        <td><span class="badge bg-secondary">${candidate.kring}</span></td>
+                        <td class="text-center">
+                            <span class="text-muted">${candidate.votes}</span>
+                        </td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <input type="number" 
+                                       class="form-control manual-vote-input" 
+                                       value="${candidate.newVotes}" 
+                                       min="0"
+                                       data-key="${candidate.tahap}-${candidate.kring}-${candidate.id}">
+                                <button class="btn btn-outline-secondary" type="button" onclick="resetSingleVote('${candidate.tahap}-${candidate.kring}-${candidate.id}')">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td>${statusText}</td>
+                    </tr>
+                `;
+            });
+            
+            tableBody.innerHTML = tableHTML;
+            
+            // Add event listeners to input fields
+            document.querySelectorAll('.manual-vote-input').forEach(input => {
+                input.addEventListener('change', handleManualVoteChange);
+                input.addEventListener('input', handleManualVoteChange);
+            });
+            
+            // Update count display
+            if (displayedCount === 0) {
+                tableHTML = `<tr><td colspan="7" class="text-center text-muted">Tidak ada data yang sesuai dengan filter</td></tr>`;
+                tableBody.innerHTML = tableHTML;
+            }
+        }
+
+        /**
+         * Handle manual vote input change
+         */
+        function handleManualVoteChange(event) {
+            const key = event.target.getAttribute('data-key');
+            const newValue = parseInt(event.target.value);
+            
+            if (isNaN(newValue) || newValue < 0) {
+                event.target.value = manualVoteData[key].newVotes;
+                return;
+            }
+            
+            const candidate = manualVoteData[key];
+            candidate.newVotes = newValue;
+            candidate.modified = (newValue !== originalVoteData[key]);
+            
+            // Update row styling
+            const row = document.querySelector(`tr[data-key="${key}"]`);
+            if (row) {
+                if (candidate.modified) {
+                    row.classList.add('manual-vote-modified');
+                    // Update status cell
+                    const statusCell = row.querySelector('td:last-child');
+                    if (statusCell) {
+                        statusCell.innerHTML = `<span class="manual-vote-status status-pending"><i class="fas fa-pencil-alt me-1"></i> Menunggu</span>`;
+                    }
+                } else {
+                    row.classList.remove('manual-vote-modified');
+                    // Update status cell
+                    const statusCell = row.querySelector('td:last-child');
+                    if (statusCell) {
+                        statusCell.innerHTML = `<span class="manual-vote-status status-saved"><i class="fas fa-check me-1"></i> Tersimpan</span>`;
+                    }
+                }
+            }
+            
+            updateManualVoteSummary();
+        }
+
+        /**
+         * Reset single vote to original value
+         */
+        function resetSingleVote(key) {
+            const candidate = manualVoteData[key];
+            candidate.newVotes = originalVoteData[key];
+            candidate.modified = false;
+            
+            // Update input field
+            const input = document.querySelector(`.manual-vote-input[data-key="${key}"]`);
+            if (input) {
+                input.value = candidate.newVotes;
+            }
+            
+            // Update row
+            const row = document.querySelector(`tr[data-key="${key}"]`);
+            if (row) {
+                row.classList.remove('manual-vote-modified');
+                const statusCell = row.querySelector('td:last-child');
+                if (statusCell) {
+                    statusCell.innerHTML = `<span class="manual-vote-status status-saved"><i class="fas fa-check me-1"></i> Tersimpan</span>`;
+                }
+            }
+            
+            updateManualVoteSummary();
+        }
+
+        /**
+         * Update manual vote summary
+         */
+        function updateManualVoteSummary() {
+            const modifiedCount = Object.values(manualVoteData).filter(candidate => candidate.modified).length;
+            const summaryElement = document.getElementById('manualVoteSummary');
+            const modifiedCountElement = document.getElementById('modifiedCount');
+            
+            if (summaryElement && modifiedCountElement) {
+                modifiedCountElement.textContent = modifiedCount;
+                
+                if (modifiedCount > 0) {
+                    summaryElement.className = 'alert alert-warning';
+                    summaryElement.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i> ${modifiedCount} data akan diupdate`;
+                } else {
+                    summaryElement.className = 'alert alert-success';
+                    summaryElement.innerHTML = `<i class="fas fa-check me-2"></i> Semua data tersimpan`;
+                }
+            }
+        }
+
+        /**
+         * Save all manual votes
+         */
+        async function saveAllManualVotes() {
+            const modifiedCandidates = Object.values(manualVoteData).filter(candidate => candidate.modified);
+            
+            if (modifiedCandidates.length === 0) {
+                showNotification('Tidak ada perubahan yang perlu disimpan', 'warning');
+                return;
+            }
+            
+            if (!confirm(`Anda akan mengupdate ${modifiedCandidates.length} data suara. Lanjutkan?`)) {
+                return;
+            }
+            
+            try {
+                const saveButton = document.getElementById('saveAllManualVotes');
+                const originalText = saveButton.innerHTML;
+                saveButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Menyimpan...';
+                saveButton.disabled = true;
+                
+                const votesData = modifiedCandidates.map(candidate => ({
+                    candidateId: candidate.id,
+                    tahap: candidate.tahap,
+                    kring: candidate.kring,
+                    votes: candidate.newVotes
+                }));
+                
+                const result = await postToGoogleScript('manualVoteInput', {
+                    votesData: JSON.stringify(votesData)
+                });
+                
+                if (result.success) {
+                    // Update original data dengan nilai baru
+                    modifiedCandidates.forEach(candidate => {
+                        const key = `${candidate.tahap}-${candidate.kring}-${candidate.id}`;
+                        originalVoteData[key] = candidate.newVotes;
+                        candidate.votes = candidate.newVotes;
+                        candidate.modified = false;
+                    });
+                    
+                    // Refresh table
+                    renderManualVoteTable();
+                    updateManualVoteSummary();
+                    
+                    // Refresh main candidates data
+                    await loadCandidatesFromServer();
+                    
+                    showNotification(`Berhasil mengupdate ${result.results ? result.results.length : modifiedCandidates.length} data suara`, 'success');
+                    
+                    if (result.errors && result.errors.length > 0) {
+                        console.warn('Some errors occurred:', result.errors);
+                    }
+                } else {
+                    throw new Error(result.error || 'Gagal menyimpan data');
+                }
+                
+            } catch (error) {
+                console.error('Error saving manual votes:', error);
+                showNotification('Gagal menyimpan data: ' + error.message, 'error');
+            } finally {
+                const saveButton = document.getElementById('saveAllManualVotes');
+                if (saveButton) {
+                    saveButton.innerHTML = '<i class="fas fa-save me-2"></i> Simpan Semua Perubahan';
+                    saveButton.disabled = false;
+                }
+            }
+        }
+
+        /**
+         * Reset all manual votes to original values
+         */
+        function resetAllManualVotes() {
+            if (!confirm('Reset semua perubahan yang belum disimpan?')) {
+                return;
+            }
+            
+            Object.keys(manualVoteData).forEach(key => {
+                resetSingleVote(key);
+            });
+            
+            showNotification('Semua perubahan telah direset', 'info');
+        }
+
         // ========== SUMMARY SECTION FUNCTIONS ========== //
 
         /**
@@ -3008,96 +3506,170 @@
         }
 
         /**
-         * Load plano images untuk summary section
+         * Enhanced load plano images untuk summary section
          */
-        function loadPlanoImages() {
-            // Untuk demo, kita gunakan placeholder
-            // Dalam implementasi nyata, ini akan mengambil data dari server
-            
+        async function loadPlanoImages() {
+            try {
+                // Coba ambil data dari server terlebih dahulu
+                const serverData = await postToGoogleScript('getPlanos');
+                
+                let planosData = {};
+                
+                if (serverData.success && serverData.planos) {
+                    planosData = serverData.planos;
+                    // Simpan data dari server ke localStorage sebagai cache
+                    localStorage.setItem('uploadedPlanos', JSON.stringify(planosData));
+                } else {
+                    // Fallback ke localStorage
+                    planosData = JSON.parse(localStorage.getItem('uploadedPlanos') || '{}');
+                }
+                
+                displayPlanoImages(planosData);
+                
+            } catch (error) {
+                console.error('Error loading plano images:', error);
+                // Fallback ke localStorage
+                const localPlanos = JSON.parse(localStorage.getItem('uploadedPlanos') || '{}');
+                displayPlanoImages(localPlanos);
+            }
+        }
+
+        /**
+         * Display plano images di summary section
+         */
+        function displayPlanoImages(planosData) {
             const planoSummaryTahap1 = document.getElementById('planoSummaryTahap1');
             const planoSummaryTahap2 = document.getElementById('planoSummaryTahap2');
             
+            // Clear existing content
+            if (planoSummaryTahap1) planoSummaryTahap1.innerHTML = '';
+            if (planoSummaryTahap2) planoSummaryTahap2.innerHTML = '';
+            
+            // Default placeholder data jika tidak ada plano
+            const defaultPlanos = {
+                tahap1: {
+                    ruang1: { downloadUrl: 'https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Belum+Ada+Bukti+Plano', name: 'Belum Upload' },
+                    ruang2: { downloadUrl: 'https://via.placeholder.com/300x200/2196F3/FFFFFF?text=Belum+Ada+Bukti+Plano', name: 'Belum Upload' },
+                    ruang3: { downloadUrl: 'https://via.placeholder.com/300x200/FF9800/FFFFFF?text=Belum+Ada+Bukti+Plano', name: 'Belum Upload' }
+                },
+                tahap2: {
+                    ruang1: { downloadUrl: 'https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Belum+Ada+Bukti+Plano', name: 'Belum Upload' },
+                    ruang2: { downloadUrl: 'https://via.placeholder.com/300x200/2196F3/FFFFFF?text=Belum+Ada+Bukti+Plano', name: 'Belum Upload' },
+                    ruang3: { downloadUrl: 'https://via.placeholder.com/300x200/FF9800/FFFFFF?text=Belum+Ada+Bukti+Plano', name: 'Belum Upload' }
+                }
+            };
+            
+            // Merge dengan data actual
+            const displayData = {
+                tahap1: { ...defaultPlanos.tahap1, ...(planosData.tahap1 || {}) },
+                tahap2: { ...defaultPlanos.tahap2, ...(planosData.tahap2 || {}) }
+            };
+            
+            // Render plano untuk tahap 1
             if (planoSummaryTahap1) {
-                planoSummaryTahap1.innerHTML = `
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                <h6 class="mb-0">Kring 1 - Ruang 1</h6>
-                            </div>
-                            <div class="card-body text-center">
-                                <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Plano+Kring+1+Tahap+1" 
-                                     class="img-fluid rounded mb-2" alt="Plano Kring 1 Tahap 1">
-                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-success text-white">
-                                <h6 class="mb-0">Kring 2 - Ruang 2</h6>
-                            </div>
-                            <div class="card-body text-center">
-                                <img src="https://via.placeholder.com/300x200/2196F3/FFFFFF?text=Plano+Kring+2+Tahap+1" 
-                                     class="img-fluid rounded mb-2" alt="Plano Kring 2 Tahap 1">
-                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-info text-white">
-                                <h6 class="mb-0">Kring 3 - Ruang 3</h6>
-                            </div>
-                            <div class="card-body text-center">
-                                <img src="https://via.placeholder.com/300x200/FF9800/FFFFFF?text=Plano+Kring+3+Tahap+1" 
-                                     class="img-fluid rounded mb-2" alt="Plano Kring 3 Tahap 1">
-                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                Object.keys(displayData.tahap1).forEach(ruang => {
+                    const plano = displayData.tahap1[ruang];
+                    const card = createPlanoCard(ruang, plano, 'tahap1');
+                    planoSummaryTahap1.appendChild(card);
+                });
             }
             
+            // Render plano untuk tahap 2
             if (planoSummaryTahap2) {
-                planoSummaryTahap2.innerHTML = `
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                <h6 class="mb-0">Kring 1 - Ruang 1</h6>
-                            </div>
-                            <div class="card-body text-center">
-                                <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Plano+Kring+1+Tahap+2" 
-                                     class="img-fluid rounded mb-2" alt="Plano Kring 1 Tahap 2">
-                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
-                            </div>
-                        </div>
+                Object.keys(displayData.tahap2).forEach(ruang => {
+                    const plano = displayData.tahap2[ruang];
+                    const card = createPlanoCard(ruang, plano, 'tahap2');
+                    planoSummaryTahap2.appendChild(card);
+                });
+            }
+        }
+
+        /**
+         * Create plano card element
+         */
+        function createPlanoCard(ruang, plano, tahap) {
+            const card = document.createElement('div');
+            card.className = 'col-md-4 mb-4';
+            
+            const ruangText = ruang.replace('ruang', 'Ruang ');
+            const tahapText = tahap === 'tahap1' ? 'Tahap 1' : 'Tahap 2';
+            const uploadedDate = plano.uploadedAt ? new Date(plano.uploadedAt).toLocaleDateString('id-ID') : '-';
+            const uploadedBy = plano.uploadedBy || 'Unknown';
+            
+            card.innerHTML = `
+                <div class="card h-100">
+                    <div class="card-header ${plano.downloadUrl.includes('placeholder') ? 'bg-warning' : 'bg-success'} text-white">
+                        <h6 class="mb-0">${ruangText} - ${tahapText}</h6>
                     </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-success text-white">
-                                <h6 class="mb-0">Kring 2 - Ruang 2</h6>
-                            </div>
-                            <div class="card-body text-center">
-                                <img src="https://via.placeholder.com/300x200/2196F3/FFFFFF?text=Plano+Kring+2+Tahap+2" 
-                                     class="img-fluid rounded mb-2" alt="Plano Kring 2 Tahap 2">
-                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
-                            </div>
+                    <div class="card-body text-center">
+                        <img src="${plano.downloadUrl}" 
+                             class="img-fluid rounded mb-2 plano-gallery-image" 
+                             alt="${plano.name || 'Bukti Plano'}"
+                             style="max-height: 200px; cursor: pointer;"
+                             onclick="openPlanoModal('${plano.downloadUrl}', '${ruangText} - ${tahapText}')">
+                        <h6 class="mt-2">${plano.name || 'Belum Upload'}</h6>
+                        <p class="small text-muted mb-1">
+                            <i class="fas fa-calendar me-1"></i>${uploadedDate}
+                        </p>
+                        <p class="small text-muted mb-0">
+                            <i class="fas fa-user me-1"></i>${uploadedBy}
+                        </p>
+                        ${plano.webViewLink ? `
+                        <div class="mt-2">
+                            <a href="${plano.webViewLink}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-external-link-alt me-1"></i>Buka di Drive
+                            </a>
                         </div>
+                        ` : ''}
                     </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-info text-white">
-                                <h6 class="mb-0">Kring 3 - Ruang 3</h6>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        /**
+         * Open modal untuk melihat plano secara full size
+         */
+        function openPlanoModal(imageUrl, title) {
+            // Create modal jika belum ada
+            let modal = document.getElementById('planoViewModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.className = 'modal fade';
+                modal.id = 'planoViewModal';
+                modal.tabIndex = -1;
+                modal.innerHTML = `
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="planoViewModalLabel">Bukti Plano</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                            <div class="card-body text-center">
-                                <img src="https://via.placeholder.com/300x200/FF9800/FFFFFF?text=Plano+Kring+3+Tahap+2" 
-                                     class="img-fluid rounded mb-2" alt="Plano Kring 3 Tahap 2">
-                                <p class="small text-muted">Uploaded: ${new Date().toLocaleDateString('id-ID')}</p>
+                            <div class="modal-body text-center">
+                                <img id="planoViewImage" src="" class="img-fluid" alt="Bukti Plano">
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" id="planoDownloadLink" class="btn btn-primary" download>
+                                    <i class="fas fa-download me-1"></i>Download
+                                </a>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                             </div>
                         </div>
                     </div>
                 `;
+                document.body.appendChild(modal);
             }
+            
+            // Set image dan title
+            document.getElementById('planoViewImage').src = imageUrl;
+            document.getElementById('planoViewModalLabel').textContent = title;
+            document.getElementById('planoDownloadLink').href = imageUrl;
+            document.getElementById('planoDownloadLink').download = title + '.jpg';
+            
+            // Show modal
+            const bsModal = new bootstrap.Modal(modal);
+            bsModal.show();
         }
 
         /**
@@ -3294,6 +3866,168 @@
             });
             
             tableBody.innerHTML = tableHTML;
+        }
+
+        // ========== ADMIN CONTROLS IMPLEMENTATION ========== //
+
+        /**
+         * Update vote limit untuk semua user
+         */
+        function updateVoteLimit() {
+            const voteLimit = document.getElementById('voteLimit');
+            if (!voteLimit) return;
+            
+            const newLimit = parseInt(voteLimit.value);
+            appSettings.maxVotesPerUser = newLimit;
+            
+            // Simpan ke localStorage
+            try {
+                localStorage.setItem('appSettings', JSON.stringify(appSettings));
+            } catch (error) {
+                console.warn('Gagal menyimpan pengaturan:', error);
+            }
+            
+            // Update UI untuk member
+            updateVoteLimitInfo('tahap2');
+            
+            // Kirim ke server jika online
+            if (isOnline) {
+                postToGoogleScript('updateSettings', {
+                    settings: JSON.stringify(appSettings)
+                }).catch(error => {
+                    console.error('Gagal update settings ke server:', error);
+                });
+            }
+            
+            showNotification(`Batas vote diubah menjadi ${newLimit} kali`, 'success');
+        }
+
+        /**
+         * Load settings ke modal pengaturan
+         */
+        function loadSettingsToModal() {
+            const maxVotesPerUser = document.getElementById('maxVotesPerUser');
+            const allowManualInput = document.getElementById('allowManualInput');
+            const allowVoting = document.getElementById('allowVoting');
+            const totalVotersSetting = document.getElementById('totalVotersSetting');
+            const voteLimit = document.getElementById('voteLimit');
+            
+            if (maxVotesPerUser) maxVotesPerUser.value = appSettings.maxVotesPerUser;
+            if (allowManualInput) allowManualInput.checked = appSettings.allowManualInput;
+            if (allowVoting) allowVoting.checked = appSettings.allowVoting;
+            if (totalVotersSetting) totalVotersSetting.value = appSettings.totalVoters;
+            if (voteLimit) voteLimit.value = appSettings.maxVotesPerUser;
+        }
+
+        /**
+         * Load display settings ke modal
+         */
+        function loadDisplaySettingsToModal() {
+            const modalToggles = [
+                'modalTogglePercentage', 'modalToggleProgressBar', 'modalToggleVoteCount',
+                'modalToggleCandidatePhotos', 'modalToggleStats', 'modalToggleCountdown',
+                'modalTogglePlano', 'modalToggleVoteButtons'
+            ];
+            
+            modalToggles.forEach(toggleId => {
+                const toggle = document.getElementById(toggleId);
+                if (toggle) {
+                    const settingKey = 'show' + toggleId.replace('modalToggle', '');
+                    toggle.checked = displaySettings[settingKey] !== false;
+                }
+            });
+        }
+
+        /**
+         * Enhanced save settings handler
+         */
+        function saveSettingsHandler() {
+            const maxVotesPerUser = document.getElementById('maxVotesPerUser');
+            const allowManualInput = document.getElementById('allowManualInput');
+            const allowVoting = document.getElementById('allowVoting');
+            const totalVotersSetting = document.getElementById('totalVotersSetting');
+            
+            if (maxVotesPerUser) appSettings.maxVotesPerUser = parseInt(maxVotesPerUser.value);
+            if (allowManualInput) appSettings.allowManualInput = allowManualInput.checked;
+            if (allowVoting) appSettings.allowVoting = allowVoting.checked;
+            if (totalVotersSetting) appSettings.totalVoters = parseInt(totalVotersSetting.value);
+            
+            // Update vote limit dropdown di admin controls
+            const voteLimit = document.getElementById('voteLimit');
+            if (voteLimit) voteLimit.value = appSettings.maxVotesPerUser;
+            
+            // Simpan ke localStorage
+            try {
+                localStorage.setItem('appSettings', JSON.stringify(appSettings));
+            } catch (error) {
+                console.warn('Gagal menyimpan pengaturan:', error);
+            }
+            
+            // Update stats dan UI
+            updateStats();
+            updateVoteLimitInfo('tahap2');
+            applyVotingRestrictions();
+            
+            // Kirim ke server jika online
+            if (isOnline) {
+                postToGoogleScript('updateSettings', {
+                    settings: JSON.stringify(appSettings)
+                }).then(() => {
+                    showNotification('Pengaturan berhasil disimpan!', 'success');
+                }).catch(error => {
+                    console.error('Gagal menyimpan pengaturan ke server:', error);
+                    showNotification('Pengaturan disimpan secara lokal', 'warning');
+                });
+            } else {
+                showNotification('Pengaturan berhasil disimpan secara lokal!', 'success');
+            }
+            
+            const settingsModal = bootstrap.Modal.getInstance(document.getElementById('settingsModal'));
+            if (settingsModal) settingsModal.hide();
+        }
+
+        /**
+         * Terapkan pembatasan voting berdasarkan settings
+         */
+        function applyVotingRestrictions() {
+            const voteButtons = document.querySelectorAll('.toggle-vote-btn');
+            const voteInfos = document.querySelectorAll('.vote-info, .vote-limit-info');
+            
+            if (!appSettings.allowVoting) {
+                // Nonaktifkan semua tombol vote
+                voteButtons.forEach(btn => {
+                    btn.disabled = true;
+                    btn.title = 'Voting sedang dinonaktifkan oleh admin';
+                    btn.classList.add('vote-disabled');
+                });
+                
+                // Update info text
+                voteInfos.forEach(info => {
+                    const originalContent = info.getAttribute('data-original-content') || info.innerHTML;
+                    info.setAttribute('data-original-content', originalContent);
+                    info.innerHTML = '<i class="fas fa-ban me-2"></i> Voting sedang dinonaktifkan oleh admin';
+                    info.classList.add('vote-disabled-info');
+                });
+            } else {
+                // Aktifkan tombol vote
+                voteButtons.forEach(btn => {
+                    btn.disabled = false;
+                    btn.title = '';
+                    btn.classList.remove('vote-disabled');
+                });
+                
+                // Kembalikan info text
+                voteInfos.forEach(info => {
+                    const originalContent = info.getAttribute('data-original-content');
+                    if (originalContent) {
+                        info.innerHTML = originalContent;
+                        info.classList.remove('vote-disabled-info');
+                    }
+                });
+            }
+            
+            // Update vote limit info
+            updateVoteLimitInfo('tahap2');
         }
 
         // ========== DISPLAY CONTROLS ========== //
@@ -3658,36 +4392,14 @@
             // Reset ke data sample
             candidates = {
                 tahap1: {
-                    kring1: [
-                        { id: 1, name: "Ahmad Santoso", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 2, name: "Budi Raharjo", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 3, name: "Citra Dewi", votes: 0, photo: "https://via.placeholder.com/150" }
-                    ],
-                    kring2: [
-                        { id: 1, name: "Dian Pratama", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 2, name: "Eko Wijaya", votes: 0, photo: "https://via.placeholder.com/150" }
-                    ],
-                    kring3: [
-                        { id: 1, name: "Fajar Nugroho", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 2, name: "Gita Sari", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 3, name: "Hendra Setiawan", votes: 0, photo: "https://via.placeholder.com/150" }
-                    ]
+                    kring1: [],
+                    kring2: [],
+                    kring3: []
                 },
                 tahap2: {
-                    kring1: [
-                        { id: 1, name: "Indra Permana", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 2, name: "Joko Susilo", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 3, name: "Kartika Wulandari", votes: 0, photo: "https://via.placeholder.com/150" }
-                    ],
-                    kring2: [
-                        { id: 1, name: "Lia Amelia", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 2, name: "Mulyadi", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 3, name: "Nina Handayani", votes: 0, photo: "https://via.placeholder.com/150" }
-                    ],
-                    kring3: [
-                        { id: 1, name: "Oki Pratama", votes: 0, photo: "https://via.placeholder.com/150" },
-                        { id: 2, name: "Putri Anggraini", votes: 0, photo: "https://via.placeholder.com/150" }
-                    ]
+                    kring1: [],
+                    kring2: [],
+                    kring3: []
                 }
             };
             
